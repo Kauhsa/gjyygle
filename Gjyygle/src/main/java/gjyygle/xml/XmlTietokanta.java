@@ -4,7 +4,6 @@
  */
 package gjyygle.xml;
 
-import Bibtex.BibtexArtikkeli;
 import Bibtex.BibtexEntry;
 import Bibtex.BibtexEntryType;
 import Bibtex.BibtexField;
