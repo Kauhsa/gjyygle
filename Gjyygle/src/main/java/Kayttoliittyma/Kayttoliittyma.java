@@ -5,6 +5,7 @@
 package Kayttoliittyma;
 
 import Bibtex.BibtexArtikkeli;
+import gjyygle.BibtexTietokanta;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -15,10 +16,18 @@ import java.util.Scanner;
 public class Kayttoliittyma {
 
     private Scanner reader;
+    private BibtexTietokanta tietokanta;
 
     public Kayttoliittyma() {
         this.reader = new Scanner(System.in);
+        // this.tietokanta = new XMLBibtexTietokanta();
     }
+
+    public Kayttoliittyma(Scanner reader) {
+        this.reader = reader;
+    }
+    
+    
 
     public void kaynnista() {
         System.out.println("Tervetuloa viitteiden hallintaan");
@@ -31,6 +40,7 @@ public class Kayttoliittyma {
             if (komento.equals("1")) {
                 lisaaViite();
             } else if (komento.equals("2")) {
+                
             } else if (komento.equals("3")) {
                 break;
             } else {

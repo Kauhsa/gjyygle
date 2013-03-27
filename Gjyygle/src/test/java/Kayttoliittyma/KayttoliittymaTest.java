@@ -4,6 +4,9 @@
  */
 package Kayttoliittyma;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,9 +21,11 @@ import static org.junit.Assert.*;
 public class KayttoliittymaTest {
     
     private Kayttoliittyma liittyma;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     
     public KayttoliittymaTest() {
         this.liittyma = new Kayttoliittyma();
+        
     }
     
     @BeforeClass
@@ -34,10 +39,13 @@ public class KayttoliittymaTest {
     @Before
     public void setUp() {
         this.liittyma = new Kayttoliittyma();
+        System.setOut(new PrintStream(outContent));
+        
     }
     
     @After
     public void tearDown() {
+        System.setOut(null);
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
@@ -46,6 +54,11 @@ public class KayttoliittymaTest {
     // public void hello() {}
     
     
+    private void asetaUusiKayttoliittyma(String input) {
+        Scanner lukija = new Scanner(input);
+        liittyma = new Kayttoliittyma(lukija);
+    }
+    
     @Test
     public void konstruktoriToimii() {
         assertTrue(liittyma != null);
@@ -53,7 +66,13 @@ public class KayttoliittymaTest {
     
     @Test
     public void alkuValikkoVirheellinenKomento() {
+        String input = "5" + "\n" + "3" + "\n";
+        Scanner lukija = new Scanner(input);
         
+        asetaUusiKayttoliittyma("");
+        liittyma.kaynnista();
+        
+        assertTrue(outContent.toString().contains("Virheellinen"));
         
     }
 }
