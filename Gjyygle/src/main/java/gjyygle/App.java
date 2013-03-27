@@ -1,5 +1,7 @@
 package gjyygle;
 
+import Kayttoliittyma.Kayttoliittyma;
+
 /**
  * Hello world!
  *
@@ -8,6 +10,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Kayttoliittyma liittyma = new Kayttoliittyma();
+        liittyma.kaynnista();
     }
 }
