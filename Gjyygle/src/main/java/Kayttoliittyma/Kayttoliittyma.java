@@ -5,7 +5,6 @@
 package Kayttoliittyma;
 
 import Bibtex.BibtexArtikkeli;
-import gjyygle.BibtexArtikkeli;
 import java.text.ParseException;
 import java.util.Scanner;
 
