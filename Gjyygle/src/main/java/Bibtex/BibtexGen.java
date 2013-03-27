@@ -7,14 +7,15 @@ import java.io.PrintWriter;
 import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BibtexGen {
 
     private List<BibtexEntry> lista;
-    
-    public BibtexGen (BibtexTietokanta db) {
+
+    public BibtexGen(BibtexTietokanta db) {
         lista = db.listaaArtikkelit();
     }
 // SAMPLE BIBTEXFILUSTA
@@ -27,24 +28,26 @@ public class BibtexGen {
 //   pages = "389--404",
 //   year = 1991
 //   }
-    public void generate() {
-//        PrintWriter tiedot = null;
-//        try {
-//            tiedot = new PrintWriter(new File("bibtex.bib"));
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(BibtexGen.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        for (BibtexEntry entry : lista) {
-//            EnumMap<BibtexField, String> map = entry.getAllValues();
-//            for ()
-//            tiedot.println("@ARTICLE{");
-//            tiedot.close();
-//        }
-    }
 
-    
+    public void generate() {
+        PrintWriter tiedot = null;
+        try {
+            tiedot = new PrintWriter(new File("bibtex.bib"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(BibtexGen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (BibtexEntry entry : lista) {
+            tiedot.println("@" + entry.getType() + "{");
+            EnumMap<BibtexField, String> map = entry.getAllValues();
+            for (EnumMap.Entry<BibtexField, String> arvot : map.entrySet()) {
+                System.out.println(arvot.getKey() + " : " + arvot.getValue());
+            }
+            tiedot.println("}");
+        }
+        tiedot.close();
+    }
 //    public static void main(String[] args) {
-//        BibtexGen gen = new BibtexGen(t);
+//        BibtexGen gen = new BibtexGen();
 //        gen.generate();
 //    }
 }
