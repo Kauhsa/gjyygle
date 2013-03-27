@@ -6,6 +6,7 @@ package gjyygle.xml;
 
 import Bibtex.BibtexArtikkeli;
 import Bibtex.BibtexEntry;
+import Bibtex.BibtexEntryType;
 import Bibtex.BibtexField;
 import gjyygle.BibtexTietokanta;
 import java.io.File;
@@ -31,17 +32,17 @@ public class XmlTietokanta implements BibtexTietokanta {
         infile = in;
         ArrayList<HashMap<String,String>> read = ReadXML.read(infile);
         for (HashMap<String,String> map : read) {
-            viitteet.add(new BibtexEntry(map));
+            viitteet.add(new BibtexEntry(map,BibtexEntryType.ARTICLE));
         }
         outfile = out;
     }
     @Override
-    public void lisaaViite(BibtexEntry entry) {
+    public void lisaaArtikkeli(BibtexEntry entry) {
         viitteet.add(entry);
     }
 
     @Override
-    public List<BibtexEntry> listaaViite() {
+    public List<BibtexEntry> listaaArtikkelit() {
         return viitteet;
     }
 

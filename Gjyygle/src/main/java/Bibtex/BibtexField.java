@@ -2,6 +2,16 @@
 package Bibtex;
 
 public enum BibtexField {
+    ID {
+        @Override
+        public String getName() {
+            return "ID";
+        }
+        @Override
+        public boolean validate(String input) {
+            return true;
+        }
+    },
     ADDRESS {
         @Override
         public String getName() {

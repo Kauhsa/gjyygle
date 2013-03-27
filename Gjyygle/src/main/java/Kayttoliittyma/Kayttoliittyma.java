@@ -4,7 +4,7 @@
  */
 package Kayttoliittyma;
 
-import Bibtex.BibtexArtikkeli;
+import Bibtex.*;
 import gjyygle.BibtexTietokanta;
 import java.text.ParseException;
 import java.util.Scanner;
@@ -26,8 +26,6 @@ public class Kayttoliittyma {
     public Kayttoliittyma(Scanner reader) {
         this.reader = reader;
     }
-    
-    
 
     public void kaynnista() {
         System.out.println("Tervetuloa viitteiden hallintaan");
@@ -40,7 +38,6 @@ public class Kayttoliittyma {
             if (komento.equals("1")) {
                 lisaaViite();
             } else if (komento.equals("2")) {
-                
             } else if (komento.equals("3")) {
                 break;
             } else {
@@ -48,6 +45,8 @@ public class Kayttoliittyma {
             }
 
         }
+        System.out.println("");
+        System.out.println("Tervetuloa uudelleen!");
     }
 
     private void tulostaValikko() {
@@ -59,12 +58,7 @@ public class Kayttoliittyma {
     }
 
     private void lisaaViite() {
-        System.out.println("");
-        System.out.println("Valitse viitetyyppi");
-        System.out.println("");
-        System.out.println("1. Artikkeli");
-        System.out.println("2. Lopeta");
-        System.out.print("-");
+        tulostaViiteValikko();
         String komento = lue();
         while (true) {
             if (komento.equals("1")) {
@@ -75,14 +69,49 @@ public class Kayttoliittyma {
                 break;
             } else {
                 virheSyote();
+                tulostaViiteValikko();
+                komento = lue();
             }
         }
     }
 
+    private void tulostaViiteValikko() {
+        System.out.println("");
+        System.out.println("Valitse viitetyyppi");
+        System.out.println("");
+        System.out.println("1. Artikkeli");
+        System.out.println("2. Lopeta");
+        System.out.print("-");
+    }
+
     private void lisaaArtikkeli() {
         // Required fields: author, title, journal, year
-        // Optional fields: volume, number, pages, month, note, key
 
+        BibtexArtikkeli uusi = lisaaArtikkeliPakolliset();
+        System.out.println("");
+        System.out.println("Haluatko lisätä valinnaisia tietoja? (k/e)");
+        String komento = lue();
+        while (true) {
+            if (komento.equals("k")) {
+                lisaaArtikkeliValinnaiset(uusi);
+                break;
+            } else if (komento.equals("e")) {
+                break;
+            } else {
+                System.out.println("Vastaa k tai e");
+                komento = lue();
+            }
+        }
+
+        // TODO Interface jolle BibtexArtikkeli-olio syötetään        
+        tietokanta.lisaaArtikkeli(uusi);
+
+        System.out.println("");
+        System.out.println("Artikkeli lisätty");
+        System.out.println("");
+    }
+
+    private BibtexArtikkeli lisaaArtikkeliPakolliset() {
         System.out.println("Artikkelin pakolliset tiedot:");
         System.out.print("Author: ");
         String author = lue();
@@ -95,14 +124,39 @@ public class Kayttoliittyma {
 
         int year = lueVuosi();
 
-        // TODO Interface jolle BibtexArtikkeli-olio syötetään
-        BibtexArtikkeli uusi = new BibtexArtikkeli(author, title, journal, year);
-
-        System.out.println("");
-        System.out.println("Artikkeli lisätty");
-        System.out.println("");
+        return new BibtexArtikkeli(author, title, journal, year);
     }
-    
+
+    private void lisaaArtikkeliValinnaiset(BibtexArtikkeli uusi) {
+        // Optional fields: volume, number, pages, month, note, key
+        System.out.println("Artikkelin valinnaiset tiedot:");
+
+        for (BibtexField type : BibtexEntryType.ARTICLE.getOptionalFields()) {
+            System.out.print(type.getName() + ": ");
+            uusi.setValue(type, lue());
+        }        
+
+        System.out.println("Valinnaiset tiedot lisätty");
+    }
+
+    private int lueInteger() {
+        int year = 0;
+        while (true) {
+            System.out.print("Year: ");
+            String yearString = lue();
+
+            try {
+                year = Integer.parseInt(yearString);
+            } catch (Exception e) {
+                System.out.println("Luku virheellinen");
+                System.out.println("");
+                continue;
+            }
+            break;
+        }
+        return year;
+    }
+
     private int lueVuosi() {
         int year = 0;
         while (true) {
