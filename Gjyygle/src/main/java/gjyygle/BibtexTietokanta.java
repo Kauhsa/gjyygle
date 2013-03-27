@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface BibtexTietokanta {
-    public void lisaaArtikkeli(BibtexEntry article) throws IllegalArgumentException;
-    public List<BibtexArtikkeli> listaaArtikkelit();
+    public void lisaaViite(BibtexEntry article) throws IllegalArgumentException;
+    public List<BibtexEntry> listaaViite();
     public void tallenna() throws IOException;
 }
