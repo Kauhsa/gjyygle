@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) {
-        String input = "5\n3\n";
-        Scanner lukija = new Scanner(input);
-        Kayttoliittyma liittyma = new Kayttoliittyma(lukija);
+        //String input = "1\n3\n2\n3";
+        //Scanner lukija = new Scanner(input);
+        Kayttoliittyma liittyma = new Kayttoliittyma();
         liittyma.kaynnista();
     }
 }

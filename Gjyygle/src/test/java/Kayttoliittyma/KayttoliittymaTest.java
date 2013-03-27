@@ -55,8 +55,7 @@ public class KayttoliittymaTest {
     
     
     private void asetaUusiKayttoliittyma(String input) {
-        Scanner lukija = new Scanner(input);
-        liittyma = new Kayttoliittyma(lukija);
+        liittyma = new Kayttoliittyma(new Scanner(input));
     }
     
     @Test
@@ -66,13 +65,57 @@ public class KayttoliittymaTest {
     
     @Test
     public void alkuValikkoVirheellinenKomento() {
-        String input = "5" + "\n" + "3" + "\n";
-        Scanner lukija = new Scanner(input);
-        
-        asetaUusiKayttoliittyma("");
-        liittyma.kaynnista();
-        
+        asetaUusiKayttoliittyma("5\n"
+                + "3");
+        liittyma.kaynnista();       
         assertTrue(outContent.toString().contains("Virheellinen"));
         
+    }
+        
+    @Test
+    public void lisaaViiteValikkoVirheellinenKomento() {
+        asetaUusiKayttoliittyma("1\n"
+                + "45\n"
+                + "2\n"
+                + "3");
+        liittyma.kaynnista();       
+        assertTrue(outContent.toString().contains("Virheellinen"));       
+    }
+    
+    @Test
+    public void lisaaViiteValikkoKayntiJaPoistuminen() {
+        asetaUusiKayttoliittyma("1\n"
+                + "2\n"
+                + "3");
+        liittyma.kaynnista();       
+        assertTrue(outContent.toString().contains("Artikkeli") && outContent.toString().contains("uudelleen!"));       
+    }
+    
+    @Test
+    public void lisaaViiteArtikkeliValideillaArvoilla() {
+        asetaUusiKayttoliittyma("1\n"
+                + "1\n"
+                + "Kalle\n"
+                + "Peruna\n"
+                + "Medicus\n"
+                + "1999\n"
+                + "3");
+        liittyma.kaynnista();       
+        assertTrue(outContent.toString().contains("lisätty"));       
+    }
+    
+    
+    @Test
+    public void lisaaViiteArtikkeliVirheellisellaVuodella() {
+        asetaUusiKayttoliittyma("1\n"
+                + "1\n"
+                + "Kalle\n"
+                + "Peruna\n"
+                + "Medicus\n"
+                + "fdasfda\n"
+                + "1999\n"
+                + "3");
+        liittyma.kaynnista();       
+        assertTrue(outContent.toString().contains("lisätty"));       
     }
 }
