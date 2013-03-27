@@ -45,15 +45,17 @@ public class WriteXML {
                     Entry<BibtexField, String> element = elements.next();
                     String e = element.getKey().getName();
                     String d = element.getValue();
-                    Element em = document.createElement(e);
-                    em.appendChild(document.createTextNode(d));
-                    entryElement.appendChild(em);
+                    if (d != null) {
+                        Element em = document.createElement(e);
+                        em.appendChild(document.createTextNode(d));
+                        entryElement.appendChild(em);
+                    }
                 }
                 rootElement.appendChild(entryElement);
             }
 
             File outfile = file;
-            
+
             TransformerFactory transformerFactory =
                     TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
