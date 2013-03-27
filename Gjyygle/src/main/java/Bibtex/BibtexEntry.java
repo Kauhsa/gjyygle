@@ -16,7 +16,7 @@ public class BibtexEntry {
         BibtexField[] required = type.getRequiredFields();
         lisaaArvot(values, required);
         BibtexField[] optional = type.getOptionalFields();
-        lisaaArvot(values, required);
+        lisaaArvot(values, optional);
     }
     private void lisaaArvot(HashMap<String, String> values, BibtexField[] kentat) {
         for (BibtexField i : kentat) {
@@ -28,7 +28,7 @@ public class BibtexEntry {
     }
     public boolean hasFields() {
         for (BibtexField i : type.getRequiredFields()) {
-            if (!arvot.containsKey(i.getName())) {
+            if (!arvot.containsKey(i)) {
                 return false;
             }
         }
@@ -59,5 +59,4 @@ public class BibtexEntry {
         }
         return -1;
     }
-
 }
