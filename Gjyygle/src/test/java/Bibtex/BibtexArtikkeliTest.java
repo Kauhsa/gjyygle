@@ -1,6 +1,7 @@
 
-package gjyygle;
+package Bibtex;
 
+import Bibtex.BibtexArtikkeli;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

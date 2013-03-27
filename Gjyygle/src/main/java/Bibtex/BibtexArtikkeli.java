@@ -1,4 +1,4 @@
-package gjyygle;
+package Bibtex;
 import java.util.HashMap;
 
 public class BibtexArtikkeli {
