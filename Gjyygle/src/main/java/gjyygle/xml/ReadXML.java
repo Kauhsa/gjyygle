@@ -75,5 +75,6 @@ public class ReadXML {
     public static void main(String[] args) {
         ReadXML t = new ReadXML("testXml.xml");
         t.printEntries();
+        WriteXML.write("xmlout.xml", t.getEntries());
     }
 }
