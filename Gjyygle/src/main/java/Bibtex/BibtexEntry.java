@@ -14,15 +14,17 @@ public class BibtexEntry {
         arvot = new EnumMap<BibtexField, String>(BibtexField.class);
         this.type = type;
         BibtexField[] required = type.getRequiredFields();
+        for (BibtexField i : required) {
+            if (!values.containsKey(i.getName())) {
+                throw new IllegalArgumentException();
+            }
+        }
         lisaaArvot(values, required);
         BibtexField[] optional = type.getOptionalFields();
         lisaaArvot(values, optional);
     }
     private void lisaaArvot(HashMap<String, String> values, BibtexField[] kentat) {
         for (BibtexField i : kentat) {
-            if (!values.containsKey(i.getName())) {
-                throw new IllegalArgumentException();
-            }
             arvot.put(i, values.get(i.getName()));
         }
     }
@@ -53,6 +55,9 @@ public class BibtexEntry {
     }
     public int getValueInt(BibtexField key) {
         String ret = arvot.get(key);
+        if (ret == null) {
+            return -1;
+        }
         if (key.validateInteger(ret))
         {
             return new Integer(ret);
