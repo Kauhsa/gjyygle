@@ -5,13 +5,21 @@ import java.util.EnumMap;
 import java.util.HashMap;
 
 public class BibtexEntry {
-    protected EnumMap<BibtexField, String> arvot;
+    private EnumMap<BibtexField, String> arvot;
+    private BibtexEntryType type;
     public BibtexEntry() {
         arvot = new EnumMap<BibtexField, String>(BibtexField.class);
     }
-    public BibtexEntry(HashMap<String, String> values) {
-        BibtexField[] required = BibtexEntryType.ARTICLE.getRequiredFields();
-        for (BibtexField i : required) {
+    public BibtexEntry(HashMap<String, String> values, BibtexEntryType type) {
+        arvot = new EnumMap<BibtexField, String>(BibtexField.class);
+        this.type = type;
+        BibtexField[] required = type.getRequiredFields();
+        lisaaArvot(values, required);
+        BibtexField[] optional = type.getOptionalFields();
+        lisaaArvot(values, required);
+    }
+    private void lisaaArvot(HashMap<String, String> values, BibtexField[] kentat) {
+        for (BibtexField i : kentat) {
             if (!values.containsKey(i.getName())) {
                 throw new IllegalArgumentException();
             }
@@ -20,13 +28,6 @@ public class BibtexEntry {
     }
     public EnumMap<BibtexField, String> getAllValues() {
         return arvot;
-    }
-    private int findInteger(String key) {
-        String found = arvot.get(key);
-        if (found == null) {
-            return -1;
-        }
-        return new Integer(found);
     }
     public void setValue(BibtexField key, String value) {
         if (key.validate(value)) {
