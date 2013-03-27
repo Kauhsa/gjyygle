@@ -95,4 +95,16 @@ public class BibtexEntryTest {
         }
         assertEquals("2012", artikkeli.getValue(BibtexField.YEAR));
     }
+    
+    @Test
+    public void cannotFindEntryThatDoesntExist() {
+        BibtexEntry artikkeli = new BibtexEntry(artonPaperi, BibtexEntryType.ARTICLE);
+        assertEquals(null, artikkeli.getValue(BibtexField.MONTH));
+    }
+    
+    @Test
+    public void cannotFindNumberThatDoesntExist() {
+        BibtexEntry artikkeli = new BibtexEntry(artonPaperi, BibtexEntryType.ARTICLE);
+        assertEquals(-1, artikkeli.getValueInt(BibtexField.MONTH));
+    }
 }

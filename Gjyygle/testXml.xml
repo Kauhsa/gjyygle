@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
     <entry>
-        <id>baka00</id>
-        <type>article</type>
-        <author>A. Baka</author>
-        <title>Peeling onions</title>
-        <journal>mkyong</journal>
-        <year>2000</year>
+        <ID>baka00</ID>
+        <Type>article</Type>
+        <Author>A. Baka</Author>
+        <Title>Peeling onions</Title>
+        <Journal>mkyong</Journal>
+        <Year>2000</Year>
     </entry>
 
-    <entry>
+<!--    <entry>
         <id>boo12</id>
         <type>farticle</type>
         <author>Albert Boo</author>
         <title>Eating rocks</title>
         <journal>Culinary review</journal>
         <year>2012</year>
-    </entry>
+    </entry>-->
 </root>

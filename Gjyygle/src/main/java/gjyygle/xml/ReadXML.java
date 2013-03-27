@@ -17,14 +17,12 @@ import org.w3c.dom.NodeList;
 
 public class ReadXML {
 
-    Document doc;
-    ArrayList<HashMap<String, String>> parsed;
+    public static ArrayList<HashMap<String, String>> read(File file) {
 
-    public ReadXML(String file) {
-
+        Document doc;
         try {
 
-            File fXmlFile = new File(file);
+            File fXmlFile = file;
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(fXmlFile);
@@ -32,14 +30,15 @@ public class ReadXML {
             //optional, but recommended
             //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
             doc.getDocumentElement().normalize();
+            return parseEntries(doc);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        parseEntries();
+        return null;
     }
 
-    private void parseEntries() {
-        parsed = new ArrayList();
+    private static ArrayList<HashMap<String, String>> parseEntries(Document doc) {
+        ArrayList<HashMap<String, String>> parsed = new ArrayList();
         NodeList entries = doc.getElementsByTagName("entry");
         for (int i = 0; i < entries.getLength(); i++) {
             Node entry = entries.item(i);
@@ -54,27 +53,19 @@ public class ReadXML {
                 }
             }
         }
-    }
-    
-    public ArrayList<HashMap<String, String>> getEntries() {
         return parsed;
     }
 
-    public void printEntries() {
+    public static void printEntries(ArrayList<HashMap<String, String>> parsed) {
         for (int i = 0; i < parsed.size(); i++) {
             System.out.println("-----------entry " + i + " ------------");
             HashMap<String, String> entry = parsed.get(i);
-            Iterator<Entry<String,String>> data = entry.entrySet().iterator();
-            while(data.hasNext()) {
-                Entry<String,String> e = data.next();
+            Iterator<Entry<String, String>> data = entry.entrySet().iterator();
+            while (data.hasNext()) {
+                Entry<String, String> e = data.next();
                 System.out.println(e.getKey() + "=" + e.getValue());
             }
         }
     }
 
-    public static void main(String[] args) {
-        ReadXML t = new ReadXML("testXml.xml");
-        t.printEntries();
-        WriteXML.write("xmlout.xml", t.getEntries());
-    }
 }
