@@ -78,4 +78,62 @@ public class BibtexArtikkeliTest {
         article.setYear(2020);
         assertEquals(2020, article.getYear());
     }
+    @Test
+    public void doesntHaveVolumeBeforeIsSet() {
+        assertEquals(-1, article.getVolume());
+    }
+    @Test
+    public void canSetArticleVolume() {
+        article.setVolume(11);
+        assertEquals(11, article.getVolume());
+    }
+    @Test
+    public void doesntHaveNumberBeforeIsSet() {
+        assertEquals(-1, article.getNumber());
+    }
+    @Test
+    public void canSetArticleNumber() {
+        article.setNumber(5);
+        assertEquals(5, article.getNumber());
+    }
+    @Test
+    public void doesntHavePagesBeforeIsSet() {
+        assertEquals(-1, article.getPagesStart());
+        assertEquals(-1, article.getPagesEnd());
+    }
+    @Test
+    public void canSetArticlePages() {
+        article.setPages(20, 25);
+        assertEquals(20, article.getPagesStart());
+        assertEquals(25, article.getPagesEnd());
+    }
+    @Test
+    public void doesntHaveMonthBeforeIsSet() {
+        assertEquals(-1, article.getMonth());
+    }
+    @Test
+    public void canSetMonthNumber() {
+        article.setMonth(9);
+        assertEquals(9, article.getMonth());
+    }
+    @Test
+    public void doesntHaveNoteBeforeIsSet() {
+        assertEquals(null, article.getNote());
+    }
+    @Test
+    public void canSetArticleNote() {
+        article.setNote("löytyi jostain");
+        assertEquals("löytyi jostain", article.getNote());
+    }
+
+    //keyn arvotyyppiä (int/string/?) ei ole löytynyt mistään, oletetaan string
+    @Test
+    public void doesntHaveKeyBeforeIsSet() {
+        assertEquals(null, article.getKey());
+    }
+    @Test
+    public void canSetArticleKey() {
+        article.setKey("??");
+        assertEquals("??", article.getKey());
+    }
 }

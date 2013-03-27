@@ -10,6 +10,13 @@ public class BibtexArtikkeli {
         arvot.put("Journal", journal);
         arvot.put("Year", ""+year);
     }
+    private int findInteger(String key) {
+        String found = arvot.get(key);
+        if (found == null) {
+            return -1;
+        }
+        return new Integer(found);
+    }
     public String getAuthor() {
         return arvot.get("Author");
     }
@@ -19,14 +26,21 @@ public class BibtexArtikkeli {
     public String getJournal() {
         return arvot.get("Journal");
     }
-    public int getKey() {
-        return new Integer(arvot.get("Key"));
+    //keyn arvotyyppiä (int/string/?) ei ole löytynyt mistään, oletetaan string
+    public String getKey() {
+        return arvot.get("Key");
     }
-    public void setKey(int key) {
-        arvot.put("Key", ""+key);
+    public void setKey(String key) {
+        arvot.put("Key", key);
+    }
+    public void setNote(String note) {
+        arvot.put("Note", ""+note);
+    }
+    public String getNote() {
+        return arvot.get("Note");
     }
     public int getYear() {
-        return new Integer(arvot.get("Year"));
+        return findInteger("Year");
     }
     public void setAuthor(String author) {
         arvot.put("Author", author);
@@ -41,19 +55,19 @@ public class BibtexArtikkeli {
         arvot.put("Year", ""+year);
     }
     public int getVolume() {
-        return new Integer(arvot.get("Volume"));
+        return findInteger("Volume");
     }
     public int getNumber() {
-        return new Integer(arvot.get("Number"));
+        return findInteger("Number");
     }
     public int getPagesStart() {
-        return new Integer(arvot.get("PagesStart"));
+        return findInteger("PagesStart");
     }
     public int getPagesEnd() {
-        return new Integer(arvot.get("PagesEnd"));
+        return findInteger("PagesEnd");
     }
     public int getMonth() {
-        return new Integer(arvot.get("Month"));
+        return findInteger("Month");
     }
     public void setVolume(int volume) {
         arvot.put("Volume", ""+volume);
