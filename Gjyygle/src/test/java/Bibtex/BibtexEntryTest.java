@@ -39,7 +39,7 @@ public class BibtexEntryTest {
     
     @Test
     public void canCreateArticle() {
-        BibtexEntry artikkeli = new BibtexEntry();
+        BibtexEntry artikkeli = new BibtexEntry(BibtexEntryType.ARTICLE);
         assertTrue(artikkeli != null);
     }
     

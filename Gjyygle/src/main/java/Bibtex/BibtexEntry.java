@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class BibtexEntry {
     private EnumMap<BibtexField, String> arvot;
     private BibtexEntryType type;
-    public BibtexEntry() {
+    public BibtexEntry(BibtexEntryType type) {
         arvot = new EnumMap<BibtexField, String>(BibtexField.class);
     }
     public BibtexEntry(HashMap<String, String> values, BibtexEntryType type) {
@@ -25,6 +25,14 @@ public class BibtexEntry {
             }
             arvot.put(i, values.get(i.getName()));
         }
+    }
+    public boolean hasFields() {
+        for (BibtexField i : type.getRequiredFields()) {
+            if (!arvot.containsKey(i.getName())) {
+                return false;
+            }
+        }
+        return true;
     }
     public void setType(BibtexEntryType type) {
         this.type = type;
