@@ -49,4 +49,17 @@ public class BibtexArtikkeli {
     public int getMonth() {
         return new Integer(arvot.get("Month"));
     }
+    public void setVolume(int volume) {
+        arvot.put("Volume", ""+volume);
+    }
+    public void setNumber(int number) {
+        arvot.put("Number", ""+number);
+    }
+    public void setMonth(int month) {
+        arvot.put("Month", ""+month);
+    }
+    public void setPages(int pagesStart, int pagesEnd) {
+        arvot.put("PagesStart", ""+pagesStart);
+        arvot.put("PagesEnd", ""+pagesEnd);
+    }
 }
