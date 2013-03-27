@@ -37,10 +37,13 @@ public class BibtexGen {
             Logger.getLogger(BibtexGen.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (BibtexEntry entry : lista) {
-            tiedot.println("@" + entry.getType() + "{");
+            tiedot.println("@" + entry.getType() + "{" + entry.getValue(BibtexField.ID));
             EnumMap<BibtexField, String> map = entry.getAllValues();
             for (EnumMap.Entry<BibtexField, String> arvot : map.entrySet()) {
-                System.out.println(arvot.getKey() + " : " + arvot.getValue());
+                if (arvot.getKey().equals(BibtexField.ID)) {
+                    continue;
+                }
+                tiedot.println(arvot.getKey() + " : " + arvot.getValue());
             }
             tiedot.println("}");
         }
