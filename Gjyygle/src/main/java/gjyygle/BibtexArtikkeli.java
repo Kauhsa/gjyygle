@@ -19,6 +19,12 @@ public class BibtexArtikkeli {
     public String getJournal() {
         return arvot.get("Journal");
     }
+    public int getKey() {
+        return new Integer(arvot.get("Key"));
+    }
+    public void setKey(int key) {
+        arvot.put("Key", ""+key);
+    }
     public int getYear() {
         return new Integer(arvot.get("Year"));
     }
