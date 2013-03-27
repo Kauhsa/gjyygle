@@ -23,4 +23,27 @@
     </dependency>
   </dependencies>
   
+  <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+  
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <show>private</show>
+                    <nohelp>true</nohelp>
+                    <stylesheetfile>${basedir}/src/main/javadoc/stylesheet.css</stylesheetfile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
