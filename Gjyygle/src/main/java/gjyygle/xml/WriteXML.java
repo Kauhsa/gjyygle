@@ -4,8 +4,10 @@
  */
 package gjyygle.xml;
 
+import Bibtex.BibtexField;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -24,8 +26,7 @@ import org.w3c.dom.Element;
  */
 public class WriteXML {
 
-    public static void write(String file, ArrayList<HashMap<String, String>> entries) {
-
+    public static void write(File file, ArrayList<EnumMap<BibtexField, String>> entries) {
         try {
             DocumentBuilderFactory documentBuilderFactory =
                     DocumentBuilderFactory.newInstance();
@@ -36,13 +37,13 @@ public class WriteXML {
             Element rootElement = document.createElement("root");
             document.appendChild(rootElement);
 
-            for (Iterator<HashMap<String, String>> it = entries.iterator(); it.hasNext();) {
-                HashMap<String, String> entry = it.next();
+            for (Iterator<EnumMap<BibtexField, String>> it = entries.iterator(); it.hasNext();) {
+                EnumMap<BibtexField, String> entry = it.next();
                 Element entryElement = document.createElement("entry");
-                Iterator<Entry<String, String>> elements = entry.entrySet().iterator();
+                Iterator<Entry<BibtexField, String>> elements = entry.entrySet().iterator();
                 while (elements.hasNext()) {
-                    Entry<String, String> element = elements.next();
-                    String e = element.getKey();
+                    Entry<BibtexField, String> element = elements.next();
+                    String e = element.getKey().getName();
                     String d = element.getValue();
                     Element em = document.createElement(e);
                     em.appendChild(document.createTextNode(d));
@@ -51,7 +52,7 @@ public class WriteXML {
                 rootElement.appendChild(entryElement);
             }
 
-            File outfile = new File(file);
+            File outfile = file;
             
             TransformerFactory transformerFactory =
                     TransformerFactory.newInstance();
