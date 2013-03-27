@@ -16,6 +16,7 @@ public enum BibtexEntryType {
                                   BibtexField.TITLE,
                                   BibtexField.JOURNAL,
                                   BibtexField.YEAR,
+                                  BibtexField.ID
             };
             return ret;
         }
