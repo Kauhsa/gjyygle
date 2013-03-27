@@ -107,4 +107,10 @@ public class BibtexEntryTest {
         BibtexEntry artikkeli = new BibtexEntry(artonPaperi, BibtexEntryType.ARTICLE);
         assertEquals(-1, artikkeli.getValueInt(BibtexField.MONTH));
     }
+    
+    @Test
+    public void emptyArticleDoesntHaveFields() {
+        BibtexEntry artikkeli = new BibtexEntry(BibtexEntryType.ARTICLE);
+        assertFalse(artikkeli.hasFields());
+    }
 }

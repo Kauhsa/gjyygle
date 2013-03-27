@@ -9,19 +9,18 @@ public class BibtexEntry {
     private BibtexEntryType type;
     public BibtexEntry(BibtexEntryType type) {
         arvot = new EnumMap<BibtexField, String>(BibtexField.class);
+        this.type = type;
     }
     public BibtexEntry(HashMap<String, String> values, BibtexEntryType type) {
         arvot = new EnumMap<BibtexField, String>(BibtexField.class);
         this.type = type;
         BibtexField[] required = type.getRequiredFields();
-        for (BibtexField i : required) {
-            if (!values.containsKey(i.getName())) {
-                throw new IllegalArgumentException();
-            }
-        }
         lisaaArvot(values, required);
         BibtexField[] optional = type.getOptionalFields();
         lisaaArvot(values, optional);
+        if (!hasFields()) {
+            throw new IllegalArgumentException();
+        }
     }
     private void lisaaArvot(HashMap<String, String> values, BibtexField[] kentat) {
         for (BibtexField i : kentat) {
