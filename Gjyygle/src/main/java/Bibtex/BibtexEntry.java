@@ -26,6 +26,12 @@ public class BibtexEntry {
             arvot.put(i, values.get(i.getName()));
         }
     }
+    public void setType(BibtexEntryType type) {
+        this.type = type;
+    }
+    public BibtexEntryType getType() {
+        return type;
+    }
     public EnumMap<BibtexField, String> getAllValues() {
         return arvot;
     }
