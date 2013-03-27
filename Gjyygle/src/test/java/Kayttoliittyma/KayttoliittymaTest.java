@@ -91,31 +91,31 @@ public class KayttoliittymaTest {
         assertTrue(outContent.toString().contains("Artikkeli") && outContent.toString().contains("uudelleen!"));       
     }
     
-    @Test
-    public void lisaaViiteArtikkeliValideillaArvoilla() {
-        asetaUusiKayttoliittyma("1\n"
-                + "1\n"
-                + "Kalle\n"
-                + "Peruna\n"
-                + "Medicus\n"
-                + "1999\n"
-                + "3");
-        liittyma.kaynnista();       
-        assertTrue(outContent.toString().contains("lisätty"));       
-    }
+//    @Test
+//    public void lisaaViiteArtikkeliValideillaArvoilla() {
+//        asetaUusiKayttoliittyma("1\n"
+//                + "1\n"
+//                + "Kalle\n"
+//                + "Peruna\n"
+//                + "Medicus\n"
+//                + "1999\n"
+//                + "3");
+//        liittyma.kaynnista();       
+//        assertTrue(outContent.toString().contains("lisätty"));       
+//    }
     
     
-    @Test
-    public void lisaaViiteArtikkeliVirheellisellaVuodella() {
-        asetaUusiKayttoliittyma("1\n"
-                + "1\n"
-                + "Kalle\n"
-                + "Peruna\n"
-                + "Medicus\n"
-                + "fdasfda\n"
-                + "1999\n"
-                + "3");
-        liittyma.kaynnista();       
-        assertTrue(outContent.toString().contains("lisätty"));       
-    }
+//    @Test
+//    public void lisaaViiteArtikkeliVirheellisellaVuodella() {
+//        asetaUusiKayttoliittyma("1\n"
+//                + "1\n"
+//                + "Kalle\n"
+//                + "Peruna\n"
+//                + "Medicus\n"
+//                + "fdasfda\n"
+//                + "1999\n"
+//                + "3");
+//        liittyma.kaynnista();       
+//        assertTrue(outContent.toString().contains("lisätty"));       
+//    }
 }
