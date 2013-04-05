@@ -26,6 +26,7 @@ public class BibtexGenTest {
     private List<BibtexEntry> lista;
     private BibtexGen gen;
     private BibtexTietokantaMock db;
+    private ByteArrayOutputStream foo;
 
     public BibtexGenTest() {
     }
@@ -40,7 +41,9 @@ public class BibtexGenTest {
 
     @Before
     public void setUp() {
-         gen = new BibtexGen(db);
+        gen = new BibtexGen(db);
+        foo = null;
+        gen.generate(foo);
     }
 
     @After
@@ -57,5 +60,4 @@ public class BibtexGenTest {
         String bar = foo.toByteArray().toString();
         bar.contains("@ARTICLE{");
     }
-
 }
