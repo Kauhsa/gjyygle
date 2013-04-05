@@ -19,13 +19,7 @@ public class Kayttoliittyma {
 
     private IO io;
     private BibtexTietokanta tietokanta;
-
-    public Kayttoliittyma(IO io) {
-        this.io = io;
-        this.tietokanta = new XmlTietokanta(new File("src/main/resources/TestIn.xml"), new File("src/main/resources/TestOut.xml"));
-
-    }
-
+  
     public Kayttoliittyma(IO reader, BibtexTietokanta tietokanta) {
         this.io = reader;
         this.tietokanta = tietokanta;
