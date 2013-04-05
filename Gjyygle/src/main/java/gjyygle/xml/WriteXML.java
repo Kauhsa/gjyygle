@@ -5,15 +5,21 @@
 package gjyygle.xml;
 
 import Bibtex.BibtexField;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -26,7 +32,7 @@ import org.w3c.dom.Element;
  */
 public class WriteXML {
 
-    public static void write(File file, ArrayList<EnumMap<BibtexField, String>> entries) {
+    public static Document createDocument(ArrayList<EnumMap<BibtexField, String>> entries) {
         try {
             DocumentBuilderFactory documentBuilderFactory =
                     DocumentBuilderFactory.newInstance();
@@ -53,17 +59,39 @@ public class WriteXML {
                 }
                 rootElement.appendChild(entryElement);
             }
+            return document;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
-            File outfile = file;
-
+    public static String getString(ArrayList<EnumMap<BibtexField, String>> entries) {
+        try {
+            Document document = createDocument(entries);
             TransformerFactory transformerFactory =
                     TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(document);
-            StreamResult result = new StreamResult(outfile);
-            transformer.transform(source, result);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            StringWriter writer = new StringWriter();
+            transformer.transform(source, new StreamResult(writer));
+            String output = writer.getBuffer().toString().replaceAll("\n|\r", "");
+            return output;
+        } catch (TransformerException ex) {
+            Logger.getLogger(WriteXML.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    public static void write(File file, ArrayList<EnumMap<BibtexField, String>> entries) {
+        String data = getString(entries);
+        try {
+            FileWriter fstream = new FileWriter(file);
+            BufferedWriter out = new BufferedWriter(fstream);
+            out.write(data);
+            out.close();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
         }
     }
 }

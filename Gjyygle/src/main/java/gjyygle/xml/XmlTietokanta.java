@@ -55,7 +55,7 @@ public class XmlTietokanta implements BibtexTietokanta {
     }
     
     public static void main(String[] args) {
-        XmlTietokanta t = new XmlTietokanta(new File("testXml.xml"), new File("xmlout2.xml"));
+        XmlTietokanta t = new XmlTietokanta(new File("testXml.xml"), new File("xmlout3.xml"));
         t.tallenna();
     }
 }
