@@ -9,7 +9,6 @@ import gjyygle.bibtex.BibtexEntry;
 import gjyygle.bibtex.BibtexEntryType;
 import gjyygle.bibtex.BibtexField;
 
-
 /**
  *
  * @author ivahamaa
@@ -18,7 +17,7 @@ public class Kayttoliittyma {
 
     private IO io;
     private BibtexTietokanta tietokanta;
-  
+
     public Kayttoliittyma(IO reader, BibtexTietokanta tietokanta) {
         this.io = reader;
         this.tietokanta = tietokanta;
@@ -31,7 +30,6 @@ public class Kayttoliittyma {
         while (true) {
             tulostaValikko();
             String komento = lue();
-
             if (komento.equals("1")) {
                 lisaaViite();
             } else if (komento.equals("2")) {
@@ -40,7 +38,6 @@ public class Kayttoliittyma {
             } else {
                 virheSyote();
             }
-
         }
         io.println("");
         io.println("Tervetuloa uudelleen!");
@@ -102,7 +99,7 @@ public class Kayttoliittyma {
                 komento = lue();
             }
         }
-
+        
         tietokanta.lisaaArtikkeli(uusi);
         try {
             tietokanta.tallenna();
@@ -114,8 +111,6 @@ public class Kayttoliittyma {
             io.println("Tallennus epäonnistui");
             io.println("");
         }
-
-
     }
 
     private void lisaaArtikkeliValinnaiset(BibtexEntry uusi) {
@@ -127,7 +122,6 @@ public class Kayttoliittyma {
         }
         io.println("Valinnaiset tiedot lisätty");
     }
-
 
     private String lue() {
         return io.nextLine();
