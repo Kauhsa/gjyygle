@@ -70,8 +70,9 @@ public class BibtexGenTest {
 
     @Before
     public void setUp() {
+        db = new BibtexTietokantaMock();
         gen = new BibtexGen(db);
-        foo = null;
+        foo = new ByteArrayOutputStream();
         gen.generate(foo);
     }
 
@@ -84,9 +85,26 @@ public class BibtexGenTest {
      */
     @Test
     public void testGenerate() {
-//        ByteArrayOutputStream foo = null;
-//        gen.generate(foo);
-//        String bar = foo.toByteArray().toString();
-//        bar.contains("@ARTICLE{");
+        String bar = foo.toByteArray().toString();
+        bar.contains("@ARTICLE{");
+    }
+
+    @Test
+    public void hasAllEntries() {
+        String bar = foo.toByteArray().toString();
+        bar.contains("@ARTICLE{aaa");
+        bar.contains("@ARTICLE{b");
+        bar.contains("@ARTICLE{c");
+    }
+    
+    @Test
+    public void articleAaaHasAllFields() {
+        String bar = foo.toByteArray().toString();
+        bar.contains("Author = \"joku tyyppi\"");
+        bar.contains("Title = \"hieno artikkeli\"");
+        bar.contains("Journal = \"jostain kirjasta kai\"");
+        bar.contains("Year = \"2013\"");
+        bar.contains("Volume = \"1\"");
+        bar.contains("Note = \"huom!\"");
     }
 }
