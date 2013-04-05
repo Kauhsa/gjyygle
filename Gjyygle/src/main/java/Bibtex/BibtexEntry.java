@@ -18,6 +18,8 @@ public class BibtexEntry {
         lisaaArvot(values, required);
         BibtexField[] optional = type.getOptionalFields();
         lisaaArvot(values, optional);
+        //halutaanko ei-required, ei-optional joita arto kuitenkin käyttää
+        lisaaArvot(values, BibtexField.values());
         if (!hasFields()) {
             throw new IllegalArgumentException();
         }

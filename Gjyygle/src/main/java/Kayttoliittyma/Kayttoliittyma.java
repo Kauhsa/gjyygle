@@ -6,7 +6,8 @@ package Kayttoliittyma;
 
 import Bibtex.*;
 import gjyygle.BibtexTietokanta;
-import java.text.ParseException;
+import gjyygle.xml.XmlTietokanta;
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -20,7 +21,8 @@ public class Kayttoliittyma {
 
     public Kayttoliittyma() {
         this.reader = new Scanner(System.in);
-        // this.tietokanta = new XMLBibtexTietokanta();
+        this.tietokanta = new XmlTietokanta(new File("src/main/resources/TestIn.xml"),new File("src/main/resources/TestOut.xml"));
+        
     }
 
     public Kayttoliittyma(Scanner reader) {
@@ -107,7 +109,12 @@ public class Kayttoliittyma {
         }
 
         // TODO Interface jolle BibtexArtikkeli-olio syötetään        
-        // tietokanta.lisaaArtikkeli(uusi);
+        tietokanta.lisaaArtikkeli(uusi);
+        try {
+            tietokanta.tallenna();
+        } catch (Exception e) {
+            
+        }
 
         System.out.println("");
         System.out.println("Artikkeli lisätty");
@@ -123,7 +130,8 @@ public class Kayttoliittyma {
         for (BibtexField type : BibtexEntryType.ARTICLE.getOptionalFields()) {
             System.out.print(type.getName() + ": ");
             uusi.setValue(type, lue());
-        }        
+        }
+        
 
         System.out.println("Valinnaiset tiedot lisätty");
     }
