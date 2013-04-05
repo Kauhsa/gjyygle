@@ -9,6 +9,7 @@ import gjyygle.bibtex.BibtexEntryType;
 import gjyygle.bibtex.BibtexField;
 import gjyygle.BibtexTietokanta;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -16,6 +17,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,7 +31,15 @@ public class XmlTietokanta implements BibtexTietokanta {
     
     public XmlTietokanta(File save) {
         savefile = save;
-        ArrayList<HashMap<String,String>> read = ReadXML.read(savefile);
+        loadEntries();
+    }
+    public final void loadEntries() {
+        ArrayList<HashMap<String,String>> read;
+        try {
+            read = ReadXML.read(savefile);
+        } catch (FileNotFoundException ex) {
+            return;
+        }
         for (HashMap<String,String> map : read) {
             viitteet.add(new BibtexEntry(map,BibtexEntryType.ARTICLE));
         }
@@ -50,10 +61,5 @@ public class XmlTietokanta implements BibtexTietokanta {
             r.add(viite.getAllValues());
         }
         WriteXML.write(savefile, r);
-    }
-    
-    public static void main(String[] args) {
-        XmlTietokanta t = new XmlTietokanta(new File("testXml.xml"));
-        t.tallenna();
     }
 }

@@ -23,21 +23,15 @@ import org.xml.sax.InputSource;
 
 public class ReadXML {
 
-    public static InputSource fileToInputSource(File file) {
-        try {
-            return new InputSource(new StringReader(new Scanner( file, "UTF-8" ).useDelimiter("\\A").next()));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ReadXML.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+    public static InputSource fileToInputSource(File file) throws FileNotFoundException {
+        return new InputSource(new StringReader(new Scanner( file, "UTF-8" ).useDelimiter("\\A").next()));
     }
     
-    public static ArrayList<HashMap<String, String>> read(File file) {
+    public static ArrayList<HashMap<String, String>> read(File file) throws FileNotFoundException {
         return read(fileToInputSource(file));
     }
     
    public static ArrayList<HashMap<String, String>> read(InputSource is) {
-
         Document doc;
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
