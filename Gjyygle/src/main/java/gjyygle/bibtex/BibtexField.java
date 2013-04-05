@@ -134,6 +134,10 @@ public enum BibtexField {
     };
     abstract public String getName();
     abstract public boolean validate(String input);
+    @Override
+    public String toString() {
+        return getName();
+    }
     public boolean validateInteger(String input) {
         try {
             Integer.decode(input);
