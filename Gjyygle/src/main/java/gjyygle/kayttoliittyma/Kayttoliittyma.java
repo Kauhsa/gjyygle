@@ -8,6 +8,9 @@ import gjyygle.BibtexTietokanta;
 import gjyygle.bibtex.BibtexEntry;
 import gjyygle.bibtex.BibtexEntryType;
 import gjyygle.bibtex.BibtexField;
+import gjyygle.bibtex.BibtexGen;
+import java.io.File;
+import java.io.FileOutputStream;
 
 /**
  *
@@ -33,6 +36,12 @@ public class Kayttoliittyma {
             if (komento.equals("1")) {
                 lisaaViite();
             } else if (komento.equals("2")) {
+                if (teeTiedostolle("kovakoodattuOutputTiedosto.bib")) {
+                    io.println("Tiedoston luonti onnistui");
+                }
+                else {
+                    io.println("Virhe tiedoston luonnissa");
+                }
             } else if (komento.equals("3")) {
                 break;
             } else {
@@ -50,6 +59,22 @@ public class Kayttoliittyma {
         io.println("3. Lopeta");
         io.print("-");
     }
+    
+    private boolean generoiTiedostoon(String tiednimi) {
+        File file = new File(tiednimi);
+        try {
+            FileOutputStream fout = new FileOutputStream(file);
+            BibtexGen gen = new BibtexGen(tietokanta);
+            gen.generate(fout);
+            fout.close();
+            return true;
+        }
+        catch (Exception e)
+        {
+            //todo
+            return false;
+        }
+    }
 
     private void lisaaViite() {
         tulostaViiteValikko();
@@ -59,7 +84,6 @@ public class Kayttoliittyma {
                 lisaaArtikkeli();
                 break;
             } else if (komento.equals("2")) {
-                io.println("");
                 break;
             } else {
                 virheSyote();
