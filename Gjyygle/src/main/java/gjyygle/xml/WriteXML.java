@@ -5,6 +5,7 @@
 package gjyygle.xml;
 
 import gjyygle.bibtex.BibtexField;
+import gjyygle.utils.FileWrite;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -85,13 +86,6 @@ public class WriteXML {
 
     public static void write(File file, ArrayList<EnumMap<BibtexField, String>> entries) {
         String data = getString(entries);
-        try {
-            FileWriter fstream = new FileWriter(file);
-            BufferedWriter out = new BufferedWriter(fstream);
-            out.write(data);
-            out.close();
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-        }
+        FileWrite.stringToFile(data, file);
     }
 }
