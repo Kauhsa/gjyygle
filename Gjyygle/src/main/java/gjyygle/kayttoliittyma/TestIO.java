@@ -5,15 +5,16 @@
 package gjyygle.kayttoliittyma;
 
 import gjyygle.kayttoliittyma.IO;
+import gjyygle.kayttoliittyma.IO;
 import java.util.ArrayList;
 
-public class IOForTest implements IO {
+public class TestIO implements IO {
 
     String[] inputit;
     int palautettava = 0;
     ArrayList<String> printatut;
 
-    public IOForTest(String[] inputit) {
+    public TestIO(String[] inputit) {
         this.inputit = inputit;
         printatut = new ArrayList<String>();
     }
