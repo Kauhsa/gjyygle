@@ -12,7 +12,7 @@ public class App {
     public static void main(String[] args) throws IOException {
         
         
-        BibtexTietokanta kanta = new XmlTietokanta(new File(""));
+        BibtexTietokanta kanta = new XmlTietokanta(new File("bibtex.xml"));
         Kayttoliittyma liittyma = new Kayttoliittyma(new KonsoliIO(), kanta);
         liittyma.kaynnista();
     }
