@@ -24,8 +24,7 @@ public enum BibtexEntryType {
         public BibtexField[] getOptionalFields() {
             BibtexField[] ret = { BibtexField.VOLUME,
                                   BibtexField.NUMBER,
-                                  BibtexField.PAGESSTART,
-                                  BibtexField.PAGESEND,
+                                  BibtexField.PAGES,
                                   BibtexField.MONTH,
                                   BibtexField.NOTE,
                                   BibtexField.KEY

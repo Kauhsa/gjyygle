@@ -28,8 +28,7 @@ public class BibtexTietokantaMock implements BibtexTietokanta {
         uusEntry.setValue(BibtexField.MONTH, "5");
         uusEntry.setValue(BibtexField.KEY, "?");
         uusEntry.setValue(BibtexField.ID, "b");
-        uusEntry.setValue(BibtexField.PAGESSTART, "101");
-        uusEntry.setValue(BibtexField.PAGESEND, "103");
+        uusEntry.setValue(BibtexField.PAGES, "101-103");
         defaultEntryt.add(uusEntry);
         uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
         uusEntry.setValue(BibtexField.TITLE, "huono artikkeli");

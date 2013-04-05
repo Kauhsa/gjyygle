@@ -82,24 +82,14 @@ public enum BibtexField {
             return validateInteger(input);
         }
     },
-    PAGESSTART {
+    PAGES {
         @Override
         public String getName() {
             return "PagesStart";
         }
         @Override
         public boolean validate(String input) {
-            return validateInteger(input);
-        }
-    },
-    PAGESEND {
-        @Override
-        public String getName() {
-            return "PagesEnd";
-        }
-        @Override
-        public boolean validate(String input) {
-            return validateInteger(input);
+            return true;
         }
     },
     MONTH {
