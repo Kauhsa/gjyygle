@@ -16,7 +16,7 @@ import org.junit.Test;
 public class KayttoliittymaTest {
 
     private Kayttoliittyma liittyma;
-    private IOForTest readerStub;
+    private TestIO readerStub;
     private File tiedosto;
 
     public KayttoliittymaTest() {
@@ -32,7 +32,7 @@ public class KayttoliittymaTest {
 
     @Before
     public void setUp() {
-        readerStub = new IOForTest(null);
+        readerStub = new TestIO(null);
         this.liittyma = new Kayttoliittyma(readerStub, new MockBibtexTietokantaKayttoliittyma());
 
 

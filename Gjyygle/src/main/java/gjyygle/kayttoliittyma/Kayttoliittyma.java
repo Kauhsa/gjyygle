@@ -85,21 +85,9 @@ public class Kayttoliittyma {
             io.print(type.getName() + ": ");
             uusi.setValue(type, lue());
         }
-        io.println("");
-        io.println("Haluatko lisätä valinnaisia tietoja? (k/e)");
-        String komento = lue();
-        while (true) {
-            if (komento.equals("k")) {
-                lisaaArtikkeliValinnaiset(uusi);
-                break;
-            } else if (komento.equals("e")) {
-                break;
-            } else {
-                io.println("Vastaa k tai e");
-                komento = lue();
-            }
-        }
         
+        lisaaArtikkeliValinnaiset(uusi);
+
         tietokanta.lisaaArtikkeli(uusi);
         try {
             tietokanta.tallenna();
@@ -115,12 +103,25 @@ public class Kayttoliittyma {
 
     private void lisaaArtikkeliValinnaiset(BibtexEntry uusi) {
         // Optional fields: volume, number, pages, month, note, key
-        io.println("Artikkelin valinnaiset tiedot:");
-        for (BibtexField type : BibtexEntryType.ARTICLE.getOptionalFields()) {
-            io.print(type.getName() + ": ");
-            uusi.setValue(type, lue());
+        io.println("");
+        io.println("Haluatko lisätä valinnaisia tietoja? (k/e)");
+        String komento = lue();
+        while (true) {
+            if (komento.equals("k")) {
+                io.println("Artikkelin valinnaiset tiedot:");
+                for (BibtexField type : BibtexEntryType.ARTICLE.getOptionalFields()) {
+                    io.print(type.getName() + ": ");
+                    uusi.setValue(type, lue());
+                }
+                io.println("Valinnaiset tiedot lisätty");
+                break;
+            } else if (komento.equals("e")) {
+                break;
+            } else {
+                io.println("Vastaa k tai e");
+                komento = lue();
+            }
         }
-        io.println("Valinnaiset tiedot lisätty");
     }
 
     private String lue() {
