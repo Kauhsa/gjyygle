@@ -85,7 +85,7 @@ public enum BibtexField {
     PAGES {
         @Override
         public String getName() {
-            return "PagesStart";
+            return "Pages";
         }
         @Override
         public boolean validate(String input) {
