@@ -116,4 +116,14 @@ public class KayttoliittymaTest {
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Vastaa k tai e\n"));
     }
+    
+    
+    @Test
+    public void generoiBibtexTiedostoOnnistuu() {
+        String[] input = {"2", "3"};
+        asetaUusiReaderStubInput(input);
+        liittyma.kaynnista();
+        assertTrue(readerStub.loytyykoRivi("Tiedoston luonti onnistui\n"));
+    }
+   
 }
