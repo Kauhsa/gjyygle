@@ -84,4 +84,19 @@ public class XmlTietokantaTest {
     public void testListaaArtikkelit() {
         assertEquals(1,x.listaaArtikkelit().size());
     }
+    @Test 
+    public void testTallenna() {
+        BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
+        uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");
+        uusEntry.setValue(BibtexField.YEAR, "2013");
+        uusEntry.setValue(BibtexField.AUTHOR, "joku tyyppi");
+        uusEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
+        uusEntry.setValue(BibtexField.ID, "aaa");
+        uusEntry.setValue(BibtexField.NOTE, "huom!");
+        uusEntry.setValue(BibtexField.VOLUME, "1");
+        x.lisaaArtikkeli(uusEntry);
+        x.tallenna();
+        x=new XmlTietokanta(temp);
+        assertEquals(2,x.listaaArtikkelit().size());
+    }
 }
