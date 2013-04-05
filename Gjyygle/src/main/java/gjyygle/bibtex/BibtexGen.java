@@ -45,6 +45,7 @@ public class BibtexGen {
             Iterator entries = map.entrySet().iterator();
             while (entries.hasNext()) {
                 EnumMap.Entry seuraavaArvo = (EnumMap.Entry) entries.next();
+//                tarkistaRivi(seuraavaArvo);
                 String rivi = seuraavaArvo.getKey() + " = \"" + seuraavaArvo.getValue() + "\"";
                 if (entries.hasNext()) {
                     rivi += ",";
@@ -63,7 +64,7 @@ public class BibtexGen {
 //            //        ByteArrayOutputStream foo = null;
 //            //        generate(foo);
 //            //        foo.toByteArray();
-//            BibtexGen gen = new BibtexGen(new XmlTietokanta(new File("testXml.xml"), new File("tuukkatesti.xml")));
+//            BibtexGen gen = new BibtexGen(new BibtexTietokantaMock());
 //            output = new FileOutputStream("bibtex.bib");
 //            gen.generate(output);
 //        } catch (FileNotFoundException ex) {
@@ -76,7 +77,7 @@ public class BibtexGen {
 //            }
 //        }
 //    }
-    
+//    
     private static EnumMap<BibtexField, String> palautaTulostettavaEnumMap(EnumMap<BibtexField, String> map) {
         EnumMap<BibtexField, String> printMap = new EnumMap<BibtexField, String>(BibtexField.class);
         for (EnumMap.Entry<BibtexField, String> arvot : map.entrySet()) {
@@ -86,6 +87,7 @@ public class BibtexGen {
         }
         return printMap;
     }
+    
 }
 
 
