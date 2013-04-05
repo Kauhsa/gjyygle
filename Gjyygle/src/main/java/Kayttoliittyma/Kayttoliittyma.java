@@ -8,7 +8,6 @@ import Bibtex.*;
 import gjyygle.BibtexTietokanta;
 import gjyygle.xml.XmlTietokanta;
 import java.io.File;
-import java.util.Scanner;
 
 /**
  *
@@ -16,22 +15,23 @@ import java.util.Scanner;
  */
 public class Kayttoliittyma {
 
-    private Scanner reader;
+    private IO io;
     private BibtexTietokanta tietokanta;
 
-    public Kayttoliittyma() {
-        this.reader = new Scanner(System.in);
-        this.tietokanta = new XmlTietokanta(new File("src/main/resources/TestIn.xml"),new File("src/main/resources/TestOut.xml"));
-        
+    public Kayttoliittyma(IO io) {
+        this.io = io;
+        this.tietokanta = new XmlTietokanta(new File("src/main/resources/TestIn.xml"), new File("src/main/resources/TestOut.xml"));
+
     }
 
-    public Kayttoliittyma(Scanner reader) {
-        this.reader = reader;
+    public Kayttoliittyma(IO reader, BibtexTietokanta tietokanta) {
+        this.io = reader;
+        this.tietokanta = tietokanta;
     }
 
     public void kaynnista() {
-        System.out.println("Tervetuloa viitteiden hallintaan");
-        System.out.println("");
+        io.println("Tervetuloa viitteiden hallintaan");
+        io.println("");
 
         while (true) {
             tulostaValikko();
@@ -47,16 +47,16 @@ public class Kayttoliittyma {
             }
 
         }
-        System.out.println("");
-        System.out.println("Tervetuloa uudelleen!");
+        io.println("");
+        io.println("Tervetuloa uudelleen!");
     }
 
     private void tulostaValikko() {
-        System.out.println("Valitse toiminto:");
-        System.out.println("1. Syötä viite");
-        System.out.println("2. Generoi bibtex-tiedosto");
-        System.out.println("3. Lopeta");
-        System.out.print("-");
+        io.println("Valitse toiminto:");
+        io.println("1. Syötä viite");
+        io.println("2. Generoi bibtex-tiedosto");
+        io.println("3. Lopeta");
+        io.print("-");
     }
 
     private void lisaaViite() {
@@ -67,7 +67,7 @@ public class Kayttoliittyma {
                 lisaaArtikkeli();
                 break;
             } else if (komento.equals("2")) {
-                System.out.println("");
+                io.println("");
                 break;
             } else {
                 virheSyote();
@@ -78,23 +78,23 @@ public class Kayttoliittyma {
     }
 
     private void tulostaViiteValikko() {
-        System.out.println("");
-        System.out.println("Valitse viitetyyppi");
-        System.out.println("");
-        System.out.println("1. Artikkeli");
-        System.out.println("2. Päävalikkoon");
-        System.out.print("-");
+        io.println("");
+        io.println("Valitse viitetyyppi");
+        io.println("");
+        io.println("1. Artikkeli");
+        io.println("2. Päävalikkoon");
+        io.print("-");
     }
 
     private void lisaaArtikkeli() {
         // Required fields: author, title, journal, year
         BibtexEntry uusi = new BibtexEntry(BibtexEntryType.ARTICLE);
         for (BibtexField type : BibtexEntryType.ARTICLE.getRequiredFields()) {
-            System.out.print(type.getName() + ": ");
+            io.print(type.getName() + ": ");
             uusi.setValue(type, lue());
         }
-        System.out.println("");
-        System.out.println("Haluatko lisätä valinnaisia tietoja? (k/e)");
+        io.println("");
+        io.println("Haluatko lisätä valinnaisia tietoja? (k/e)");
         String komento = lue();
         while (true) {
             if (komento.equals("k")) {
@@ -103,50 +103,50 @@ public class Kayttoliittyma {
             } else if (komento.equals("e")) {
                 break;
             } else {
-                System.out.println("Vastaa k tai e");
+                io.println("Vastaa k tai e");
                 komento = lue();
             }
         }
 
-        // TODO Interface jolle BibtexArtikkeli-olio syötetään        
         tietokanta.lisaaArtikkeli(uusi);
         try {
             tietokanta.tallenna();
+            io.println("");
+            io.println("Artikkeli lisätty");
+            io.println("");
         } catch (Exception e) {
-            
+            io.println("");
+            io.println("Tallennus epäonnistui");
+            io.println("");
         }
 
-        System.out.println("");
-        System.out.println("Artikkeli lisätty");
-        System.out.println("");
-    }
 
-    
+    }
 
     private void lisaaArtikkeliValinnaiset(BibtexEntry uusi) {
         // Optional fields: volume, number, pages, month, note, key
-        System.out.println("Artikkelin valinnaiset tiedot:");
+        io.println("Artikkelin valinnaiset tiedot:");
 
         for (BibtexField type : BibtexEntryType.ARTICLE.getOptionalFields()) {
-            System.out.print(type.getName() + ": ");
+            io.print(type.getName() + ": ");
             uusi.setValue(type, lue());
         }
-        
 
-        System.out.println("Valinnaiset tiedot lisätty");
+
+        io.println("Valinnaiset tiedot lisätty");
     }
 
     private int lueVuosi() {
         int year = 0;
         while (true) {
-            System.out.print("Year: ");
+            io.println("Year: ");
             String yearString = lue();
 
             try {
                 year = Integer.parseInt(yearString);
             } catch (Exception e) {
-                System.out.println("Vuosiluku virheellinen");
-                System.out.println("");
+                io.println("Vuosiluku virheellinen");
+                io.println("");
                 continue;
             }
             break;
@@ -155,11 +155,11 @@ public class Kayttoliittyma {
     }
 
     private String lue() {
-        return reader.nextLine();
+        return io.nextLine();
     }
 
     private void virheSyote() {
-        System.out.println("Virheellinen komento");
-        System.out.println("");
+        io.println("Virheellinen komento");
+        io.println("");
     }
 }

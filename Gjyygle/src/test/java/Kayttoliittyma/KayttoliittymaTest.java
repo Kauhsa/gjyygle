@@ -4,8 +4,8 @@
  */
 package Kayttoliittyma;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,78 +19,82 @@ import static org.junit.Assert.*;
  * @author ivahamaa
  */
 public class KayttoliittymaTest {
-    
+
     private Kayttoliittyma liittyma;
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    
+    private IOForTest readerStub;
+
+
     public KayttoliittymaTest() {
-        this.liittyma = new Kayttoliittyma();
-        
+        this.liittyma = new Kayttoliittyma(readerStub);
+
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-        this.liittyma = new Kayttoliittyma();
-        System.setOut(new PrintStream(outContent));
+        readerStub = new IOForTest(null);
+        this.liittyma = new Kayttoliittyma(readerStub);
         
+
     }
-    
+
     @After
     public void tearDown() {
-        System.setOut(null);
+    
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
     // @Test
     // public void hello() {}
-    
-    
-    private void asetaUusiKayttoliittyma(String input) {
-        liittyma = new Kayttoliittyma(new Scanner(input));
+
+    private void asetaUusiReaderStub(String[] input) {
+        this.readerStub.asetaInput(input); 
+        
     }
-    
+
+    private void asetaUusiKayttoliittyma(String input) {
+        //liittyma = new Kayttoliittyma(new Scanner(input));
+    }
+
     @Test
     public void konstruktoriToimii() {
         assertTrue(liittyma != null);
     }
-    
+
     @Test
     public void alkuValikkoVirheellinenKomento() {
-        asetaUusiKayttoliittyma("5\n"
-                + "3");
-        liittyma.kaynnista();       
-        assertTrue(outContent.toString().contains("Virheellinen"));
+        String[] input = {"5","3"};
+        asetaUusiReaderStub(input);
+        liittyma.kaynnista();
         
+        assertTrue(readerStub.loytyykoRivi("Virheellinen komento\n"));
+
+
     }
-        
+
     @Test
     public void lisaaViiteValikkoVirheellinenKomento() {
-        asetaUusiKayttoliittyma("1\n"
-                + "45\n"
-                + "2\n"
-                + "3");
-        liittyma.kaynnista();       
-        assertTrue(outContent.toString().contains("Virheellinen"));       
+        String[] input = {"1","45" ,"2","3"};
+        asetaUusiReaderStub(input);
+        liittyma.kaynnista();
+        assertTrue(readerStub.loytyykoRivi("Virheellinen komento\n"));
     }
-    
+
     @Test
     public void lisaaViiteValikkoKayntiJaPoistuminen() {
-        asetaUusiKayttoliittyma("1\n"
-                + "2\n"
-                + "3");
-        liittyma.kaynnista();       
-        assertTrue(outContent.toString().contains("Artikkeli") && outContent.toString().contains("uudelleen!"));       
+        String[] input = {"1","2" ,"3"};
+        asetaUusiReaderStub(input);
+        liittyma.kaynnista();
+        assertTrue(!readerStub.loytyykoRivi("Virheellinen komento"));
     }
-    
 //    @Test
 //    public void lisaaViiteArtikkeliValideillaArvoilla() {
 //        asetaUusiKayttoliittyma("1\n"
@@ -103,8 +107,6 @@ public class KayttoliittymaTest {
 //        liittyma.kaynnista();       
 //        assertTrue(outContent.toString().contains("lisätty"));       
 //    }
-    
-    
 //    @Test
 //    public void lisaaViiteArtikkeliVirheellisellaVuodella() {
 //        asetaUusiKayttoliittyma("1\n"
