@@ -4,10 +4,16 @@
  */
 package gjyygle.kayttoliittyma;
 
-
+import gjyygle.BibtexTietokanta;
 import gjyygle.kayttoliittyma.Kayttoliittyma;
+import gjyygle.xml.XmlTietokanta;
+import groovy.mock.interceptor.MockFor;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,11 +29,9 @@ public class KayttoliittymaTest {
 
     private Kayttoliittyma liittyma;
     private IOForTest readerStub;
-
+    private File tiedosto;
 
     public KayttoliittymaTest() {
-        this.liittyma = new Kayttoliittyma(readerStub);
-
     }
 
     @BeforeClass
@@ -41,28 +45,18 @@ public class KayttoliittymaTest {
     @Before
     public void setUp() {
         readerStub = new IOForTest(null);
-        this.liittyma = new Kayttoliittyma(readerStub);
-        
+        this.liittyma = new Kayttoliittyma(readerStub, new MockBibtexTietokantaKayttoliittyma());
+
 
     }
 
     @After
     public void tearDown() {
-    
-    }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-
-    private void asetaUusiReaderStub(String[] input) {
-        this.readerStub.asetaInput(input); 
-        
     }
 
-    private void asetaUusiKayttoliittyma(String input) {
-        //liittyma = new Kayttoliittyma(new Scanner(input));
+    private void asetaUusiReaderStubInput(String[] input) {
+        this.readerStub.asetaInput(input);
+
     }
 
     @Test
@@ -72,10 +66,10 @@ public class KayttoliittymaTest {
 
     @Test
     public void alkuValikkoVirheellinenKomento() {
-        String[] input = {"5","3"};
-        asetaUusiReaderStub(input);
+        String[] input = {"5", "3"};
+        asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
-        
+
         assertTrue(readerStub.loytyykoRivi("Virheellinen komento\n"));
 
 
@@ -83,26 +77,51 @@ public class KayttoliittymaTest {
 
     @Test
     public void lisaaViiteValikkoVirheellinenKomento() {
-        String[] input = {"1","45" ,"2","3"};
-        asetaUusiReaderStub(input);
+        String[] input = {"1", "45", "2", "3"};
+        asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Virheellinen komento\n"));
     }
 
     @Test
     public void lisaaViiteValikkoKayntiJaPoistuminen() {
-        String[] input = {"1","2" ,"3"};
-        asetaUusiReaderStub(input);
+        String[] input = {"1", "2", "3"};
+        asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(!readerStub.loytyykoRivi("Virheellinen komento"));
         assertTrue(readerStub.loytyykoRivi("Tervetuloa uudelleen!\n"));
     }
+
+    @Test
+    public void lisaaViiteArtikkeliKysyyLisatietoja() {
+        String[] input = {"1", "1", "Kalle", "Peruna", "Medicus", "1999", "756", "e", "3"};
+        asetaUusiReaderStubInput(input);
+        liittyma.kaynnista();
+        assertTrue(readerStub.loytyykoRivi("Haluatko lisätä valinnaisia tietoja? (k/e)\n"));
+    }
+    
     @Test
     public void lisaaViiteArtikkeliValideillaArvoilla() {
-        String[] input = {"1","1" ,"Kalle","Peruna","Medicus","1999","e","2","3"};
-        asetaUusiReaderStub(input);
-        liittyma.kaynnista();       
-        assertTrue(readerStub.loytyykoRivi("Artikkeli lisätty\n"));       
+        String[] input = {"1", "1", "Kalle", "Peruna", "Medicus", "1999", "756", "e", "3"};
+        asetaUusiReaderStubInput(input);
+        liittyma.kaynnista();
+        assertTrue(readerStub.loytyykoRivi("Artikkeli lisätty\n"));
+    }
+
+    @Test
+    public void lisaaViiteArtikkeliVaarillaArvoilla() {
+        String[] input = {"1", "1", "Kalle123", "Peru321na", "Medicus", "sdfasdfa", "fdasfda", "e", "3"};
+        asetaUusiReaderStubInput(input);
+        liittyma.kaynnista();
+        assertTrue(readerStub.loytyykoRivi("Artikkeli lisätty\n"));
+    }
+
+    @Test
+    public void lisaaViiteArtikkeliValideillaArvoillaJaLisatiedoilla() {
+        String[] input = {"1", "1", "Kalle", "Peruna", "Medicus", "1999", "756", "k", "14", "15", "99", "100", "1", "moi", "avain", "3"};
+        asetaUusiReaderStubInput(input);
+        liittyma.kaynnista();
+        assertTrue(readerStub.loytyykoRivi("Artikkeli lisätty\n"));
     }
 //    @Test
 //    public void lisaaViiteArtikkeliVirheellisellaVuodella() {

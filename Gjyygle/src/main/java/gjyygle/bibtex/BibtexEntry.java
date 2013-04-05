@@ -29,6 +29,10 @@ public class BibtexEntry {
             arvot.put(i, values.get(i.getName()));
         }
     }
+    /**
+     * Tarkistaa että entryllä on kaikkissa tarvittavissa kentissä arvo
+     * @return onko kaikilla kentillä arvo
+     */
     public boolean hasFields() {
         for (BibtexField i : type.getRequiredFields()) {
             if (!arvot.containsKey(i)) {
@@ -37,6 +41,10 @@ public class BibtexEntry {
         }
         return true;
     }
+    /**
+     * Vaihtaa entryn tyypin (artikkeli, kirja, jne..)
+     * @param type uusi tyyppi
+     */
     public void setType(BibtexEntryType type) {
         this.type = type;
     }
@@ -54,6 +62,11 @@ public class BibtexEntry {
     public String getValue(BibtexField key) {
         return arvot.get(key);
     }
+    /**
+     * Palauttaa arvon numerona, tai -1 jos arvo ei ole numero
+     * @param key arvo, tai -1 jos ei ole numero
+     * @return 
+     */
     public int getValueInt(BibtexField key) {
         String ret = arvot.get(key);
         if (ret == null) {

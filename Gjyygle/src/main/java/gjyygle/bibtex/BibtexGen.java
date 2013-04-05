@@ -2,8 +2,13 @@ package gjyygle.bibtex;
 
 import gjyygle.BibtexTietokanta;
 import gjyygle.xml.XmlTietokanta;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -31,44 +36,46 @@ public class BibtexGen {
 //   pages = "389--404",
 //   year = 1991
 //   }
-//        Iterator it = mp.entrySet().iterator();
-//    while (it.hasNext()) {
-//        Map.Entry pairs = (Map.Entry)it.next();
-//        System.out.println(pairs.getKey() + " = " + pairs.getValue());
-//        it.remove(); // avoids a ConcurrentModificationException
-//    }
 
-    public void generate(String tiedosto) {
-        PrintWriter tiedot = null;
-        try {
-            tiedot = new PrintWriter(new File(tiedosto));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(BibtexGen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void generate(OutputStream out) {
+        PrintStream ps = new PrintStream(out);
         for (BibtexEntry entry : lista) {
             EnumMap<BibtexField, String> map = palautaTulostettavaEnumMap(entry.getAllValues());
-            tiedot.println("@" + entry.getType() + "{" + entry.getValue(BibtexField.ID)+ ",");
+            ps.println("@" + entry.getType() + "{" + entry.getValue(BibtexField.ID)+ ",");
             Iterator entries = map.entrySet().iterator();
             while (entries.hasNext()) {
                 EnumMap.Entry seuraavaArvo = (EnumMap.Entry) entries.next();
-//                if (seuraavaArvo.getValue() == null) {
-//                    continue;
-//                }
                 String rivi = seuraavaArvo.getKey() + " = \"" + seuraavaArvo.getValue() + "\"";
                 if (entries.hasNext()) {
                     rivi += ",";
                 }
-                tiedot.println(rivi);
+                ps.println(rivi);
             }
-            tiedot.println("}");
-        }
-        tiedot.close();
+            ps.println("}");
+        }        
+        
+        ps.close();
     }
 
-    public static void main(String[] args) {
-        BibtexGen gen = new BibtexGen(new XmlTietokanta(new File("testXml.xml"), new File("tuukkatesti.xml")));
-        gen.generate("bibtex.bib");
-    }
+//    public static void main(String[] args) {
+//        OutputStream output = null;
+//        try {
+//            //        ByteArrayOutputStream foo = null;
+//            //        generate(foo);
+//            //        foo.toByteArray();
+//            BibtexGen gen = new BibtexGen(new XmlTietokanta(new File("testXml.xml"), new File("tuukkatesti.xml")));
+//            output = new FileOutputStream("bibtex.bib");
+//            gen.generate(output);
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(BibtexGen.class.getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//            try {
+//                output.close();
+//            } catch (IOException ex) {
+//                Logger.getLogger(BibtexGen.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//    }
     
     private static EnumMap<BibtexField, String> palautaTulostettavaEnumMap(EnumMap<BibtexField, String> map) {
         EnumMap<BibtexField, String> printMap = new EnumMap<BibtexField, String>(BibtexField.class);

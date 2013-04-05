@@ -41,6 +41,7 @@ public class BibtexTietokantaMock implements BibtexTietokanta {
     }
     @Override
     public void lisaaArtikkeli(BibtexEntry article) {
+        defaultEntryt.add(article);
     }
     @Override
     public List<BibtexEntry> listaaArtikkelit() {
