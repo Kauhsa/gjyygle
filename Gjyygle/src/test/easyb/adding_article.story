@@ -42,7 +42,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään article-tyyppis
         juttu = new Kayttoliittyma(io, tietokanta)
     }
 
-    when 'pakollinen data syötetty eikä syötetä valinnaisia tietoja', {
+    when 'datat syötetty', {
         juttu.kaynnista()
     }
 
