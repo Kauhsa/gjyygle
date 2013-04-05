@@ -23,7 +23,6 @@ import static org.junit.Assert.*;
  */
 
 //@ARTICLE{aaa,
-//ID = "aaa",
 //Author = "joku tyyppi",
 //Title = "hieno artikkeli",
 //Journal = "jostain kirjasta kai",
@@ -33,7 +32,6 @@ import static org.junit.Assert.*;
 //}
 //
 //@ARTICLE{b,
-//ID = "b",
 //Author = "joku toinen tyyppi",
 //Title = "toinen hieno artikkeli",
 //Journal = "jostain kirjasta melko varmasti",
@@ -44,7 +42,6 @@ import static org.junit.Assert.*;
 //}
 //
 //@ARTICLE{c,
-//ID = "c",
 //Author = "joku",
 //Title = "huono artikkeli",
 //Journal = "jostain",
@@ -85,26 +82,43 @@ public class BibtexGenTest {
      */
     @Test
     public void testGenerate() {
-        String bar = foo.toByteArray().toString();
-        bar.contains("@ARTICLE{");
+        String bar = foo.toString();
+        assertTrue(bar.contains("@ARTICLE{"));
     }
 
     @Test
     public void hasAllEntries() {
-        String bar = foo.toByteArray().toString();
-        bar.contains("@ARTICLE{aaa");
-        bar.contains("@ARTICLE{b");
-        bar.contains("@ARTICLE{c");
+        String bar = foo.toString();
+        assertTrue(bar.contains("@ARTICLE{aaa"));
+        assertTrue(bar.contains("@ARTICLE{b"));
+        assertTrue(bar.contains("@ARTICLE{c"));
+    }
+
+    @Test
+    public void doesntPrintID() {
+        String bar = foo.toString();
+        assertTrue(!bar.contains("ID = \"aaa\""));
+        assertTrue(!bar.contains("ID = \"b\""));
+        assertTrue(!bar.contains("ID = \"c\""));
+    }
+
+    @Test
+    public void articleAaaHasAllFields() {
+        String bar = foo.toString();
+        assertTrue(bar.contains("Author = \"joku tyyppi\""));
+        assertTrue(bar.contains("Title = \"hieno artikkeli\""));
+        assertTrue(bar.contains("Journal = \"jostain kirjasta kai\""));
+        assertTrue(bar.contains("Year = \"2013\""));
+        assertTrue(bar.contains("Volume = \"1\""));
+        assertTrue(bar.contains("Note = \"huom!\""));
     }
     
     @Test
-    public void articleAaaHasAllFields() {
-        String bar = foo.toByteArray().toString();
-        bar.contains("Author = \"joku tyyppi\"");
-        bar.contains("Title = \"hieno artikkeli\"");
-        bar.contains("Journal = \"jostain kirjasta kai\"");
-        bar.contains("Year = \"2013\"");
-        bar.contains("Volume = \"1\"");
-        bar.contains("Note = \"huom!\"");
+    public void removesNullFields() {/*
+        BibtexEntry tuhmaEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
+        tuhmaEntry.setValue(BibtexField.TITLE, "hmm");
+        tuhmaEntry.setValue(BibtexField.YEAR, null);
+        db.lisaaArtikkeli(tuhmaEntry);
+        String bar = foo.toByteArray().toString();*/
     }
 }
