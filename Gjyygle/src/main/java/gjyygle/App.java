@@ -11,11 +11,8 @@ public class App {
 
     public static void main(String[] args) throws IOException {
         
-        File tiedosto = new File("bibtex.xml");
-        if (!tiedosto.exists()) {
-            tiedosto.createNewFile();
-        }
-        BibtexTietokanta kanta = new XmlTietokanta(tiedosto);
+        
+        BibtexTietokanta kanta = new XmlTietokanta(new File(""));
         Kayttoliittyma liittyma = new Kayttoliittyma(new KonsoliIO(), kanta);
         liittyma.kaynnista();
     }

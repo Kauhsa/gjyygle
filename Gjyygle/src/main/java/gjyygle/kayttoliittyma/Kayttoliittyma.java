@@ -4,12 +4,11 @@
  */
 package gjyygle.kayttoliittyma;
 
-import gjyygle.bibtex.BibtexField;
-import gjyygle.bibtex.BibtexEntryType;
-import gjyygle.bibtex.BibtexEntry;
 import gjyygle.BibtexTietokanta;
-import gjyygle.xml.XmlTietokanta;
-import java.io.File;
+import gjyygle.bibtex.BibtexEntry;
+import gjyygle.bibtex.BibtexEntryType;
+import gjyygle.bibtex.BibtexField;
+
 
 /**
  *
@@ -122,33 +121,13 @@ public class Kayttoliittyma {
     private void lisaaArtikkeliValinnaiset(BibtexEntry uusi) {
         // Optional fields: volume, number, pages, month, note, key
         io.println("Artikkelin valinnaiset tiedot:");
-
         for (BibtexField type : BibtexEntryType.ARTICLE.getOptionalFields()) {
             io.print(type.getName() + ": ");
             uusi.setValue(type, lue());
         }
-
-
         io.println("Valinnaiset tiedot lisätty");
     }
 
-    private int lueVuosi() {
-        int year = 0;
-        while (true) {
-            io.println("Year: ");
-            String yearString = lue();
-
-            try {
-                year = Integer.parseInt(yearString);
-            } catch (Exception e) {
-                io.println("Vuosiluku virheellinen");
-                io.println("");
-                continue;
-            }
-            break;
-        }
-        return year;
-    }
 
     private String lue() {
         return io.nextLine();
