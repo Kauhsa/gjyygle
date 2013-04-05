@@ -23,7 +23,7 @@ import org.xml.sax.InputSource;
 
 public class ReadXML {
 
-    public static InputSource fileToInputSource(File file) throws FileNotFoundException {
+    private static InputSource fileToInputSource(File file) throws FileNotFoundException {
         return new InputSource(new StringReader(new Scanner( file, "UTF-8" ).useDelimiter("\\A").next()));
     }
     
@@ -31,7 +31,7 @@ public class ReadXML {
         return read(fileToInputSource(file));
     }
     
-   public static ArrayList<HashMap<String, String>> read(InputSource is) {
+   private static ArrayList<HashMap<String, String>> read(InputSource is) {
         Document doc;
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
