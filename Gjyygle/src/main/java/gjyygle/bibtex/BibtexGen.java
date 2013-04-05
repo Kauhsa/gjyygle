@@ -41,20 +41,30 @@ public class BibtexGen {
         PrintStream ps = new PrintStream(out);
         for (BibtexEntry entry : lista) {
             EnumMap<BibtexField, String> map = palautaTulostettavaEnumMap(entry.getAllValues());
-            ps.println("@" + entry.getType() + "{" + entry.getValue(BibtexField.ID)+ ",");
+            ps.println("@" + entry.getType() + "{" + entry.getValue(BibtexField.ID) + ",");
             Iterator entries = map.entrySet().iterator();
             while (entries.hasNext()) {
                 EnumMap.Entry seuraavaArvo = (EnumMap.Entry) entries.next();
-//                tarkistaRivi(seuraavaArvo);
-                String rivi = seuraavaArvo.getKey() + " = \"" + seuraavaArvo.getValue() + "\"";
+                String rivi = "";
+//                if (seuraavaArvo.getKey().toString().equals(BibtexField.PAGESSTART.toString())) {
+//                    rivi += "pages = " + seuraavaArvo.getValue().toString();
+//                }
+//                if (seuraavaArvo.getKey().equals(BibtexField.PAGESEND.getName()) && rivi.equals("")) {
+//                    rivi += "pages = " + seuraavaArvo.getValue().toString();
+//                } else if (seuraavaArvo.getKey().equals(BibtexField.PAGESEND.getName())) {
+//                    rivi += " - " + seuraavaArvo.getValue().toString();
+//                } else {
+                    rivi = seuraavaArvo.getKey() + " = \"" + seuraavaArvo.getValue() + "\"";
+//                }
                 if (entries.hasNext()) {
                     rivi += ",";
                 }
                 ps.println(rivi);
             }
             ps.println("}");
-        }        
-        
+            ps.println();
+        }
+
         ps.close();
     }
 
@@ -77,7 +87,7 @@ public class BibtexGen {
 //            }
 //        }
 //    }
-//    
+
     private static EnumMap<BibtexField, String> palautaTulostettavaEnumMap(EnumMap<BibtexField, String> map) {
         EnumMap<BibtexField, String> printMap = new EnumMap<BibtexField, String>(BibtexField.class);
         for (EnumMap.Entry<BibtexField, String> arvot : map.entrySet()) {
@@ -87,10 +97,7 @@ public class BibtexGen {
         }
         return printMap;
     }
-    
 }
-
-
 //        for (BibtexEntry entry : lista) {
 //            tiedot.println("@" + entry.getType() + "{" + entry.getValue(BibtexField.ID)+ ",");
 //            EnumMap<BibtexField, String> map = entry.getAllValues();
