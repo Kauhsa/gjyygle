@@ -1,6 +1,9 @@
 
-package Bibtex;
+package gjyygle.bibtex;
 
+import gjyygle.bibtex.BibtexEntry;
+import gjyygle.bibtex.BibtexEntryType;
+import gjyygle.bibtex.BibtexField;
 import java.util.EnumMap;
 import java.util.HashMap;
 import org.junit.After;

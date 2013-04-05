@@ -4,7 +4,7 @@
  */
 package gjyygle.xml;
 
-import Bibtex.BibtexField;
+import gjyygle.bibtex.BibtexField;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

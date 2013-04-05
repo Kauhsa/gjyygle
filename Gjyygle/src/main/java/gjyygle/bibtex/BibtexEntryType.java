@@ -1,5 +1,5 @@
 
-package Bibtex;
+package gjyygle.bibtex;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,9 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Kayttoliittyma;
+package gjyygle.kayttoliittyma;
 
-import Bibtex.*;
+import gjyygle.bibtex.BibtexField;
+import gjyygle.bibtex.BibtexEntryType;
+import gjyygle.bibtex.BibtexEntry;
 import gjyygle.BibtexTietokanta;
 import gjyygle.xml.XmlTietokanta;
 import java.io.File;

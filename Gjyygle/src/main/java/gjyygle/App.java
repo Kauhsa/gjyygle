@@ -1,7 +1,7 @@
 package gjyygle;
 
-import Kayttoliittyma.Kayttoliittyma;
-import Kayttoliittyma.KonsoliIO;
+import gjyygle.kayttoliittyma.Kayttoliittyma;
+import gjyygle.kayttoliittyma.KonsoliIO;
 
 
 public class App {

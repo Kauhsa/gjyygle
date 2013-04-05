@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Kayttoliittyma;
+package gjyygle.kayttoliittyma;
 
 
+import gjyygle.kayttoliittyma.Kayttoliittyma;
 import java.util.ArrayList;
 import java.util.Scanner;
 import org.junit.After;
@@ -94,19 +95,15 @@ public class KayttoliittymaTest {
         asetaUusiReaderStub(input);
         liittyma.kaynnista();
         assertTrue(!readerStub.loytyykoRivi("Virheellinen komento"));
+        assertTrue(readerStub.loytyykoRivi("Tervetuloa uudelleen!\n"));
     }
-//    @Test
-//    public void lisaaViiteArtikkeliValideillaArvoilla() {
-//        asetaUusiKayttoliittyma("1\n"
-//                + "1\n"
-//                + "Kalle\n"
-//                + "Peruna\n"
-//                + "Medicus\n"
-//                + "1999\n"
-//                + "3");
-//        liittyma.kaynnista();       
-//        assertTrue(outContent.toString().contains("lisätty"));       
-//    }
+    @Test
+    public void lisaaViiteArtikkeliValideillaArvoilla() {
+        String[] input = {"1","1" ,"Kalle","Peruna","Medicus","1999","e","2","3"};
+        asetaUusiReaderStub(input);
+        liittyma.kaynnista();       
+        assertTrue(readerStub.loytyykoRivi("Artikkeli lisätty\n"));       
+    }
 //    @Test
 //    public void lisaaViiteArtikkeliVirheellisellaVuodella() {
 //        asetaUusiKayttoliittyma("1\n"

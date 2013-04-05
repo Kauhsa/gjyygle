@@ -4,9 +4,9 @@
  */
 package gjyygle.xml;
 
-import Bibtex.BibtexEntry;
-import Bibtex.BibtexEntryType;
-import Bibtex.BibtexField;
+import gjyygle.bibtex.BibtexEntry;
+import gjyygle.bibtex.BibtexEntryType;
+import gjyygle.bibtex.BibtexField;
 import gjyygle.BibtexTietokanta;
 import java.io.File;
 import java.util.ArrayList;

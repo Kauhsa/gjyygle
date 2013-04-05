@@ -1,4 +1,4 @@
-package Bibtex;
+package gjyygle.bibtex;
 
 import gjyygle.BibtexTietokanta;
 import gjyygle.xml.XmlTietokanta;

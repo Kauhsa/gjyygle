@@ -1,6 +1,6 @@
 package gjyygle;
 
-import Bibtex.BibtexEntry;
+import gjyygle.bibtex.BibtexEntry;
 import java.io.IOException;
 import java.util.List;
 

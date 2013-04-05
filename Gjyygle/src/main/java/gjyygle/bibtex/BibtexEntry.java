@@ -1,5 +1,5 @@
 
-package Bibtex;
+package gjyygle.bibtex;
 
 import java.util.EnumMap;
 import java.util.HashMap;

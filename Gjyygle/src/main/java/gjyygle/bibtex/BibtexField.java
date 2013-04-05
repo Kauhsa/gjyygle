@@ -1,5 +1,5 @@
 
-package Bibtex;
+package gjyygle.bibtex;
 
 public enum BibtexField {
     ID {

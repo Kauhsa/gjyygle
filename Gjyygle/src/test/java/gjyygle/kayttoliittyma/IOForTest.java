@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Kayttoliittyma;
+package gjyygle.kayttoliittyma;
 
+import gjyygle.kayttoliittyma.IO;
 import java.util.ArrayList;
 
 public class IOForTest implements IO {
