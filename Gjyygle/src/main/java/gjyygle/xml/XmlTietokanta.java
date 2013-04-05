@@ -23,17 +23,15 @@ import java.util.Set;
  */
 public class XmlTietokanta implements BibtexTietokanta {
 
-    File infile;
-    File outfile;
+    File savefile;
     ArrayList<BibtexEntry> viitteet = new ArrayList();
     
-    public XmlTietokanta(File in, File out) {
-        infile = in;
-        ArrayList<HashMap<String,String>> read = ReadXML.read(infile);
+    public XmlTietokanta(File save) {
+        savefile = save;
+        ArrayList<HashMap<String,String>> read = ReadXML.read(savefile);
         for (HashMap<String,String> map : read) {
             viitteet.add(new BibtexEntry(map,BibtexEntryType.ARTICLE));
         }
-        outfile = out;
     }
     @Override
     public void lisaaArtikkeli(BibtexEntry entry) {
@@ -51,11 +49,11 @@ public class XmlTietokanta implements BibtexTietokanta {
         for(BibtexEntry viite : viitteet) {
             r.add(viite.getAllValues());
         }
-        WriteXML.write(outfile, r);
+        WriteXML.write(savefile, r);
     }
     
     public static void main(String[] args) {
-        XmlTietokanta t = new XmlTietokanta(new File("testXml.xml"), new File("xmlout3.xml"));
+        XmlTietokanta t = new XmlTietokanta(new File("testXml.xml"));
         t.tallenna();
     }
 }
