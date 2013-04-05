@@ -36,7 +36,7 @@ public class Kayttoliittyma {
             if (komento.equals("1")) {
                 lisaaViite();
             } else if (komento.equals("2")) {
-                if (teeTiedostolle("kovakoodattuOutputTiedosto.bib")) {
+                if (generoiTiedostoon("kovakoodattuOutputTiedosto.bib")) {
                     io.println("Tiedoston luonti onnistui");
                 }
                 else {
