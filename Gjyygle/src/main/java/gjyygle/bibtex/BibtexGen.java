@@ -46,6 +46,9 @@ public class BibtexGen {
             while (entries.hasNext()) {
                 EnumMap.Entry seuraavaArvo = (EnumMap.Entry) entries.next();
                 String rivi = "";
+                if (seuraavaArvo.getKey().equals(BibtexField.ID)) {
+                    continue;
+                }
 //                if (seuraavaArvo.getKey().toString().equals(BibtexField.PAGESSTART.toString())) {
 //                    rivi += "pages = " + seuraavaArvo.getValue().toString();
 //                }
