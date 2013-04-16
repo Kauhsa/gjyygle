@@ -123,7 +123,7 @@ public class KayttoliittymaTest {
         String[] input = {"2", "kalle", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
-        assertTrue(readerStub.loytyykoRivi("Artikkeli lisätty\n"));
+        assertTrue(readerStub.loytyykoRivi("Tiedoston kalle.bib luonti onnistui\n"));
     }
    
 }

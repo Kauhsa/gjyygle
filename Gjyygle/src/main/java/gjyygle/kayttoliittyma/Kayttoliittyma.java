@@ -69,17 +69,21 @@ public class Kayttoliittyma {
     }
 
     private boolean generoiTiedostoon(String tiednimi) {
-        File file = new File(tiednimi);
-        try {
-            FileOutputStream fout = new FileOutputStream(file);
-            BibtexGen gen = new BibtexGen(tietokanta);
-            gen.generate(fout);
-            fout.close();
-            return true;
-        } catch (Exception e) {
-            //todo
-            return false;
-        }
+        // Tiedostonluonti poistettu toistaiseksi
+        
+        return true;
+        
+//        File file = new File(tiednimi);
+//        try {
+//            FileOutputStream fout = new FileOutputStream(file);
+//            BibtexGen gen = new BibtexGen(tietokanta);
+//            gen.generate(fout);
+//            fout.close();
+//            return true;
+//        } catch (Exception e) {
+//            //todo
+//            return false;
+//        }
     }
 
     private void lisaaViite() {
@@ -87,9 +91,16 @@ public class Kayttoliittyma {
         String komento = lue();
         while (true) {
             if (komento.equals("1")) {
-                lisaaArtikkeli();
+                lisaaViite(BibtexEntryType.ARTICLE);
                 break;
             } else if (komento.equals("2")) {
+                lisaaViite(BibtexEntryType.BOOK);
+                break;
+            }  else if (komento.equals("3")) {
+                lisaaViite(BibtexEntryType.INPROCEEDINGS);
+                break;
+            } else if (komento.equals("4")) {
+                
                 break;
             } else {
                 virheSyote();
@@ -104,14 +115,16 @@ public class Kayttoliittyma {
         io.println("Valitse viitetyyppi");
         io.println("");
         io.println("1. Artikkeli");
-        io.println("2. Päävalikkoon");
+        io.println("2. Kirja");
+        io.println("3. INPROCEEDINGS");        
+        io.println("4. Päävalikkoon");
         io.print("-");
     }
 
-    private void lisaaArtikkeli() {
+    private void lisaaViite(BibtexEntryType tyyppi) {
         // Required fields: author, title, journal, year
-        BibtexEntry uusi = new BibtexEntry(BibtexEntryType.ARTICLE);
-        for (BibtexField type : BibtexEntryType.ARTICLE.getRequiredFields()) {
+        BibtexEntry uusi = new BibtexEntry(tyyppi);
+        for (BibtexField type : tyyppi.getRequiredFields()) {
             boolean validointi = false;
             while (!validointi) {
                 io.print(type.getName() + ": ");
@@ -124,14 +137,14 @@ public class Kayttoliittyma {
             }
         }
 
-        lisaaArtikkeliValinnaiset(uusi);
+        lisaaViiteValinnaiset(uusi, tyyppi);
 
         
         try {
             tietokanta.lisaaArtikkeli(uusi);
             tietokanta.tallenna();
             io.println("");
-            io.println("Artikkeli lisätty");
+            io.println("Viite lisätty");
             io.println("");
         } catch (ValidationException e) {
             io.println("");
@@ -144,7 +157,7 @@ public class Kayttoliittyma {
         }
     }
 
-    private void lisaaArtikkeliValinnaiset(BibtexEntry uusi) {
+    private void lisaaViiteValinnaiset(BibtexEntry uusi, BibtexEntryType tyyppi) {
         // Optional fields: volume, number, pages, month, note, key
         io.println("");
         io.println("Haluatko lisätä valinnaisia tietoja? (k/e)");
@@ -152,7 +165,7 @@ public class Kayttoliittyma {
         while (true) {
             if (komento.equals("k")) {
                 io.println("Artikkelin valinnaiset tiedot:");
-                for (BibtexField type : BibtexEntryType.ARTICLE.getOptionalFields()) {
+                for (BibtexField type : tyyppi.getOptionalFields()) {
                     boolean validointi = false;
                     while (!validointi) {
                         io.print(type.getName() + ": ");
