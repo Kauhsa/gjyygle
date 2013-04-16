@@ -28,23 +28,18 @@ public class MockBibtexTietokantaKayttoliittyma implements BibtexTietokanta {
 
     @Override
     public List<BibtexEntry> listaaArtikkelit() {
-        try {
-            ArrayList<BibtexEntry> lista = new ArrayList<BibtexEntry>();
-            BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
-            uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");
-            uusEntry.setValue(BibtexField.YEAR, "2013");
-            uusEntry.setValue(BibtexField.AUTHOR, "joku tyyppi");
-            uusEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
-            uusEntry.setValue(BibtexField.ID, "aaa");
-            uusEntry.setValue(BibtexField.NOTE, "huom!");
-            uusEntry.setValue(BibtexField.VOLUME, "1");
-            
-            lista.add(uusEntry);
-            return lista;
-        } catch (ValidationException ex) {
-            Logger.getLogger(MockBibtexTietokantaKayttoliittyma.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        ArrayList<BibtexEntry> lista = new ArrayList<BibtexEntry>();
+        BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
+        uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");
+        uusEntry.setValue(BibtexField.YEAR, "2013");
+        uusEntry.setValue(BibtexField.AUTHOR, "joku tyyppi");
+        uusEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
+        uusEntry.setValue(BibtexField.ID, "aaa");
+        uusEntry.setValue(BibtexField.NOTE, "huom!");
+        uusEntry.setValue(BibtexField.VOLUME, "1");
+
+        lista.add(uusEntry);
+        return lista;
     }
 
     @Override
