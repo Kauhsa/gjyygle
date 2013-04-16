@@ -21,7 +21,6 @@ import static org.junit.Assert.*;
  *
  * @author peuranie
  */
-
 //@ARTICLE{aaa,
 //Author = "joku tyyppi",
 //Title = "hieno artikkeli",
@@ -92,6 +91,8 @@ public class BibtexGenTest {
         assertTrue(bar.contains("@article{aaa"));
         assertTrue(bar.contains("@article{b"));
         assertTrue(bar.contains("@article{c"));
+        assertTrue(bar.contains("@inproceedings{d"));
+        assertTrue(bar.contains("@book{e"));
     }
 
     @Test
@@ -105,20 +106,51 @@ public class BibtexGenTest {
     @Test
     public void articleAaaHasAllFields() {
         String bar = foo.toString();
-        assertTrue(bar.contains("author = \"joku tyyppi\""));
-        assertTrue(bar.contains("title = \"hieno artikkeli\""));
-        assertTrue(bar.contains("journal = \"jostain kirjasta kai\""));
-        assertTrue(bar.contains("year = \"2013\""));
-        assertTrue(bar.contains("volume = \"1\""));
-        assertTrue(bar.contains("note = \"huom!\""));
+        assertTrue(bar.contains("author = \"{joku tyyppi}\""));
+        assertTrue(bar.contains("title = \"{hieno artikkeli}\""));
+        assertTrue(bar.contains("journal = \"{jostain kirjasta kai}\""));
+        assertTrue(bar.contains("year = \"{2013}\""));
+        assertTrue(bar.contains("volume = \"{1}\""));
+        assertTrue(bar.contains("note = \"{huom!}\""));
     }
-    
+
+    @Test
+    public void inproceedingsTypeFound() {
+        String bar = foo.toString();
+        assertTrue(bar.contains("@inproceedings{"));
+    }
+
+    @Test
+    public void bookTypeFound() {
+        String bar = foo.toString();
+        assertTrue(bar.contains("@book{"));
+    }
+
+    @Test
+    public void bookHasBooktitleFieldFound() {
+        String bar = foo.toString();
+        assertTrue(bar.contains("@book{"));
+        assertTrue(bar.contains("booktitle"));
+    }
+
+    @Test
+    public void scandinavianLettersFound() {
+        String bar = foo.toString();
+        assertTrue(bar.contains("\\\"{A}"));
+        assertTrue(bar.contains("\\\"{o}"));
+        assertTrue(bar.contains("\\\"{O}"));
+        assertTrue(bar.contains("\\\"{a}"));
+        assertTrue(bar.contains("\\aa"));
+        assertTrue(bar.contains("\\AA"));
+    }
+
     @Test
     public void removesNullFields() {/*
-        BibtexEntry tuhmaEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
-        tuhmaEntry.setValue(BibtexField.TITLE, "hmm");
-        tuhmaEntry.setValue(BibtexField.YEAR, null);
-        db.lisaaArtikkeli(tuhmaEntry);
-        String bar = foo.toByteArray().toString();*/
+         BibtexEntry tuhmaEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
+         tuhmaEntry.setValue(BibtexField.TITLE, "hmm");
+         tuhmaEntry.setValue(BibtexField.YEAR, null);
+         db.lisaaArtikkeli(tuhmaEntry);
+         String bar = foo.toByteArray().toString();*/
+
     }
 }

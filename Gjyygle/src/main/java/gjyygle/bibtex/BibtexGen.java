@@ -49,7 +49,8 @@ public class BibtexGen {
                 if (seuraavaArvo.getKey().equals(BibtexField.ID)) {
                     continue;
                 }
-                    rivi += seuraavaArvo.getKey().toString().toLowerCase() + " = \"" + seuraavaArvo.getValue() + "\"";
+                    rivi +=  seuraavaArvo.getKey().toString().toLowerCase() + " = \"{" + seuraavaArvo.getValue() + "}\"";
+                    rivi = skandiMuunnin(rivi);
                 if (entries.hasNext()) {
                     rivi += ",";
                 }
@@ -60,6 +61,15 @@ public class BibtexGen {
         }
 
         ps.close();
+    }
+    
+    public String skandiMuunnin(String rivi) {
+        rivi = rivi.replaceAll("Ä", "\\\\\"{A}");
+        rivi = rivi.replaceAll("ö", "\\\\\"{o}");
+        rivi = rivi.replaceAll("Ö", "\\\\\"{O}");
+        rivi = rivi.replaceAll("å", "\\\\aa");
+        rivi = rivi.replaceAll("Å", "\\\\AA");
+        return rivi.replaceAll("ä", "\\\\\"{a}");   
     }
 
 //    public static void main(String[] args) {
