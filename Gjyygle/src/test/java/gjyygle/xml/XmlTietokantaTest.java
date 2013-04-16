@@ -76,6 +76,32 @@ public class XmlTietokantaTest {
         x.lisaaArtikkeli(uusEntry);
         
         assertEquals(2,x.listaaArtikkelit().size());
+    }   
+    @Test(expected=ValidationException.class)
+    public void testLisaaDuplicateArtikkeli() throws ValidationException {
+        BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
+        uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");
+        uusEntry.setValue(BibtexField.YEAR, "2013");
+        uusEntry.setValue(BibtexField.AUTHOR, "joku tyyppi");
+        uusEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
+        uusEntry.setValue(BibtexField.ID, "aaa");
+        uusEntry.setValue(BibtexField.NOTE, "huom!");
+        uusEntry.setValue(BibtexField.VOLUME, "1");
+        
+        BibtexEntry uusEntry2 = new BibtexEntry(BibtexEntryType.ARTICLE);
+        uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");
+        uusEntry.setValue(BibtexField.YEAR, "2013");
+        uusEntry.setValue(BibtexField.AUTHOR, "joku tyyppi");
+        uusEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
+        uusEntry.setValue(BibtexField.ID, "aaa");
+        uusEntry.setValue(BibtexField.NOTE, "huom!");
+        uusEntry.setValue(BibtexField.VOLUME, "1");
+        
+
+        x.lisaaArtikkeli(uusEntry);
+        x.lisaaArtikkeli(uusEntry2);
+        
+        assertEquals(2,x.listaaArtikkelit().size());
     }
 
     /**
