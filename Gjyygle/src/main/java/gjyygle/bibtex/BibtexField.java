@@ -121,6 +121,46 @@ public enum BibtexField {
         public boolean validate(String input) {
             return true;
         }
+    },
+    EDITOR {
+        @Override
+        public String getName() {
+            return "Editor";
+        }
+        @Override
+        public boolean validate(String input) {
+            return true;
+        }
+    },
+    PUBLISHER {
+        @Override
+        public String getName() {
+            return "Publisher";
+        }
+        @Override
+        public boolean validate(String input) {
+            return true;
+        }
+    },
+    SERIES {
+        @Override
+        public String getName() {
+            return "Series";
+        }
+        @Override
+        public boolean validate(String input) {
+            return true;
+        }
+    },
+    EDITION {
+        @Override
+        public String getName() {
+            return "Edition";
+        }
+        @Override
+        public boolean validate(String input) {
+            return true;
+        }
     };
     abstract public String getName();
     abstract public boolean validate(String input);

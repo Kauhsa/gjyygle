@@ -31,6 +31,35 @@ public enum BibtexEntryType {
             };
             return ret;
         }
+    },
+    BOOK {
+        @Override
+        public String getName() {
+            return "Book";
+        }
+        @Override
+        public BibtexField[] getRequiredFields() {
+            BibtexField[] ret = { BibtexField.AUTHOR,
+                                  BibtexField.EDITOR,
+                                  BibtexField.TITLE,
+                                  BibtexField.PUBLISHER,
+                                  BibtexField.YEAR,
+            };
+            return ret;
+        }
+        @Override
+        public BibtexField[] getOptionalFields() {
+            BibtexField[] ret = { BibtexField.VOLUME,
+                                  BibtexField.NUMBER,
+                                  BibtexField.SERIES,
+                                  BibtexField.ADDRESS,
+                                  BibtexField.EDITION,
+                                  BibtexField.MONTH,
+                                  BibtexField.NOTE,
+                                  BibtexField.KEY,
+            };
+            return ret;
+        }
     };
     abstract public String getName();
     abstract public BibtexField[] getRequiredFields();
