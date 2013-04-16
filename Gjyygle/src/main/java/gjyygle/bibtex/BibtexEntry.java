@@ -54,9 +54,13 @@ public class BibtexEntry {
     public EnumMap<BibtexField, String> getAllValues() {
         return arvot;
     }
-    public void setValue(BibtexField key, String value) {
+    public void setValue(BibtexField key, String value) throws ValidationException {
         if (key.validate(value)) {
             arvot.put(key, value);
+        }
+        else
+        {
+            throw new ValidationException("Arvo " + value + " ei käy kentälle " + key.getName());
         }
     }
     public String getValue(BibtexField key) {
