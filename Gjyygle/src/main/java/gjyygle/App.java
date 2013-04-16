@@ -1,6 +1,7 @@
 package gjyygle;
 
 import gjyygle.bibtex.BibtexGen;
+import gjyygle.bibtex.ValidationException;
 import gjyygle.kayttoliittyma.Kayttoliittyma;
 import gjyygle.kayttoliittyma.KonsoliIO;
 import gjyygle.xml.XmlTietokanta;
@@ -9,7 +10,7 @@ import java.io.IOException;
 
 public class App {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ValidationException {
 
 
         BibtexTietokanta kanta = new XmlTietokanta(new File("bibtex.xml"));
