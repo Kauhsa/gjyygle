@@ -6,7 +6,7 @@ import gjyygle.utils.FileWrite;
 import java.io.File;
 
 scenario "käyttäjä pystyy syöttämään käyttöliittymään book-tyyppisen viitteen pakolliset tiedot", {
-    given 'artikkelin syöttö-toiminto avattu', {
+    given 'kirjan syöttö-toiminto avattu', {
         tempXMLTietokanta = File.createTempFile("temp", "file")
         tempXMLTietokanta.deleteOnExit();
         String fileContents = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root></root>";
@@ -22,7 +22,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään book-tyyppisen 
         juttu.kaynnista()
     }
 
-    then 'artikkeli on syötetty tietokantaan', {
+    then 'kirja on syötetty tietokantaan', {
         teksti = new Scanner(tempXMLTietokanta).useDelimiter("\\A").next()
         teksti.contains("<ID>artonkirjaiidee123</ID>").shouldEqual(true)
         teksti.contains("<Author>arto1</Author>").shouldEqual(true)
@@ -30,7 +30,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään book-tyyppisen 
 }
 
 scenario "käyttäjä pystyy syöttämään käyttöliittymään book-tyyppisen viitteen pakolliset ja valinnaiset tiedot", {
-    given 'artikkelin syöttö-toiminto avattu', {
+    given 'kirjan syöttö-toiminto avattu', {
         tempXMLTietokanta = File.createTempFile("temp", "file")
         tempXMLTietokanta.deleteOnExit()
         fileContents = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root></root>"
@@ -46,7 +46,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään book-tyyppisen 
         juttu.kaynnista()
     }
 
-    then 'artikkeli on syötetty tietokantaan', {
+    then 'kirjan on syötetty tietokantaan', {
         teksti = new Scanner(tempXMLTietokanta).useDelimiter("\\A").next()
         teksti.contains("<ID>asdfa213</ID>").shouldEqual(true)
         teksti.contains("<Author>arto2</Author>").shouldEqual(true)

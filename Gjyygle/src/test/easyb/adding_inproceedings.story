@@ -6,7 +6,7 @@ import gjyygle.utils.FileWrite;
 import java.io.File;
 
 scenario "käyttäjä pystyy syöttämään käyttöliittymään inproceedings-tyyppisen viitteen pakolliset tiedot", {
-    given 'artikkelin syöttö-toiminto avattu', {
+    given 'inproceedingsin syöttö-toiminto avattu', {
         tempXMLTietokanta = File.createTempFile("temp", "file")
         tempXMLTietokanta.deleteOnExit();
         String fileContents = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root></root>";
@@ -22,7 +22,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään inproceedings-t
         juttu.kaynnista()
     }
 
-    then 'artikkeli on syötetty tietokantaan', {
+    then 'inproceedings on syötetty tietokantaan', {
         teksti = new Scanner(tempXMLTietokanta).useDelimiter("\\A").next()
         teksti.contains("<ID>inproceedings123</ID>").shouldEqual(true)
         teksti.contains("<Author>tyyppi</Author>").shouldEqual(true)
@@ -30,7 +30,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään inproceedings-t
 }
 
 scenario "käyttäjä pystyy syöttämään käyttöliittymään inproceedings-tyyppisen viitteen pakolliset ja valinnaiset tiedot", {
-    given 'artikkelin syöttö-toiminto avattu', {
+    given 'inproceedings syöttö-toiminto avattu', {
         tempXMLTietokanta = File.createTempFile("temp", "file")
         tempXMLTietokanta.deleteOnExit()
         fileContents = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root></root>"
@@ -46,7 +46,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään inproceedings-t
         juttu.kaynnista()
     }
 
-    then 'artikkeli on syötetty tietokantaan', {
+    then 'inproceedings on syötetty tietokantaan', {
         teksti = new Scanner(tempXMLTietokanta).useDelimiter("\\A").next()
         teksti.contains("<ID>inproceedings1234</ID>").shouldEqual(true)
         teksti.contains("<Author>tyyppi</Author>").shouldEqual(true)
