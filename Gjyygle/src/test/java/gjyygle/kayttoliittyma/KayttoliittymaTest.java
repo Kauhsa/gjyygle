@@ -1,6 +1,8 @@
 
 package gjyygle.kayttoliittyma;
 
+import gjyygle.BibtexTietokanta;
+import gjyygle.bibtex.BibtexGen;
 import java.io.File;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,29 +20,39 @@ public class KayttoliittymaTest {
     private Kayttoliittyma liittyma;
     private TestIO readerStub;
     private File tiedosto;
+    private String[] validiArtikkeliPakolliset;
+    private String[] validiArtikkeliValinnaiset;
     
 
     public KayttoliittymaTest() {
+       this.validiArtikkeliPakolliset = new String[] {"Kalle", "Peruna", "Medicus", "1999", "756"};
+
     }
 
     @BeforeClass
     public static void setUpClass() {
+        
     }
 
     @AfterClass
     public static void tearDownClass() {
+        
     }
 
     @Before
     public void setUp() {
         readerStub = new TestIO(null);
-        this.liittyma = new Kayttoliittyma(readerStub, new MockBibtexTietokantaKayttoliittyma());
+        BibtexTietokanta MockTietokanta = new MockBibtexTietokantaKayttoliittyma();
+        BibtexGen gene = new BibtexGen(MockTietokanta);
+        this.liittyma = new Kayttoliittyma(readerStub, MockTietokanta, gene);
 
 
     }
 
     @After
     public void tearDown() {
+        
+        
     }
 
     private void asetaUusiReaderStubInput(String[] input) {
@@ -48,6 +60,23 @@ public class KayttoliittymaTest {
 
     }
 
+    public String[] generalConcatAll(String[]... jobs) {
+        int len = 0;
+        for (final String[] job : jobs) {
+            len += job.length;
+        }
+
+        final String[] result = new String[len];
+
+        int currentPos = 0;
+        for (final String[] job : jobs) {
+            System.arraycopy(job, 0, result, currentPos, job.length);
+            currentPos += job.length;
+        }
+
+        return result;
+    }
+    
     @Test
     public void konstruktoriToimii() {
         assertNotNull(liittyma);
@@ -87,8 +116,8 @@ public class KayttoliittymaTest {
     }
     
     @Test
-    public void lisaaViiteArtikkeliValideillaArvoilla() {
-        String[] input = {"1", "1", "Kalle", "Peruna", "Medicus", "1999", "756", "e", "3"};
+    public void lisaaViiteArtikkeliValideillaArvoilla() {               
+        String[] input = generalConcatAll(new String[] {"1", "1"}, validiArtikkeliPakolliset, new String[] {"e", "3"});
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Viite lisätty\n"));
@@ -121,10 +150,12 @@ public class KayttoliittymaTest {
     
     @Test
     public void generoiBibtexTiedostoOnnistuu() {
-        String[] input = {"2", "kalle", "3"};
+        String[] input = {"2", "kallekolamies", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
-        assertTrue(readerStub.loytyykoRivi("Tiedoston kalle.bib luonti onnistui\n"));
+        File luotu = new File("kallekolamies.bib");
+        luotu.delete();
+        assertTrue(readerStub.loytyykoRivi("Tiedoston kallekolamies.bib luonti onnistui\n"));
     }
    
 }
