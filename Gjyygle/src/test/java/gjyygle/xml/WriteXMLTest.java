@@ -4,10 +4,18 @@
  */
 package gjyygle.xml;
 
+import gjyygle.BibtexTietokanta;
+import gjyygle.bibtex.BibtexEntry;
+import gjyygle.bibtex.BibtexEntryType;
 import gjyygle.bibtex.BibtexField;
+import gjyygle.bibtex.BibtexTietokantaMock;
+import gjyygle.utils.FileWrite;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -32,9 +40,16 @@ public class WriteXMLTest {
     @AfterClass
     public static void tearDownClass() {
     }
-    
+    File temp;
+    XmlTietokanta x;
     @Before
     public void setUp() {
+        try {
+            temp = File.createTempFile("temp",".txt");
+            temp.deleteOnExit();
+        } catch (IOException ex) {
+            Logger.getLogger(WriteXMLTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @After
@@ -69,5 +84,19 @@ public class WriteXMLTest {
         assertTrue(result.contains("wq"));
         assertTrue(result.contains("es"));
         assertTrue(result.contains("rd"));
+    }
+    @Test
+    public void testWrite() {
+        BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
+        uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");
+        uusEntry.setValue(BibtexField.YEAR, "2013");
+        uusEntry.setValue(BibtexField.AUTHOR, "joku tyyppi");
+        uusEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
+        uusEntry.setValue(BibtexField.ID, "aaa");
+        uusEntry.setValue(BibtexField.NOTE, "huom!");
+        uusEntry.setValue(BibtexField.VOLUME, "1");
+        ArrayList<EnumMap<BibtexField,String>> t = new ArrayList();
+        t.add(uusEntry.getAllValues());
+        WriteXML.write(temp, t);
     }
 }

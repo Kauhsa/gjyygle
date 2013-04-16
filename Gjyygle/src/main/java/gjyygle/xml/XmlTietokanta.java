@@ -8,6 +8,7 @@ import gjyygle.bibtex.BibtexEntry;
 import gjyygle.bibtex.BibtexEntryType;
 import gjyygle.bibtex.BibtexField;
 import gjyygle.BibtexTietokanta;
+import gjyygle.bibtex.ValidationException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -45,7 +46,12 @@ public class XmlTietokanta implements BibtexTietokanta {
         }
     }
     @Override
-    public void lisaaArtikkeli(BibtexEntry entry) {
+    public void lisaaArtikkeli(BibtexEntry entry) throws ValidationException{
+        for (BibtexEntry be : viitteet) {
+            if (be.getValue(BibtexField.ID) == entry.getValue(BibtexField.ID)) {
+                throw new ValidationException("Database already has an entry with id " + entry.getValue(BibtexField.ID));
+            }
+        }
         viitteet.add(entry);
     }
 
