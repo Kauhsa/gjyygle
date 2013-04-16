@@ -45,6 +45,9 @@ public class XmlTietokanta implements BibtexTietokanta {
         for (HashMap<String, String> map : read) {
             String typename = map.get("Type");
             map.remove("Type");
+            if (typename == null) {
+                throw new ValidationException("Type is missing from entry!");
+            }
             BibtexEntryType entryType = BibtexEntryType.getType(typename);
             if(entryType == null) {
                 throw new ValidationException("Invalid type for entry!");

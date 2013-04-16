@@ -42,11 +42,37 @@ public class XmlTietokantaTest {
     File temp;
     XmlTietokanta x;
     @Before
-    public void setUp() {
+    public void setUp() throws ValidationException {
         try {
             temp = File.createTempFile("temp",".txt");
             temp.deleteOnExit();
-            String test = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root><entry><ID>baka00</ID><Author>A. Baka</Author><Title>Peeling onions</Title><Journal>mkyong</Journal><Year>2000</Year></entry></root>";
+            String test = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
+"<root>\n" +
+"    <entry>\n" +
+"        <Type>Article</Type>\n" +
+"        <Author>Pekko</Author>\n" +
+"        <Title>plaa plaa</Title>\n" +
+"        <Year>2001</Year>\n" +
+"        <Journal>jäbä</Journal>\n" +
+"        <ID>p1</ID>\n" +
+"    </entry>\n" +
+"    <entry>\n" +
+"        <Year>55</Year>\n" +
+"        <Journal>mama</Journal>\n" +
+"        <Type>Article</Type>\n" +
+"        <Author>Plee</Author>\n" +
+"        <ID>ooo11</ID>\n" +
+"        <Title>Pi</Title>\n" +
+"    </entry>\n" +
+"    <entry>\n" +
+"        <Booktitle>hihi</Booktitle>\n" +
+"        <Year>99</Year>\n" +
+"        <Type>inproceedings</Type>\n" +
+"        <Author>wat</Author>\n" +
+"        <ID>KK11</ID>\n" +
+"        <Title>de</Title>\n" +
+"    </entry>\n" +
+"</root>";
             FileWrite.stringToFile(test, temp);
         } catch (IOException ex) {
             Logger.getLogger(XmlTietokantaTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,7 +101,7 @@ public class XmlTietokantaTest {
 
         x.lisaaArtikkeli(uusEntry);
         
-        assertEquals(2,x.listaaArtikkelit().size());
+        assertEquals(4,x.listaaArtikkelit().size());
     }   
     @Test(expected=ValidationException.class)
     public void testLisaaDuplicateArtikkeli() throws ValidationException {
@@ -132,7 +158,7 @@ public class XmlTietokantaTest {
      */
     @Test
     public void testListaaArtikkelit() {
-        assertEquals(1,x.listaaArtikkelit().size());
+        assertEquals(3,x.listaaArtikkelit().size());
     }
     @Test 
     public void testTallenna() throws ValidationException {
@@ -147,6 +173,6 @@ public class XmlTietokantaTest {
         x.lisaaArtikkeli(uusEntry);
         x.tallenna();
         x=new XmlTietokanta(temp);
-        assertEquals(2,x.listaaArtikkelit().size());
+        assertEquals(4,x.listaaArtikkelit().size());
     }
 }
