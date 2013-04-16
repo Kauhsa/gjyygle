@@ -33,7 +33,7 @@ import org.w3c.dom.Element;
  */
 public class WriteXML {
 
-    public static Document createDocument(ArrayList<EnumMap<BibtexField, String>> entries) {
+    public static Document createDocument(ArrayList<HashMap<String, String>> entries) {
         try {
             DocumentBuilderFactory documentBuilderFactory =
                     DocumentBuilderFactory.newInstance();
@@ -43,14 +43,14 @@ public class WriteXML {
 
             Element rootElement = document.createElement("root");
             document.appendChild(rootElement);
-
-            for (Iterator<EnumMap<BibtexField, String>> it = entries.iterator(); it.hasNext();) {
-                EnumMap<BibtexField, String> entry = it.next();
+            
+            for (Iterator<HashMap<String, String>> it = entries.iterator(); it.hasNext();) {
+                HashMap<String, String> entry = it.next();
                 Element entryElement = document.createElement("entry");
-                Iterator<Entry<BibtexField, String>> elements = entry.entrySet().iterator();
+                Iterator<Entry<String, String>> elements = entry.entrySet().iterator();
                 while (elements.hasNext()) {
-                    Entry<BibtexField, String> element = elements.next();
-                    String e = element.getKey().getName();
+                    Entry<String, String> element = elements.next();
+                    String e = element.getKey();
                     String d = element.getValue();
                     if (d != null) {
                         Element em = document.createElement(e);
@@ -67,7 +67,7 @@ public class WriteXML {
         }
     }
 
-    public static String getString(ArrayList<EnumMap<BibtexField, String>> entries) {
+    public static String getString(ArrayList<HashMap<String, String>> entries) {
         try {
             Document document = createDocument(entries);
             TransformerFactory transformerFactory =
@@ -84,7 +84,7 @@ public class WriteXML {
         }
     }
 
-    public static void write(File file, ArrayList<EnumMap<BibtexField, String>> entries) {
+    public static void write(File file, ArrayList<HashMap<String, String>> entries) {
         String data = getString(entries);
         FileWrite.stringToFile(data, file);
     }

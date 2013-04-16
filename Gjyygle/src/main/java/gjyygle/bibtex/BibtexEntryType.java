@@ -95,7 +95,7 @@ public enum BibtexEntryType {
         }
     };
 
-    static BibtexEntryType getType(String type) {
+    public static BibtexEntryType getType(String type) {
         for (BibtexEntryType et : BibtexEntryType.values()) {
             if (type.equals(et.getName()))
             {

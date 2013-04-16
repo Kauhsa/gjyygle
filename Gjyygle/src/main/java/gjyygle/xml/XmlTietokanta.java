@@ -29,24 +29,29 @@ public class XmlTietokanta implements BibtexTietokanta {
 
     File savefile;
     ArrayList<BibtexEntry> viitteet = new ArrayList();
-    
+
     public XmlTietokanta(File save) {
         savefile = save;
         loadEntries();
     }
+
     public final void loadEntries() {
-        ArrayList<HashMap<String,String>> read;
+        ArrayList<HashMap<String, String>> read;
         try {
             read = ReadXML.read(savefile);
         } catch (FileNotFoundException ex) {
             return;
         }
-        for (HashMap<String,String> map : read) {
-            viitteet.add(new BibtexEntry(map,BibtexEntryType.ARTICLE));
+        for (HashMap<String, String> map : read) {
+            String typename = map.get("Type");
+            map.remove("Type");
+            BibtexEntryType entryType = BibtexEntryType.getType(typename);
+            viitteet.add(new BibtexEntry(map, entryType));
         }
     }
+
     @Override
-    public void lisaaArtikkeli(BibtexEntry entry) throws ValidationException{
+    public void lisaaArtikkeli(BibtexEntry entry) throws ValidationException {
         String ID = entry.getValue(BibtexField.ID);
         for (BibtexEntry be : viitteet) {
             String vertailuID = be.getValue(BibtexField.ID);
@@ -64,9 +69,16 @@ public class XmlTietokanta implements BibtexTietokanta {
 
     @Override
     public void tallenna() {
-        ArrayList<EnumMap<BibtexField,String>> r = new ArrayList();
-        for(BibtexEntry viite : viitteet) {
-            r.add(viite.getAllValues());
+        ArrayList<HashMap<String, String>> r = new ArrayList();
+        for (BibtexEntry viite : viitteet) {
+            HashMap<String, String> l = new HashMap();
+            r.add(l);
+            l.put("Type", viite.getType().getName());
+            Iterator<Entry<BibtexField, String>> it = viite.getAllValues().entrySet().iterator();
+            while (it.hasNext()) {
+                Entry<BibtexField, String> next = it.next();
+                l.put(next.getKey().getName(), next.getValue());
+            }
         }
         WriteXML.write(savefile, r);
     }
