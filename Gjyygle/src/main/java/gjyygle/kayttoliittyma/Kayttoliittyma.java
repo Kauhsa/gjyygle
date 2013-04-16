@@ -9,8 +9,10 @@ import gjyygle.bibtex.BibtexEntry;
 import gjyygle.bibtex.BibtexEntryType;
 import gjyygle.bibtex.BibtexField;
 import gjyygle.bibtex.BibtexGen;
+import gjyygle.bibtex.ValidationException;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  *
@@ -36,10 +38,15 @@ public class Kayttoliittyma {
             if (komento.equals("1")) {
                 lisaaViite();
             } else if (komento.equals("2")) {
-                if (generoiTiedostoon("kovakoodattuOutputTiedosto.bib")) {
-                    io.println("Tiedoston luonti onnistui");
+                io.println("Valitse tiedostonimi");
+                String nimi = lue();
+                if (!nimi.contains(".bib")) {
+                    nimi = nimi + ".bib";
                 }
-                else {
+
+                if (generoiTiedostoon(nimi)) {
+                    io.println("Tiedoston " + nimi + " luonti onnistui");
+                } else {
                     io.println("Virhe tiedoston luonnissa");
                 }
             } else if (komento.equals("3")) {
@@ -59,7 +66,7 @@ public class Kayttoliittyma {
         io.println("3. Lopeta");
         io.print("-");
     }
-    
+
     private boolean generoiTiedostoon(String tiednimi) {
         File file = new File(tiednimi);
         try {
@@ -68,9 +75,7 @@ public class Kayttoliittyma {
             gen.generate(fout);
             fout.close();
             return true;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             //todo
             return false;
         }
@@ -106,19 +111,32 @@ public class Kayttoliittyma {
         // Required fields: author, title, journal, year
         BibtexEntry uusi = new BibtexEntry(BibtexEntryType.ARTICLE);
         for (BibtexField type : BibtexEntryType.ARTICLE.getRequiredFields()) {
-            io.print(type.getName() + ": ");
-            uusi.setValue(type, lue());
+            boolean validointi = false;
+            while (!validointi) {
+                io.print(type.getName() + ": ");
+                try {
+                    uusi.setValue(type, lue());
+                    validointi = true;
+                } catch (Exception e) {
+                    io.println(e.getMessage());
+                }
+            }
         }
-        
+
         lisaaArtikkeliValinnaiset(uusi);
 
-        tietokanta.lisaaArtikkeli(uusi);
+        
         try {
+            tietokanta.lisaaArtikkeli(uusi);
             tietokanta.tallenna();
             io.println("");
             io.println("Artikkeli lisätty");
             io.println("");
-        } catch (Exception e) {
+        } catch (ValidationException e) {
+            io.println("");
+            io.println(e.getMessage());
+            io.println("");
+        } catch (IOException x) {
             io.println("");
             io.println("Tallennus epäonnistui");
             io.println("");
@@ -134,8 +152,16 @@ public class Kayttoliittyma {
             if (komento.equals("k")) {
                 io.println("Artikkelin valinnaiset tiedot:");
                 for (BibtexField type : BibtexEntryType.ARTICLE.getOptionalFields()) {
-                    io.print(type.getName() + ": ");
-                    uusi.setValue(type, lue());
+                    boolean validointi = false;
+                    while (!validointi) {
+                        io.print(type.getName() + ": ");
+                        try {
+                            uusi.setValue(type, lue());
+                            validointi = true;
+                        } catch (Exception e) {
+                            io.println(e.toString());
+                        }
+                    }
                 }
                 io.println("Valinnaiset tiedot lisätty");
                 break;
