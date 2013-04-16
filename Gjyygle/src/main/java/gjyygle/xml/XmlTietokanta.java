@@ -30,12 +30,12 @@ public class XmlTietokanta implements BibtexTietokanta {
     File savefile;
     ArrayList<BibtexEntry> viitteet = new ArrayList();
 
-    public XmlTietokanta(File save) {
+    public XmlTietokanta(File save) throws ValidationException {
         savefile = save;
         loadEntries();
     }
 
-    public final void loadEntries() {
+    public final void loadEntries() throws ValidationException {
         ArrayList<HashMap<String, String>> read;
         try {
             read = ReadXML.read(savefile);
@@ -46,6 +46,9 @@ public class XmlTietokanta implements BibtexTietokanta {
             String typename = map.get("Type");
             map.remove("Type");
             BibtexEntryType entryType = BibtexEntryType.getType(typename);
+            if(entryType == null) {
+                throw new ValidationException("Invalid type for entry!");
+            }
             viitteet.add(new BibtexEntry(map, entryType));
         }
     }

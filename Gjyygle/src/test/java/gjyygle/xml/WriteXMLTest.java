@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -62,10 +63,10 @@ public class WriteXMLTest {
      */
     @Test
     public void testCreateDocument() {
-        ArrayList<EnumMap<BibtexField, String>> entries = new ArrayList();
-        EnumMap<BibtexField, String> em = new EnumMap<BibtexField, String>(BibtexField.class);
+        ArrayList<HashMap<String, String>> entries = new ArrayList();
+        HashMap<String, String> em = new HashMap();
         entries.add(em);
-        em.put(BibtexField.AUTHOR, "test");
+        em.put(BibtexField.AUTHOR.getName(), "test");
         Document result = WriteXML.createDocument(entries);
         assertEquals("test",result.getElementsByTagName("Author").item(0).getFirstChild().getNodeValue());
     }
@@ -75,29 +76,15 @@ public class WriteXMLTest {
      */
     @Test
     public void testGetString() {
-        ArrayList<EnumMap<BibtexField, String>> entries = new ArrayList();
-        EnumMap<BibtexField, String> em = new EnumMap<BibtexField, String>(BibtexField.class);
+        ArrayList<HashMap<String, String>> entries = new ArrayList();
+        HashMap<String, String> em = new HashMap();
         entries.add(em);
-        em.put(BibtexField.AUTHOR, "wq");
-        em.put(BibtexField.ID, "es");
-        em.put(BibtexField.NUMBER, "rd");
+        em.put(BibtexField.AUTHOR.getName(), "wq");
+        em.put(BibtexField.ID.getName(), "es");
+        em.put(BibtexField.NUMBER.getName(), "rd");
         String result = WriteXML.getString(entries);
         assertTrue(result.contains("wq"));
         assertTrue(result.contains("es"));
         assertTrue(result.contains("rd"));
-    }
-    @Test
-    public void testWrite() throws ValidationException {
-        BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
-        uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");
-        uusEntry.setValue(BibtexField.YEAR, "2013");
-        uusEntry.setValue(BibtexField.AUTHOR, "joku tyyppi");
-        uusEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
-        uusEntry.setValue(BibtexField.ID, "aaa");
-        uusEntry.setValue(BibtexField.NOTE, "huom!");
-        uusEntry.setValue(BibtexField.VOLUME, "1");
-        ArrayList<EnumMap<BibtexField,String>> t = new ArrayList();
-        t.add(uusEntry.getAllValues());
-        WriteXML.write(temp, t);
     }
 }

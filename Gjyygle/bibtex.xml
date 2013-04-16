@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+    <entry>
+        <Type>Article</Type>
+        <Author>Pekko</Author>
+        <Title>plaa plaa</Title>
+        <Year>2001</Year>
+        <Journal>jäbä</Journal>
+        <ID>p1</ID>
+    </entry>
+    <entry>
+        <Year>55</Year>
+        <Journal>mama</Journal>
+        <Type>Article</Type>
+        <Author>Plee</Author>
+        <ID>ooo11</ID>
+        <Title>Pi</Title>
+    </entry>
+    <entry>
+        <Booktitle>hihi</Booktitle>
+        <Year>99</Year>
+        <Type>inproceedings</Type>
+        <Author>wat</Author>
+        <ID>KK11</ID>
+        <Title>de</Title>
+    </entry>
+</root>
