@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BibtexTietokantaMock implements BibtexTietokanta {
     ArrayList<BibtexEntry> defaultEntryt;
-    public BibtexTietokantaMock() {
+    public BibtexTietokantaMock() throws ValidationException {
         defaultEntryt = new ArrayList<BibtexEntry>();
         BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
         uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");

@@ -9,6 +9,7 @@ import gjyygle.bibtex.BibtexEntry;
 import gjyygle.bibtex.BibtexEntryType;
 import gjyygle.bibtex.BibtexField;
 import gjyygle.bibtex.BibtexTietokantaMock;
+import gjyygle.bibtex.ValidationException;
 import gjyygle.utils.FileWrite;
 import java.io.File;
 import java.io.IOException;
@@ -86,7 +87,7 @@ public class WriteXMLTest {
         assertTrue(result.contains("rd"));
     }
     @Test
-    public void testWrite() {
+    public void testWrite() throws ValidationException {
         BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
         uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");
         uusEntry.setValue(BibtexField.YEAR, "2013");

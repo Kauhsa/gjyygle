@@ -81,14 +81,14 @@ public class BibtexEntryTest {
     }
     
     @Test
-    public void canSetField() {
+    public void canSetField() throws ValidationException {
         BibtexEntry artikkeli = new BibtexEntry(artonPaperi, BibtexEntryType.ARTICLE);
         artikkeli.setValue(BibtexField.AUTHOR, "plagioija");
         assertEquals("plagioija", artikkeli.getValue(BibtexField.AUTHOR));
     }
     
     @Test
-    public void cannotEnterStringYear() {
+    public void cannotEnterStringYear() throws ValidationException {
         BibtexEntry artikkeli = new BibtexEntry(artonPaperi, BibtexEntryType.ARTICLE);
         try {
             artikkeli.setValue(BibtexField.YEAR, "arton syntymäpäivä");

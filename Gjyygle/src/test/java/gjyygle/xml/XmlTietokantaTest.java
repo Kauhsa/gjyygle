@@ -7,6 +7,7 @@ package gjyygle.xml;
 import gjyygle.bibtex.BibtexEntry;
 import gjyygle.bibtex.BibtexEntryType;
 import gjyygle.bibtex.BibtexField;
+import gjyygle.bibtex.ValidationException;
 import gjyygle.utils.FileWrite;
 import java.io.File;
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class XmlTietokantaTest {
      * Test of lisaaArtikkeli method, of class XmlTietokanta.
      */
     @Test
-    public void testLisaaArtikkeli() {
+    public void testLisaaArtikkeli() throws ValidationException {
         BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
         uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");
         uusEntry.setValue(BibtexField.YEAR, "2013");
@@ -85,7 +86,7 @@ public class XmlTietokantaTest {
         assertEquals(1,x.listaaArtikkelit().size());
     }
     @Test 
-    public void testTallenna() {
+    public void testTallenna() throws ValidationException {
         BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
         uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");
         uusEntry.setValue(BibtexField.YEAR, "2013");
