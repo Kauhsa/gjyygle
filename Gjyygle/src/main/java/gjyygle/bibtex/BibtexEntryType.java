@@ -71,7 +71,8 @@ public enum BibtexEntryType {
         }
         @Override
         public BibtexField[] getRequiredFields() {
-            BibtexField[] ret = {BibtexField.AUTHOR,
+            BibtexField[] ret = {BibtexField.ID,
+                BibtexField.AUTHOR,
                 BibtexField.TITLE,
                 BibtexField.BOOKTITLE,
                 BibtexField.YEAR};
@@ -79,8 +80,7 @@ public enum BibtexEntryType {
         }
         @Override
         public BibtexField[] getOptionalFields() {
-            BibtexField[] ret = {BibtexField.ID,
-                BibtexField.EDITOR,
+            BibtexField[] ret = {BibtexField.EDITOR,
                 BibtexField.VOLUME,
                 BibtexField.NUMBER,
                 BibtexField.SERIES,
