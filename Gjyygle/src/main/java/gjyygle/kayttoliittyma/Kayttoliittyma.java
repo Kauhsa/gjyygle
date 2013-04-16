@@ -8,7 +8,10 @@ import gjyygle.BibtexTietokanta;
 import gjyygle.bibtex.BibtexEntry;
 import gjyygle.bibtex.BibtexEntryType;
 import gjyygle.bibtex.BibtexField;
+import gjyygle.bibtex.BibtexGen;
 import gjyygle.bibtex.ValidationException;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -66,21 +69,18 @@ public class Kayttoliittyma {
     }
 
     private boolean generoiTiedostoon(String tiednimi) {
-        // Tiedostonluonti poistettu toistaiseksi
-        
-        return true;
-        
-//        File file = new File(tiednimi);
-//        try {
-//            FileOutputStream fout = new FileOutputStream(file);
-//            BibtexGen gen = new BibtexGen(tietokanta);
-//            gen.generate(fout);
-//            fout.close();
-//            return true;
-//        } catch (Exception e) {
-//            //todo
-//            return false;
-//        }
+       
+        File file = new File(tiednimi);
+        try {
+            FileOutputStream fout = new FileOutputStream(file);
+            BibtexGen gen = new BibtexGen(tietokanta);
+            gen.generate(fout);
+            fout.close();
+            return true;
+        } catch (Exception e) {
+            //todo
+            return false;
+        }
     }
 
     private void lisaaViite() {
@@ -96,8 +96,7 @@ public class Kayttoliittyma {
             }  else if (komento.equals("3")) {
                 lisaaViite(BibtexEntryType.INPROCEEDINGS);
                 break;
-            } else if (komento.equals("4")) {
-                
+            } else if (komento.equals("4")) {                
                 break;
             } else {
                 virheSyote();
@@ -128,7 +127,7 @@ public class Kayttoliittyma {
                 try {
                     uusi.setValue(type, lue());
                     validointi = true;
-                } catch (Exception e) {
+                } catch (ValidationException e) {
                     io.println(e.getMessage());
                 }
             }
