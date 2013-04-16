@@ -24,10 +24,18 @@ public class Kayttoliittyma {
     private IO io;
     private BibtexTietokanta tietokanta;
     private HashMap<String,String> komennot;
+    private BibtexGen generaattori;
 
     public Kayttoliittyma(IO reader, BibtexTietokanta tietokanta) {
         this.io = reader;
         this.tietokanta = tietokanta;
+        this.generaattori = new BibtexGen(tietokanta);
+    }
+    
+    public Kayttoliittyma(IO reader, BibtexTietokanta tietokanta, BibtexGen generaattori ) {
+        this.io = reader;
+        this.tietokanta = tietokanta;
+        this.generaattori = generaattori;
     }
 
     public void kaynnista() {
@@ -40,16 +48,7 @@ public class Kayttoliittyma {
             if (komento.equals("1")) {
                 lisaaViite();
             } else if (komento.equals("2")) {
-                io.println("Valitse tiedostonimi");
-                String nimi = lue();
-                if (!nimi.contains(".bib")) {
-                    nimi = nimi + ".bib";
-                }
-                if (generoiTiedostoon(nimi)) {
-                    io.println("Tiedoston " + nimi + " luonti onnistui");
-                } else {
-                    io.println("Virhe tiedoston luonnissa");
-                }
+                tiedostonGenerointi();
             } else if (komento.equals("3")) {
                 break;
             } else {
@@ -68,17 +67,28 @@ public class Kayttoliittyma {
         io.print("-");
     }
 
-    private boolean generoiTiedostoon(String tiednimi) {
-       
+    private void tiedostonGenerointi() {
+        io.println("Valitse tiedostonimi");
+                String nimi = lue();
+                if (!nimi.contains(".bib\n")) {
+                    nimi = nimi + ".bib";
+                }
+                if (generoiTiedostoon(nimi)) {
+                    io.println("Tiedoston " + nimi + " luonti onnistui");
+                } else {
+                    io.println("Virhe tiedoston luonnissa");
+                }
+    }
+    
+    private boolean generoiTiedostoon(String tiednimi) {       
         File file = new File(tiednimi);
         try {
-            FileOutputStream fout = new FileOutputStream(file);
-            BibtexGen gen = new BibtexGen(tietokanta);
-            gen.generate(fout);
+            FileOutputStream fout = new FileOutputStream(file);           
+            generaattori.generate(fout);
             fout.close();
             return true;
         } catch (Exception e) {
-            //todo
+            io.println(e.getMessage());
             return false;
         }
     }
