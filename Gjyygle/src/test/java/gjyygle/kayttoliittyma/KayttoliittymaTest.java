@@ -18,6 +18,7 @@ public class KayttoliittymaTest {
     private Kayttoliittyma liittyma;
     private TestIO readerStub;
     private File tiedosto;
+    
 
     public KayttoliittymaTest() {
     }
@@ -62,7 +63,7 @@ public class KayttoliittymaTest {
 
     @Test
     public void lisaaViiteValikkoVirheellinenKomento() {
-        String[] input = {"1", "45", "2", "3"};
+        String[] input = {"1", "45", "4", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Virheellinen komento\n"));
@@ -70,7 +71,7 @@ public class KayttoliittymaTest {
 
     @Test
     public void lisaaViiteValikkoKayntiJaPoistuminen() {
-        String[] input = {"1", "2", "3"};
+        String[] input = {"1", "4", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(!readerStub.loytyykoRivi("Virheellinen komento\n"));
@@ -90,7 +91,7 @@ public class KayttoliittymaTest {
         String[] input = {"1", "1", "Kalle", "Peruna", "Medicus", "1999", "756", "e", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
-        assertTrue(readerStub.loytyykoRivi("Artikkeli lisätty\n"));
+        assertTrue(readerStub.loytyykoRivi("Viite lisätty\n"));
     }
 
     @Test
@@ -98,7 +99,7 @@ public class KayttoliittymaTest {
         String[] input = {"1", "1", "Kalle123", "Peru321na", "Medicus", "sdfasdfa","1999", "fdasfda", "e", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
-        assertTrue(readerStub.loytyykoRivi("Artikkeli lisätty\n"));
+        assertTrue(readerStub.loytyykoRivi("Viite lisätty\n"));
     }
 
     @Test
@@ -106,7 +107,7 @@ public class KayttoliittymaTest {
         String[] input = {"1", "1", "Kalle", "Peruna", "Medicus", "1999", "756", "k", "14", "15", "99", "100", "1", "moi", "avain", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
-        assertTrue(readerStub.loytyykoRivi("Artikkeli lisätty\n"));
+        assertTrue(readerStub.loytyykoRivi("Viite lisätty\n"));
     }
     
     @Test
