@@ -95,6 +95,15 @@ public enum BibtexEntryType {
         }
     };
 
+    static BibtexEntryType getType(String type) {
+        for (BibtexEntryType et : BibtexEntryType.values()) {
+            if (type.equals(et.getName()))
+            {
+                return et;
+            }
+        }
+        return null;
+    }
     abstract public String getName();
 
     abstract public BibtexField[] getRequiredFields();
