@@ -83,34 +83,34 @@ public class BibtexGenTest {
     @Test
     public void testGenerate() {
         String bar = foo.toString();
-        assertTrue(bar.contains("@ARTICLE{"));
+        assertTrue(bar.contains("@article{"));
     }
 
     @Test
     public void hasAllEntries() {
         String bar = foo.toString();
-        assertTrue(bar.contains("@ARTICLE{aaa"));
-        assertTrue(bar.contains("@ARTICLE{b"));
-        assertTrue(bar.contains("@ARTICLE{c"));
+        assertTrue(bar.contains("@article{aaa"));
+        assertTrue(bar.contains("@article{b"));
+        assertTrue(bar.contains("@article{c"));
     }
 
     @Test
     public void doesntPrintID() {
         String bar = foo.toString();
-        assertTrue(!bar.contains("ID = \"aaa\""));
-        assertTrue(!bar.contains("ID = \"b\""));
-        assertTrue(!bar.contains("ID = \"c\""));
+        assertTrue(!bar.contains("id = \"aaa\""));
+        assertTrue(!bar.contains("id = \"b\""));
+        assertTrue(!bar.contains("id = \"c\""));
     }
 
     @Test
     public void articleAaaHasAllFields() {
         String bar = foo.toString();
-        assertTrue(bar.contains("Author = \"joku tyyppi\""));
-        assertTrue(bar.contains("Title = \"hieno artikkeli\""));
-        assertTrue(bar.contains("Journal = \"jostain kirjasta kai\""));
-        assertTrue(bar.contains("Year = \"2013\""));
-        assertTrue(bar.contains("Volume = \"1\""));
-        assertTrue(bar.contains("Note = \"huom!\""));
+        assertTrue(bar.contains("author = \"joku tyyppi\""));
+        assertTrue(bar.contains("title = \"hieno artikkeli\""));
+        assertTrue(bar.contains("journal = \"jostain kirjasta kai\""));
+        assertTrue(bar.contains("year = \"2013\""));
+        assertTrue(bar.contains("volume = \"1\""));
+        assertTrue(bar.contains("note = \"huom!\""));
     }
     
     @Test
