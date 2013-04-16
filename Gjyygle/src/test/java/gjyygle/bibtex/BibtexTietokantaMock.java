@@ -10,8 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BibtexTietokantaMock implements BibtexTietokanta {
+
     ArrayList<BibtexEntry> defaultEntryt;
-    public BibtexTietokantaMock(){
+
+    public BibtexTietokantaMock() {
         try {
             defaultEntryt = new ArrayList<BibtexEntry>();
             BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
@@ -37,23 +39,39 @@ public class BibtexTietokantaMock implements BibtexTietokanta {
             uusEntry.setValue(BibtexField.TITLE, "huono artikkeli");
             uusEntry.setValue(BibtexField.YEAR, "2010");
             uusEntry.setValue(BibtexField.AUTHOR, "joku");
-            uusEntry.setValue(BibtexField.JOURNAL, "jostain");
+            uusEntry.setValue(BibtexField.JOURNAL, "jostÄin");
             uusEntry.setValue(BibtexField.ID, "c");
+            defaultEntryt.add(uusEntry);
+            uusEntry = new BibtexEntry(BibtexEntryType.INPROCEEDINGS);
+            uusEntry.setValue(BibtexField.TITLE, "Skändinåviö");
+            uusEntry.setValue(BibtexField.YEAR, "2010");
+            uusEntry.setValue(BibtexField.AUTHOR, "");
+            uusEntry.setValue(BibtexField.BOOKTITLE, "ÖöpinÅn");
+            uusEntry.setValue(BibtexField.ID, "d");
+            defaultEntryt.add(uusEntry);
+            uusEntry = new BibtexEntry(BibtexEntryType.BOOK);
+            uusEntry.setValue(BibtexField.TITLE, "SkändinåviöKIRJA");
+            uusEntry.setValue(BibtexField.YEAR, "2010");
+            uusEntry.setValue(BibtexField.AUTHOR, "");
+            uusEntry.setValue(BibtexField.BOOKTITLE, "ÖöpinÅn");
+            uusEntry.setValue(BibtexField.ID, "e");
             defaultEntryt.add(uusEntry);
         } catch (ValidationException ex) {
             Logger.getLogger(BibtexTietokantaMock.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @Override
     public void lisaaArtikkeli(BibtexEntry article) {
         defaultEntryt.add(article);
     }
+
     @Override
     public List<BibtexEntry> listaaArtikkelit() {
         return defaultEntryt;
     }
+
     @Override
     public void tallenna() {
-        
     }
 }
