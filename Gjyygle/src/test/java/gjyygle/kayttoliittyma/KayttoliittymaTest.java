@@ -95,7 +95,7 @@ public class KayttoliittymaTest {
 
     @Test
     public void lisaaViiteArtikkeliVaarillaArvoillaMeneeLapi() {
-        String[] input = {"1", "1", "Kalle123", "Peru321na", "Medicus", "sdfasdfa", "fdasfda", "e", "3"};
+        String[] input = {"1", "1", "Kalle123", "Peru321na", "Medicus", "sdfasdfa","1999", "fdasfda", "e", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Artikkeli lisätty\n"));
@@ -111,7 +111,7 @@ public class KayttoliittymaTest {
     
     @Test
     public void lisaaViiteArtikkeliLisatiedotVaaraKomento() {
-        String[] input = {"1", "1", "Kalle123", "Peru321na", "Medicus", "sdfasdfa", "fdasfda", "gepardi","e", "3"};
+        String[] input = {"1", "1", "Kalle123", "Peru321na", "Medicus", "1999", "fdasfda", "gepardi","e", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Vastaa k tai e\n"));
@@ -120,10 +120,10 @@ public class KayttoliittymaTest {
     
     @Test
     public void generoiBibtexTiedostoOnnistuu() {
-        String[] input = {"2", "3"};
+        String[] input = {"2", "kalle", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
-        assertTrue(readerStub.loytyykoRivi("Tiedoston luonti onnistui\n"));
+        assertTrue(readerStub.loytyykoRivi("Artikkeli lisätty\n"));
     }
    
 }

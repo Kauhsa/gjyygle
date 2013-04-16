@@ -13,6 +13,7 @@ import gjyygle.bibtex.ValidationException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  *
@@ -22,6 +23,7 @@ public class Kayttoliittyma {
 
     private IO io;
     private BibtexTietokanta tietokanta;
+    private HashMap<String,String> komennot;
 
     public Kayttoliittyma(IO reader, BibtexTietokanta tietokanta) {
         this.io = reader;
@@ -43,7 +45,6 @@ public class Kayttoliittyma {
                 if (!nimi.contains(".bib")) {
                     nimi = nimi + ".bib";
                 }
-
                 if (generoiTiedostoon(nimi)) {
                     io.println("Tiedoston " + nimi + " luonti onnistui");
                 } else {
