@@ -47,8 +47,10 @@ public class XmlTietokanta implements BibtexTietokanta {
     }
     @Override
     public void lisaaArtikkeli(BibtexEntry entry) throws ValidationException{
+        String ID = entry.getValue(BibtexField.ID);
         for (BibtexEntry be : viitteet) {
-            if (be.getValue(BibtexField.ID).equals(entry.getValue(BibtexField.ID))) {
+            String vertailuID = be.getValue(BibtexField.ID);
+            if (String.CASE_INSENSITIVE_ORDER.compare(ID, vertailuID) == 0) {
                 throw new ValidationException("Database already has an entry with id " + entry.getValue(BibtexField.ID));
             }
         }
