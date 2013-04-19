@@ -54,6 +54,6 @@ scenario "käyttäjä pystyy generoimaan bibtexin jossa on ääkkösiä", {
 
     then 'artikkeli on syötetty tietokantaan', {
         teksti = new Scanner(tempBibTexFile).useDelimiter("\\A").next()
-        teksti.contains("author = \"{\\AA\\\"{A}\\\"{O}\\aa\\\"{a}\\\"{o}}\"").shouldEqual(true)
+        teksti.contains("author = \"{{\\AA}\\\"{A}\\\"{O}{\\aa}\\\"{a}\\\"{o}}\"").shouldEqual(true)
     }
 }
