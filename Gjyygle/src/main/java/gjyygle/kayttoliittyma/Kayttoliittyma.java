@@ -13,7 +13,6 @@ import gjyygle.bibtex.ValidationException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -27,7 +26,6 @@ public class Kayttoliittyma {
 
     private IO io;
     private BibtexTietokanta tietokanta;
-    private HashMap<String, String> komennot;
     private BibtexGen generaattori;
 
     public Kayttoliittyma(IO reader, BibtexTietokanta tietokanta) {
@@ -80,6 +78,7 @@ public class Kayttoliittyma {
     }
 
     private void tulostaValikko() {
+        io.println("");
         io.println("Valitse toiminto:");
         io.println("1. Syötä viite");
         io.println("2. Generoi bibtex-tiedosto");
@@ -118,12 +117,15 @@ public class Kayttoliittyma {
         String komento = lue();
         while (true) {
             if (komento.equals("1")) {
+                
                 lisaaViite(BibtexEntryType.ARTICLE);
                 break;
             } else if (komento.equals("2")) {
+                
                 lisaaViite(BibtexEntryType.BOOK);
                 break;
             } else if (komento.equals("3")) {
+                
                 lisaaViite(BibtexEntryType.INPROCEEDINGS);
                 break;
             } else if (komento.equals("4")) {
@@ -149,6 +151,7 @@ public class Kayttoliittyma {
 
     private void lisaaViite(BibtexEntryType tyyppi) {
         // Required fields: author, title, journal, year
+        io.println("");
         BibtexEntry viite = new BibtexEntry(tyyppi);
         for (BibtexField type : tyyppi.getRequiredFields()) {
             boolean validointi = false;
@@ -190,6 +193,7 @@ public class Kayttoliittyma {
         String komento = lue();
         while (true) {
             if (komento.equals("k")) {
+                io.println("");
                 io.println("Artikkelin valinnaiset tiedot:");
                 io.println("Tyhjä jättää kentän lisäämättä");
                 for (BibtexField type : tyyppi.getOptionalFields()) {
