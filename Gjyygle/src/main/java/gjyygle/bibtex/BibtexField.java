@@ -99,7 +99,7 @@ public enum BibtexField {
         }
         @Override
         public boolean validate(String input) {
-            return validateInteger(input);
+            return true;
         }
     },
     NOTE {
