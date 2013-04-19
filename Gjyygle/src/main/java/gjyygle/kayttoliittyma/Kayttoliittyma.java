@@ -70,7 +70,7 @@ public class Kayttoliittyma {
     private void tiedostonGenerointi() {
         io.println("Valitse tiedostonimi");
                 String nimi = lue();
-                if (!nimi.contains(".bib\n")) {
+                if (!nimi.contains(".bib")) {
                     nimi = nimi + ".bib";
                 }
                 if (generoiTiedostoon(nimi)) {
@@ -171,6 +171,7 @@ public class Kayttoliittyma {
         while (true) {
             if (komento.equals("k")) {
                 io.println("Artikkelin valinnaiset tiedot:");
+                io.println("Tyhjä jättää kentän lisäämättä");
                 for (BibtexField type : tyyppi.getOptionalFields()) {
                     boolean validointi = false;
                     while (!validointi) {

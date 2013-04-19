@@ -124,10 +124,11 @@ public class KayttoliittymaTest {
     }
 
     @Test
-    public void lisaaViiteArtikkeliVaarillaArvoillaMeneeLapi() {
-        String[] input = {"1", "1", "Kalle123", "Peru321na", "Medicus", "sdfasdfa","1999", "fdasfda", "e", "3"};
+    public void lisaaViiteArtikkeliVaaraArvoVaatiiKorjauksen() {
+        String[] input = {"1", "1", "Kalle123", "Peru321na", "Medicus", "sdfasdfa","vuosiluku","1999", "fdasfda", "e", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
+        assertTrue(readerStub.loytyykoRivi("Arvo vuosiluku ei käy kentälle Year\n"));
         assertTrue(readerStub.loytyykoRivi("Viite lisätty\n"));
     }
 
@@ -138,6 +139,8 @@ public class KayttoliittymaTest {
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Viite lisätty\n"));
     }
+    
+  
     
     @Test
     public void lisaaViiteArtikkeliLisatiedotVaaraKomento() {
@@ -150,6 +153,16 @@ public class KayttoliittymaTest {
     
     @Test
     public void generoiBibtexTiedostoOnnistuu() {
+        String[] input = {"2", "kallekolamies.bib", "3"};
+        asetaUusiReaderStubInput(input);
+        liittyma.kaynnista();
+        File luotu = new File("kallekolamies.bib");
+        luotu.delete();
+        assertTrue(readerStub.loytyykoRivi("Tiedoston kallekolamies.bib luonti onnistui\n"));
+    }
+    
+    @Test
+    public void generoiBibtexTiedostoOnnistuuJaTiedostopaateLisataan() {
         String[] input = {"2", "kallekolamies", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
@@ -157,5 +170,7 @@ public class KayttoliittymaTest {
         luotu.delete();
         assertTrue(readerStub.loytyykoRivi("Tiedoston kallekolamies.bib luonti onnistui\n"));
     }
+    
+    
    
 }
