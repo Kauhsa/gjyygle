@@ -122,7 +122,7 @@ public class Kayttoliittyma {
         io.println("");
         io.println("1. Artikkeli");
         io.println("2. Kirja");
-        io.println("3. INPROCEEDINGS");        
+        io.println("3. Pöytäkirja-artikla");        
         io.println("4. Päävalikkoon");
         io.print("-");
     }
