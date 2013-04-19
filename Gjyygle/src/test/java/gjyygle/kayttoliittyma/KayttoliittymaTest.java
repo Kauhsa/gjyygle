@@ -109,7 +109,7 @@ public class KayttoliittymaTest {
 
     @Test
     public void lisaaViiteArtikkeliKysyyLisatietoja() {
-        String[] input = {"1", "1", "Kalle", "Peruna", "Medicus", "1999", "756", "e", "3"};
+        String[] input = {"1", "1", "756", "Kalle", "Peruna", "Medicus", "1999", "e", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Haluatko lisätä valinnaisia tietoja? (k/e)\n"));
@@ -125,7 +125,7 @@ public class KayttoliittymaTest {
 
     @Test
     public void lisaaViiteArtikkeliVaaraArvoVaatiiKorjauksen() {
-        String[] input = {"1", "1", "Kalle123", "Peru321na", "Medicus", "sdfasdfa","vuosiluku","1999", "fdasfda", "e", "3"};
+        String[] input = {"1", "1", "fdasfda", "Kalle123", "Peru321na", "Medicus", "sdfasdfa","vuosiluku","1999", "e", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Arvo vuosiluku ei käy kentälle Year\n"));
@@ -134,7 +134,7 @@ public class KayttoliittymaTest {
 
     @Test
     public void lisaaViiteArtikkeliValideillaArvoillaJaLisatiedoilla() {
-        String[] input = {"1", "1", "Kalle", "Peruna", "Medicus", "1999", "756", "k", "14", "15", "99", "100", "1", "moi", "avain", "3"};
+        String[] input = {"1", "1", "756", "Kalle", "Peruna", "Medicus", "1999", "k", "14", "15", "99", "100", "1", "moi", "avain", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Viite lisätty\n"));
@@ -144,7 +144,7 @@ public class KayttoliittymaTest {
     
     @Test
     public void lisaaViiteArtikkeliLisatiedotVaaraKomento() {
-        String[] input = {"1", "1", "Kalle123", "Peru321na", "Medicus", "1999", "fdasfda", "gepardi","e", "3"};
+        String[] input = {"1", "1", "fdasfda", "Kalle123", "Peru321na", "Medicus", "1999", "gepardi","e", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Vastaa k tai e\n"));
