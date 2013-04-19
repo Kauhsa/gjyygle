@@ -26,6 +26,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään inproceedings-t
         teksti = new Scanner(tempXMLTietokanta).useDelimiter("\\A").next()
         teksti.contains("<ID>inproceedings123</ID>").shouldEqual(true)
         teksti.contains("<Author>tyyppi</Author>").shouldEqual(true)
+        teksti.contains("<Type>inproceedings</Type>").shouldEqual(true)
     }
 }
 
@@ -50,6 +51,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään inproceedings-t
         teksti = new Scanner(tempXMLTietokanta).useDelimiter("\\A").next()
         teksti.contains("<ID>inproceedings1234</ID>").shouldEqual(true)
         teksti.contains("<Author>tyyppi</Author>").shouldEqual(true)
+        teksti.contains("<Type>inproceedings</Type>").shouldEqual(true)
         teksti.contains("<Note>aika hieno artikkeli</Note>").shouldEqual(true)
     }
 }

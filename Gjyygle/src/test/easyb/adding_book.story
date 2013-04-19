@@ -26,6 +26,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään book-tyyppisen 
         teksti = new Scanner(tempXMLTietokanta).useDelimiter("\\A").next()
         teksti.contains("<ID>artonkirjaiidee123</ID>").shouldEqual(true)
         teksti.contains("<Author>arto1</Author>").shouldEqual(true)
+        teksti.contains("<Type>Book</Type>").shouldEqual(true)
     }
 }
 
@@ -50,6 +51,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään book-tyyppisen 
         teksti = new Scanner(tempXMLTietokanta).useDelimiter("\\A").next()
         teksti.contains("<ID>asdfa213</ID>").shouldEqual(true)
         teksti.contains("<Author>arto2</Author>").shouldEqual(true)
+        teksti.contains("<Type>Book</Type>").shouldEqual(true)
         teksti.contains("<Note>huomio!</Note>").shouldEqual(true)
     }
 }
