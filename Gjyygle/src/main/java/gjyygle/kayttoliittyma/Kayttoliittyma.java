@@ -45,11 +45,11 @@ public class Kayttoliittyma {
     public void listaaViitteet() {
         List<BibtexEntry> viitteet = tietokanta.listaaArtikkelit();
         for (BibtexEntry entry : viitteet) {
-            io.print("Type: " + entry.getType().getName());
+            io.println("Type: " + entry.getType().getName());
             Set<Entry<BibtexField, String>> vals = entry.getAllValues().entrySet();
             for (Entry<BibtexField, String> data : vals) {
                 if (data.getValue() != null) {
-                    io.println("\t" + data.getKey().getName() + ": " + data.getValue());
+                    io.println(data.getKey().getName() + ": " + data.getValue());
                 }
             }
             io.println("");
