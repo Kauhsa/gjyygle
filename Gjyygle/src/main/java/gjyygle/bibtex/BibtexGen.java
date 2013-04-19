@@ -74,8 +74,8 @@ public class BibtexGen {
         rivi = rivi.replaceAll("Ä", "\\\\\"{A}");
         rivi = rivi.replaceAll("ö", "\\\\\"{o}");
         rivi = rivi.replaceAll("Ö", "\\\\\"{O}");
-        rivi = rivi.replaceAll("å", "\\\\aa");
-        rivi = rivi.replaceAll("Å", "\\\\AA");
+        rivi = rivi.replaceAll("å", "{\\\\aa}");
+        rivi = rivi.replaceAll("Å", "{\\\\AA}");
         return rivi.replaceAll("ä", "\\\\\"{a}");
     }
 
