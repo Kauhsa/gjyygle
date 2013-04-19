@@ -131,6 +131,22 @@ public class KayttoliittymaTest {
         assertTrue(readerStub.loytyykoRivi("Arvo vuosiluku ei käy kentälle Year\n"));
         assertTrue(readerStub.loytyykoRivi("Viite lisätty\n"));
     }
+    
+        @Test
+    public void listaaViitteetTulostaaTiedot() {
+        String[] input = {"4", "3"};
+        asetaUusiReaderStubInput(input);
+        liittyma.kaynnista();
+        assertTrue(readerStub.loytyykoRivi("Type: Article\n"));
+        assertTrue(readerStub.loytyykoRivi("ID: aaa\n"));
+        assertTrue(readerStub.loytyykoRivi("Author: joku tyyppi\n"));
+        assertTrue(readerStub.loytyykoRivi("Title: hieno artikkeli\n"));
+        assertTrue(readerStub.loytyykoRivi("Journal: jostain kirjasta kai\n"));
+        assertTrue(readerStub.loytyykoRivi("Year: 2013\n"));
+        assertTrue(readerStub.loytyykoRivi("Volume: 1\n"));
+        assertTrue(readerStub.loytyykoRivi("Note: huom!\n"));
+
+    }
 
     @Test
     public void lisaaViiteArtikkeliValideillaArvoillaJaLisatiedoilla() {
