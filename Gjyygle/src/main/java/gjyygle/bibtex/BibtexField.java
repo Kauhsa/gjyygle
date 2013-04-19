@@ -189,6 +189,10 @@ public enum BibtexField {
         return getName();
     }
     public boolean validateInteger(String input) {
+        if (input.equals(""))
+        {
+            return true;
+        }
         try {
             Integer.decode(input);
             return true;

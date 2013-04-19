@@ -26,6 +26,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään article-tyyppis
         teksti = new Scanner(tempXMLTietokanta).useDelimiter("\\A").next()
         teksti.contains("<ID>756</ID>").shouldEqual(true)
         teksti.contains("<Author>Kalle</Author>").shouldEqual(true)
+        teksti.contains("<Type>Article</Type>").shouldEqual(true)
     }
 }
 
@@ -50,6 +51,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään article-tyyppis
         teksti = new Scanner(tempXMLTietokanta).useDelimiter("\\A").next()
         teksti.contains("<ID>756</ID>").shouldEqual(true)
         teksti.contains("<Author>Kalle</Author>").shouldEqual(true)
+        teksti.contains("<Type>Article</Type>").shouldEqual(true)
         teksti.contains("<Key>moi</Key>").shouldEqual(true)
     }
 }
