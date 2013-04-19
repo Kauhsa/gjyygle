@@ -13,7 +13,11 @@ import gjyygle.bibtex.ValidationException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  *
@@ -23,7 +27,7 @@ public class Kayttoliittyma {
 
     private IO io;
     private BibtexTietokanta tietokanta;
-    private HashMap<String,String> komennot;
+    private HashMap<String, String> komennot;
     private BibtexGen generaattori;
 
     public Kayttoliittyma(IO reader, BibtexTietokanta tietokanta) {
@@ -31,11 +35,25 @@ public class Kayttoliittyma {
         this.tietokanta = tietokanta;
         this.generaattori = new BibtexGen(tietokanta);
     }
-    
-    public Kayttoliittyma(IO reader, BibtexTietokanta tietokanta, BibtexGen generaattori ) {
+
+    public Kayttoliittyma(IO reader, BibtexTietokanta tietokanta, BibtexGen generaattori) {
         this.io = reader;
         this.tietokanta = tietokanta;
         this.generaattori = generaattori;
+    }
+
+    public void listaaViitteet() {
+        List<BibtexEntry> viitteet = tietokanta.listaaArtikkelit();
+        for (BibtexEntry entry : viitteet) {
+            io.print("Type: " + entry.getType().getName());
+            Set<Entry<BibtexField, String>> vals = entry.getAllValues().entrySet();
+            for (Entry<BibtexField, String> data : vals) {
+                if (data.getValue() != null) {
+                    io.println("\t" + data.getKey().getName() + ": " + data.getValue());
+                }
+            }
+            io.println("");
+        }
     }
 
     public void kaynnista() {
@@ -51,6 +69,8 @@ public class Kayttoliittyma {
                 tiedostonGenerointi();
             } else if (komento.equals("3")) {
                 break;
+            } else if (komento.equals("4")) {
+                listaaViitteet();
             } else {
                 virheSyote();
             }
@@ -69,21 +89,21 @@ public class Kayttoliittyma {
 
     private void tiedostonGenerointi() {
         io.println("Valitse tiedostonimi");
-                String nimi = lue();
-                if (!nimi.contains(".bib\n")) {
-                    nimi = nimi + ".bib";
-                }
-                if (generoiTiedostoon(nimi)) {
-                    io.println("Tiedoston " + nimi + " luonti onnistui");
-                } else {
-                    io.println("Virhe tiedoston luonnissa");
-                }
+        String nimi = lue();
+        if (!nimi.contains(".bib\n")) {
+            nimi = nimi + ".bib";
+        }
+        if (generoiTiedostoon(nimi)) {
+            io.println("Tiedoston " + nimi + " luonti onnistui");
+        } else {
+            io.println("Virhe tiedoston luonnissa");
+        }
     }
-    
-    private boolean generoiTiedostoon(String tiednimi) {       
+
+    private boolean generoiTiedostoon(String tiednimi) {
         File file = new File(tiednimi);
         try {
-            FileOutputStream fout = new FileOutputStream(file);           
+            FileOutputStream fout = new FileOutputStream(file);
             generaattori.generate(fout);
             fout.close();
             return true;
@@ -103,10 +123,10 @@ public class Kayttoliittyma {
             } else if (komento.equals("2")) {
                 lisaaViite(BibtexEntryType.BOOK);
                 break;
-            }  else if (komento.equals("3")) {
+            } else if (komento.equals("3")) {
                 lisaaViite(BibtexEntryType.INPROCEEDINGS);
                 break;
-            } else if (komento.equals("4")) {                
+            } else if (komento.equals("4")) {
                 break;
             } else {
                 virheSyote();
@@ -122,7 +142,7 @@ public class Kayttoliittyma {
         io.println("");
         io.println("1. Artikkeli");
         io.println("2. Kirja");
-        io.println("3. INPROCEEDINGS");        
+        io.println("3. INPROCEEDINGS");
         io.println("4. Päävalikkoon");
         io.print("-");
     }
@@ -145,7 +165,7 @@ public class Kayttoliittyma {
 
         lisaaViiteValinnaiset(uusi, tyyppi);
 
-        
+
         try {
             tietokanta.lisaaArtikkeli(uusi);
             tietokanta.tallenna();
