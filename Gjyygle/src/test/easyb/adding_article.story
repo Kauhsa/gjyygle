@@ -12,7 +12,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään article-tyyppis
         String fileContents = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root></root>";
         FileWrite.stringToFile(fileContents, tempXMLTietokanta);
 
-        String[] input = ["1", "1", "Kalle", "Peruna", "Medicus", "1999", "756", "e", "3"]
+        String[] input = ["1", "1", "756", "Kalle", "Peruna", "Medicus", "1999", "e", "3"]
         io = new TestIO(input)        
         XmlTietokanta tietokanta = new XmlTietokanta(tempXMLTietokanta)
         juttu = new Kayttoliittyma(io, tietokanta)
@@ -37,7 +37,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään article-tyyppis
         fileContents = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root></root>"
         FileWrite.stringToFile(fileContents, tempXMLTietokanta)
 
-        String[] input = ["1", "1", "Kalle", "Peruna", "Medicus", "1999", "756", "k", "14", "15", "99", "100", "1", "moi", "avain", "3"]
+        String[] input = ["1", "1", "756", "Kalle", "Peruna", "Medicus", "1999","k", "14", "15", "99", "100", "1", "moi", "avain", "3"]
         io = new TestIO(input)        
         XmlTietokanta tietokanta = new XmlTietokanta(tempXMLTietokanta)
         juttu = new Kayttoliittyma(io, tietokanta)
