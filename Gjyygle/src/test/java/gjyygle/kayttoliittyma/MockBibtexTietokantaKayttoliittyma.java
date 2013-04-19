@@ -42,7 +42,7 @@ public class MockBibtexTietokantaKayttoliittyma implements BibtexTietokanta {
             lista.add(uusEntry);
             return lista;
         } catch (ValidationException ex) {
-            Logger.getLogger(MockBibtexTietokantaKayttoliittyma.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         return null;
     }
