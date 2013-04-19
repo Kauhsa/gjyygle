@@ -89,15 +89,15 @@ public class Kayttoliittyma {
 
     private void tiedostonGenerointi() {
         io.println("Valitse tiedostonimi");
-        String nimi = lue();
-        if (!nimi.contains(".bib\n")) {
-            nimi = nimi + ".bib";
-        }
-        if (generoiTiedostoon(nimi)) {
-            io.println("Tiedoston " + nimi + " luonti onnistui");
-        } else {
-            io.println("Virhe tiedoston luonnissa");
-        }
+                String nimi = lue();
+                if (!nimi.contains(".bib")) {
+                    nimi = nimi + ".bib";
+                }
+                if (generoiTiedostoon(nimi)) {
+                    io.println("Tiedoston " + nimi + " luonti onnistui");
+                } else {
+                    io.println("Virhe tiedoston luonnissa");
+                }
     }
 
     private boolean generoiTiedostoon(String tiednimi) {
@@ -142,7 +142,7 @@ public class Kayttoliittyma {
         io.println("");
         io.println("1. Artikkeli");
         io.println("2. Kirja");
-        io.println("3. INPROCEEDINGS");
+        io.println("3. Pöytäkirja-artikla");        
         io.println("4. Päävalikkoon");
         io.print("-");
     }
@@ -191,6 +191,7 @@ public class Kayttoliittyma {
         while (true) {
             if (komento.equals("k")) {
                 io.println("Artikkelin valinnaiset tiedot:");
+                io.println("Tyhjä jättää kentän lisäämättä");
                 for (BibtexField type : tyyppi.getOptionalFields()) {
                     boolean validointi = false;
                     while (!validointi) {
