@@ -43,12 +43,11 @@ public class Kayttoliittyma {
     public void listaaViitteet() {
         List<BibtexEntry> viitteet = tietokanta.listaaArtikkelit();
         for (BibtexEntry entry : viitteet) {
+            entry.poistaTyhjat();
             io.println("Type: " + entry.getType().getName());
             Set<Entry<BibtexField, String>> vals = entry.getAllValues().entrySet();
             for (Entry<BibtexField, String> data : vals) {
-                if (data.getValue() != null) {
-                    io.println(data.getKey().getName() + ": " + data.getValue());
-                }
+                io.println(data.getKey().getName() + ": " + data.getValue());
             }
             io.println("");
         }
@@ -88,15 +87,15 @@ public class Kayttoliittyma {
 
     private void tiedostonGenerointi() {
         io.println("Valitse tiedostonimi");
-                String nimi = lue();
-                if (!nimi.contains(".bib")) {
-                    nimi = nimi + ".bib";
-                }
-                if (generoiTiedostoon(nimi)) {
-                    io.println("Tiedoston " + nimi + " luonti onnistui");
-                } else {
-                    io.println("Virhe tiedoston luonnissa");
-                }
+        String nimi = lue();
+        if (!nimi.contains(".bib")) {
+            nimi = nimi + ".bib";
+        }
+        if (generoiTiedostoon(nimi)) {
+            io.println("Tiedoston " + nimi + " luonti onnistui");
+        } else {
+            io.println("Virhe tiedoston luonnissa");
+        }
     }
 
     private boolean generoiTiedostoon(String tiednimi) {
@@ -117,15 +116,15 @@ public class Kayttoliittyma {
         String komento = lue();
         while (true) {
             if (komento.equals("1")) {
-                
+
                 lisaaViite(BibtexEntryType.ARTICLE);
                 break;
             } else if (komento.equals("2")) {
-                
+
                 lisaaViite(BibtexEntryType.BOOK);
                 break;
             } else if (komento.equals("3")) {
-                
+
                 lisaaViite(BibtexEntryType.INPROCEEDINGS);
                 break;
             } else if (komento.equals("4")) {
@@ -144,7 +143,7 @@ public class Kayttoliittyma {
         io.println("");
         io.println("1. Artikkeli");
         io.println("2. Kirja");
-        io.println("3. Pöytäkirja-artikla");        
+        io.println("3. Pöytäkirja-artikla");
         io.println("4. Päävalikkoon");
         io.print("-");
     }
