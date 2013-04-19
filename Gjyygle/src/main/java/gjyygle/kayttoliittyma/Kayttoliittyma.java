@@ -149,13 +149,13 @@ public class Kayttoliittyma {
 
     private void lisaaViite(BibtexEntryType tyyppi) {
         // Required fields: author, title, journal, year
-        BibtexEntry uusi = new BibtexEntry(tyyppi);
+        BibtexEntry viite = new BibtexEntry(tyyppi);
         for (BibtexField type : tyyppi.getRequiredFields()) {
             boolean validointi = false;
             while (!validointi) {
                 io.print(type.getName() + ": ");
                 try {
-                    uusi.setValue(type, lue());
+                    viite.setValue(type, lue());
                     validointi = true;
                 } catch (ValidationException e) {
                     io.println(e.getMessage());
@@ -163,11 +163,11 @@ public class Kayttoliittyma {
             }
         }
 
-        lisaaViiteValinnaiset(uusi, tyyppi);
+        lisaaViiteValinnaiset(viite, tyyppi);
 
 
         try {
-            tietokanta.lisaaArtikkeli(uusi);
+            tietokanta.lisaaArtikkeli(viite);
             tietokanta.tallenna();
             io.println("");
             io.println("Viite lisätty");
@@ -183,7 +183,7 @@ public class Kayttoliittyma {
         }
     }
 
-    private void lisaaViiteValinnaiset(BibtexEntry uusi, BibtexEntryType tyyppi) {
+    private void lisaaViiteValinnaiset(BibtexEntry viite, BibtexEntryType tyyppi) {
         // Optional fields: volume, number, pages, month, note, key
         io.println("");
         io.println("Haluatko lisätä valinnaisia tietoja? (k/e)");
@@ -197,10 +197,10 @@ public class Kayttoliittyma {
                     while (!validointi) {
                         io.print(type.getName() + ": ");
                         try {
-                            uusi.setValue(type, lue());
+                            viite.setValue(type, lue());
                             validointi = true;
-                        } catch (Exception e) {
-                            io.println(e.toString());
+                        } catch (ValidationException e) {
+                            io.println(e.getMessage());
                         }
                     }
                 }
