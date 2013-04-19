@@ -13,11 +13,11 @@ public enum BibtexEntryType {
 
         @Override
         public BibtexField[] getRequiredFields() {
-            BibtexField[] ret = {BibtexField.AUTHOR,
+            BibtexField[] ret = {BibtexField.ID,
+                BibtexField.AUTHOR,
                 BibtexField.TITLE,
                 BibtexField.JOURNAL,
                 BibtexField.YEAR,
-                BibtexField.ID
             };
             return ret;
         }

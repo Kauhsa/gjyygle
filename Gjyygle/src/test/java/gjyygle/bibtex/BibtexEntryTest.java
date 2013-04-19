@@ -180,4 +180,17 @@ public class BibtexEntryTest {
         }
         assertTrue(inproceedings.getValue(BibtexField.EDITOR).equals("Arto"));
     }
+    
+    @Test
+    public void removesEmptyFields() {
+        BibtexEntry artikkeli = new BibtexEntry(artonPaperi, BibtexEntryType.ARTICLE);
+        try {
+            artikkeli.setValue(BibtexField.MONTH, "");
+        }
+        catch (Exception e) {
+            
+        }
+        artikkeli.poistaTyhjat();
+        assertFalse(artikkeli.getAllValues().containsKey(BibtexField.MONTH));
+    }
 }
