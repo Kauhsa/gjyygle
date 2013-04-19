@@ -7,9 +7,9 @@ import java.io.File;
 
 scenario "käyttäjä pystyy syöttämään käyttöliittymään article-tyyppisen viitteen pakolliset tiedot", {
     given 'ohjelma avattu, tietokannassa dataa valmiina', {
-        tempXMLTietokanta = File.createTempFile("temp", "file")
+        tempXMLTietokanta = File.createTempFile("temp", ".xml")
         tempXMLTietokanta.deleteOnExit();
-        String fileContents = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root><entry><ID>baka00</ID><Author>A. Baka</Author><Title>Peeling onions</Title><Journal>mkyong</Journal><Year>2000</Year></entry></root>";
+        String fileContents = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root><entry><Year>2011</Year><Journal>testiJournal</Journal><Type>Article</Type><Author>A. Baka</Author><ID>baka00</ID><Title>Peeling onions</Title></entry></root>"
         FileWrite.stringToFile(fileContents, tempXMLTietokanta);
 
         tempBibTexFile = File.createTempFile("temp", ".bib")
