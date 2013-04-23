@@ -21,7 +21,6 @@ public class MockBibtexTietokantaKayttoliittyma implements BibtexTietokanta {
 
     @Override
     public void lisaaArtikkeli(BibtexEntry article) throws IllegalArgumentException {
-        
     }
 
     @Override
@@ -53,31 +52,38 @@ public class MockBibtexTietokantaKayttoliittyma implements BibtexTietokanta {
             
             return lista;
         } catch (ValidationException ex) {
-            
         }
         return null;
     }
 
     @Override
     public void tallenna() throws IOException {
-        
     }
 
     @Override
     public void lisaaFiltteri(String filtteri) {
+<<<<<<< HEAD
         
+=======
+//        throw new UnsupportedOperationException("Not supported yet.");
+>>>>>>> 06e0bb01c49226cf8ecc4dac1c813555b7084299
     }
 
     @Override
     public List<String> getFiltterit() {
         return new ArrayList<String>();
+<<<<<<< HEAD
+=======
+//        throw new UnsupportedOperationException("Not supported yet.");
+>>>>>>> 06e0bb01c49226cf8ecc4dac1c813555b7084299
     }
 
     @Override
     public void nollaaFiltterit() {
+<<<<<<< HEAD
         
+=======
+//        throw new UnsupportedOperationException("Not supported yet.");
+>>>>>>> 06e0bb01c49226cf8ecc4dac1c813555b7084299
     }
-    
-    
-    
 }
