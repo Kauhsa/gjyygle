@@ -39,6 +39,13 @@ public class TestIO implements IO {
         printatut = new ArrayList<String>();
     }
 
+    public String kaikkiRivit() {
+        String tulos = "";
+        for (String i : printatut) {
+            tulos += i;
+        }
+        return tulos;
+    }
     public String monesPrintattu(int mones) {
         return printatut.get(mones);
     }

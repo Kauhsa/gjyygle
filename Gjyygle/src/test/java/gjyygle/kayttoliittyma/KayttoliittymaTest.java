@@ -137,7 +137,7 @@ public class KayttoliittymaTest {
         String[] input = {"3", "x"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
-        assertTrue(readerStub.loytyykoRivi("ID: aaa, joku tyyppi, hieno artikkeli, 2013, Article.\n"));
+        assertTrue(readerStub.loytyykoRivi("ID: aa, teppo, matti, 2013, Article.\n"));
 
     }
 

@@ -39,13 +39,13 @@ public class MockBibtexTietokantaKayttoliittyma implements BibtexTietokanta {
             lista.add(uusEntry);
             
             BibtexEntry tokaEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
-            uusEntry.setValue(BibtexField.TITLE, "esa");
-            uusEntry.setValue(BibtexField.YEAR, "2000");
-            uusEntry.setValue(BibtexField.AUTHOR, "pertti");
-            uusEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
-            uusEntry.setValue(BibtexField.ID, "aaaa");
-            uusEntry.setValue(BibtexField.NOTE, "huom!");
-            uusEntry.setValue(BibtexField.VOLUME, "1");
+            tokaEntry.setValue(BibtexField.TITLE, "esa");
+            tokaEntry.setValue(BibtexField.YEAR, "2000");
+            tokaEntry.setValue(BibtexField.AUTHOR, "pertti");
+            tokaEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
+            tokaEntry.setValue(BibtexField.ID, "aaaa");
+            tokaEntry.setValue(BibtexField.NOTE, "huom!");
+            tokaEntry.setValue(BibtexField.VOLUME, "1");
 
             lista.add(tokaEntry);
             
