@@ -15,7 +15,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään article-tyyppis
         tempBibTexFile = File.createTempFile("temp", ".bib")
         tempBibTexFile.deleteOnExit()
 
-        String[] input = ["2", tempBibTexFile.getAbsolutePath(), "3"]
+        String[] input = ["2", tempBibTexFile.getAbsolutePath(), "x"]
         io = new TestIO(input)        
         XmlTietokanta tietokanta = new XmlTietokanta(tempXMLTietokanta)
         juttu = new Kayttoliittyma(io, tietokanta)
