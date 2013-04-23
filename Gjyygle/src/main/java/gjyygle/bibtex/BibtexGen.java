@@ -1,23 +1,11 @@
 package gjyygle.bibtex;
 
 import gjyygle.BibtexTietokanta;
-import gjyygle.xml.XmlTietokanta;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class BibtexGen {
 
@@ -26,16 +14,6 @@ public class BibtexGen {
     public BibtexGen(BibtexTietokanta db) {
         lista = db.listaaArtikkelit();
     }
-// SAMPLE BIBTEXFILUSTA
-//    @ARTICLE{Bailey,
-//   author = "D. H. Bailey and P. N. Swarztrauber",
-//   title = "The fractional {F}ourier transform and applications",
-//   journal = "SIAM Rev.",
-//   volume = 33,
-//   number = 3,
-//   pages = "389--404",
-//   year = 1991
-//   }
 
     public void generate(OutputStream out) {
         PrintStream ps = new PrintStream(out);
@@ -44,28 +22,10 @@ public class BibtexGen {
             EnumMap<BibtexField, String> map = palautaTulostettavaEnumMap(entry.getAllValues());
             ps.println("@" + entry.getType().toString().toLowerCase() + "{" + entry.getValue(BibtexField.ID) + ",");
             Iterator entries = map.entrySet().iterator();
-            while (entries.hasNext()) {
-                EnumMap.Entry seuraavaArvo = (EnumMap.Entry) entries.next();
-
-//                if (seuraavaArvo.getKey().equals(BibtexField.ID) || seuraavaArvo.getValue() == null || seuraavaArvo.getValue().equals("")) {
-//                    continue;
-//                }
-                if (seuraavaArvo.getKey().equals(BibtexField.ID)) {
-                    continue;
-                }
-                String rivi = "    ";
-
-                rivi += seuraavaArvo.getKey().toString().toLowerCase() + " = \"{" + seuraavaArvo.getValue() + "}\"";
-                rivi = skandiMuunnin(rivi);
-                if (entries.hasNext()) {
-                    rivi += ",";
-                }
-                ps.println(rivi);
-            }
+            entryjenLapikaynti(entries, ps);
             ps.println("}");
             ps.println();
         }
-
         ps.close();
     }
 
@@ -78,7 +38,31 @@ public class BibtexGen {
         rivi = rivi.replaceAll("Å", "{\\\\AA}");
         return rivi.replaceAll("ä", "\\\\\"{a}");
     }
-
+    
+    private static EnumMap<BibtexField, String> palautaTulostettavaEnumMap(EnumMap<BibtexField, String> map) {
+        EnumMap<BibtexField, String> printMap = new EnumMap<BibtexField, String>(BibtexField.class);
+        for (EnumMap.Entry<BibtexField, String> arvot : map.entrySet()) {
+            if (arvot.getValue() != null) {
+                printMap.put(arvot.getKey(), arvot.getValue().toString());
+            }
+        }
+        return printMap;
+    }
+    
+    private void entryjenLapikaynti(Iterator entries, PrintStream ps) {
+        while (entries.hasNext()) {
+            EnumMap.Entry seuraavaArvo = (EnumMap.Entry) entries.next();
+            if (seuraavaArvo.getKey().equals(BibtexField.ID)) {
+                continue;
+            }
+            String rivi = "    " + seuraavaArvo.getKey().toString().toLowerCase() + " = \"{" + seuraavaArvo.getValue() + "}\"";
+            rivi = skandiMuunnin(rivi);
+            if (entries.hasNext()) {
+                rivi += ",";
+            }
+            ps.println(rivi);
+        }
+    }    
 //    public static void main(String[] args) {
 //        OutputStream output = null;
 //        try {
@@ -98,33 +82,4 @@ public class BibtexGen {
 //            }
 //        }
 //    }
-    private static EnumMap<BibtexField, String> palautaTulostettavaEnumMap(EnumMap<BibtexField, String> map) {
-        EnumMap<BibtexField, String> printMap = new EnumMap<BibtexField, String>(BibtexField.class);
-        for (EnumMap.Entry<BibtexField, String> arvot : map.entrySet()) {
-            if (arvot.getValue() != null) {
-                printMap.put(arvot.getKey(), arvot.getValue().toString());
-            }
-        }
-        return printMap;
-    }
 }
-//        for (BibtexEntry entry : lista) {
-//            tiedot.println("@" + entry.getType() + "{" + entry.getValue(BibtexField.ID)+ ",");
-//            EnumMap<BibtexField, String> map = entry.getAllValues();
-//            Iterator entries = map.entrySet().iterator();
-////            for (EnumMap.Entry<BibtexField, String> arvot : map.entrySet()) {
-//            while (entries.hasNext()) {
-//                EnumMap.Entry seuraavaArvo = (EnumMap.Entry) entries.next();
-//                if (seuraavaArvo.getValue() == null) {
-//                    continue;
-//                }
-////                if (arvo.getKey().equals(BibtexField.ID) || arvo.getValue() == null) { continue;}
-////                tiedot.println(seuraavaArvo.getKey() + " = \"" + seuraavaArvo.getValue() + "\"");
-//                String rivi = seuraavaArvo.getKey() + " = \"" + seuraavaArvo.getValue() + "\"";
-//                if (entries.hasNext()) {
-//                    rivi += ",";
-//                }
-//                tiedot.println(rivi);
-//            }
-//            tiedot.println("}");
-//        }

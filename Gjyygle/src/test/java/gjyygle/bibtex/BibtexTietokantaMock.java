@@ -1,9 +1,6 @@
 package gjyygle.bibtex;
 
 import gjyygle.BibtexTietokanta;
-import gjyygle.bibtex.BibtexEntry;
-import gjyygle.bibtex.BibtexEntryType;
-import gjyygle.bibtex.BibtexField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -73,5 +70,20 @@ public class BibtexTietokantaMock implements BibtexTietokanta {
 
     @Override
     public void tallenna() {
+    }
+
+    @Override
+    public void lisaaFiltteri(String filtteri) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<String> getFiltterit() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void nollaaFiltterit() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
