@@ -103,7 +103,7 @@ public class BibtexEntry {
 
     @Override
     public String toString() {
-        String tulos = "";
+        String tulos = "ID: " + getValue(BibtexField.ID) + ", ";
         for (BibtexField f : type.getPrintFields()) {
             tulos += getValue(f) + ", ";
         }

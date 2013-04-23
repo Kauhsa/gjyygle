@@ -23,7 +23,7 @@ scenario "käyttäjä pystyy näkemään viitteiden lyhyen muodon", {
     }
 
     then 'viitteet printataan ruudulle', {
-        io.loytyykoRivi("baka00, A. Baka, Peeling onions, 2011, Article.\n").shouldEqual(true)
-        io.loytyykoRivi("baka01, A. Baka, Peeling onions, the book, 2012, Book.\n").shouldEqual(true)
+        io.loytyykoRivi("ID: baka00, A. Baka, Peeling onions, 2011, Article.\n").shouldEqual(true)
+        io.loytyykoRivi("ID: baka01, A. Baka, Peeling onions, the book, 2012, Book.\n").shouldEqual(true)
     }
 }

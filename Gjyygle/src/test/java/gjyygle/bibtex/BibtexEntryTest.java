@@ -196,7 +196,7 @@ public class BibtexEntryTest {
     @Test
     public void toStringWorks() {
         BibtexEntry artikkeli = new BibtexEntry(artonPaperi, BibtexEntryType.ARTICLE);
-        assertEquals("arto1, Arto Vihavainen, A Software Craftsman's Approach to Data Structures, 2012, Article.", artikkeli.toString());
+        assertEquals("ID: arto1, Arto Vihavainen, A Software Craftsman's Approach to Data Structures, 2012, Article.", artikkeli.toString());
     }
     @Test
     public void kaikkiArvotStringinaToimii() {

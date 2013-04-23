@@ -35,7 +35,7 @@ public enum BibtexEntryType {
 
         @Override
         public BibtexField[] getPrintFields() {
-            BibtexField[] ret = {BibtexField.ID,
+            BibtexField[] ret = {
                 BibtexField.AUTHOR,
                 BibtexField.TITLE,
                 BibtexField.YEAR
@@ -75,7 +75,7 @@ public enum BibtexEntryType {
 
         @Override
         public BibtexField[] getPrintFields() {
-            BibtexField[] ret = {BibtexField.ID,
+            BibtexField[] ret = {
                 BibtexField.AUTHOR,
                 BibtexField.TITLE,
                 BibtexField.YEAR
@@ -117,7 +117,7 @@ public enum BibtexEntryType {
 
         @Override
         public BibtexField[] getPrintFields() {
-            BibtexField[] ret = {BibtexField.ID,
+            BibtexField[] ret = {
                 BibtexField.AUTHOR,
                 BibtexField.TITLE,
                 BibtexField.YEAR
