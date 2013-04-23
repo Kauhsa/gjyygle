@@ -9,14 +9,15 @@ import java.util.List;
 
 public class BibtexGen {
 
-    private List<BibtexEntry> lista;
+    private BibtexTietokanta db;
 
     public BibtexGen(BibtexTietokanta db) {
-        lista = db.listaaArtikkelit();
+        this.db = db;
     }
 
     public void generate(OutputStream out) {
         PrintStream ps = new PrintStream(out);
+        List<BibtexEntry> lista = db.listaaArtikkelit();
         for (BibtexEntry entry : lista) {
             entry.poistaTyhjat();
             EnumMap<BibtexField, String> map = palautaTulostettavaEnumMap(entry.getAllValues());
