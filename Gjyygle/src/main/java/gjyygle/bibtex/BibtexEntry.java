@@ -110,4 +110,13 @@ public class BibtexEntry {
         tulos += type.getName() + ".";
         return tulos;
     }
+    
+    public String kaikkiKentatStringina() {
+        String tulos = "";
+        for (BibtexField f : BibtexField.values())
+        {
+            tulos += f.getName() + ":" + getValue(f) + "\n";
+        }
+        return tulos;
+    }
 }
