@@ -14,8 +14,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
 /**
  *
@@ -40,6 +38,7 @@ public class Kayttoliittyma {
     }
 
     public void listaaViitteet() {
+        io.println("");
         List<BibtexEntry> viitteet = tietokanta.listaaArtikkelit();
         for (BibtexEntry entry : viitteet) {
             io.println(entry.toString());
@@ -58,7 +57,12 @@ public class Kayttoliittyma {
             } else if (komento.equals("2")) {
                 tiedostonGenerointi();
             } else if (komento.equals("3")) {
-                listaaViitteet();              
+                listaaViitteet();
+            } else if (komento.equals("4")) {
+                io.print("Lisättävä filtteri: ");
+                tietokanta.lisaaFiltteri(lue());            
+            } else if (komento.equals("5")) {
+                tietokanta.nollaaFiltterit();              
             } else if (komento.equals("x")) {
                 break;
             } else {
@@ -74,7 +78,9 @@ public class Kayttoliittyma {
         io.println("Valitse toiminto:");
         io.println("1. Syötä viite");
         io.println("2. Generoi bibtex-tiedosto");
-        io.println("3. Listaa viitteet");
+        io.println("3. Viitteiden listaus");        
+        io.println("4. Lisää filtteri "+tietokanta.getFiltterit().toString());        
+        io.println("5. Filtterien nollaus");        
         io.println("x. Lopeta");
         io.print("-");
     }
