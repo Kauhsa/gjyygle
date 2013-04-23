@@ -84,7 +84,7 @@ public class KayttoliittymaTest {
 
     @Test
     public void alkuValikkoVirheellinenKomento() {
-        String[] input = {"5", "x"};
+        String[] input = {"15", "x"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Virheellinen komento\n"));
