@@ -40,17 +40,23 @@ public class BibtexGen {
     public void generate(OutputStream out) {
         PrintStream ps = new PrintStream(out);
         for (BibtexEntry entry : lista) {
+            entry.poistaTyhjat();
             EnumMap<BibtexField, String> map = palautaTulostettavaEnumMap(entry.getAllValues());
             ps.println("@" + entry.getType().toString().toLowerCase() + "{" + entry.getValue(BibtexField.ID) + ",");
             Iterator entries = map.entrySet().iterator();
             while (entries.hasNext()) {
                 EnumMap.Entry seuraavaArvo = (EnumMap.Entry) entries.next();
-                String rivi = "    ";
+
+//                if (seuraavaArvo.getKey().equals(BibtexField.ID) || seuraavaArvo.getValue() == null || seuraavaArvo.getValue().equals("")) {
+//                    continue;
+//                }
                 if (seuraavaArvo.getKey().equals(BibtexField.ID)) {
                     continue;
                 }
-                    rivi +=  seuraavaArvo.getKey().toString().toLowerCase() + " = \"{" + seuraavaArvo.getValue() + "}\"";
-                    rivi = skandiMuunnin(rivi);
+                String rivi = "    ";
+
+                rivi += seuraavaArvo.getKey().toString().toLowerCase() + " = \"{" + seuraavaArvo.getValue() + "}\"";
+                rivi = skandiMuunnin(rivi);
                 if (entries.hasNext()) {
                     rivi += ",";
                 }
@@ -62,14 +68,15 @@ public class BibtexGen {
 
         ps.close();
     }
-    
+
     public String skandiMuunnin(String rivi) {
+        rivi = rivi.replaceAll("-", "{-}");
         rivi = rivi.replaceAll("Ä", "\\\\\"{A}");
         rivi = rivi.replaceAll("ö", "\\\\\"{o}");
         rivi = rivi.replaceAll("Ö", "\\\\\"{O}");
-        rivi = rivi.replaceAll("å", "\\\\aa");
-        rivi = rivi.replaceAll("Å", "\\\\AA");
-        return rivi.replaceAll("ä", "\\\\\"{a}");   
+        rivi = rivi.replaceAll("å", "{\\\\aa}");
+        rivi = rivi.replaceAll("Å", "{\\\\AA}");
+        return rivi.replaceAll("ä", "\\\\\"{a}");
     }
 
 //    public static void main(String[] args) {
@@ -91,7 +98,6 @@ public class BibtexGen {
 //            }
 //        }
 //    }
-
     private static EnumMap<BibtexField, String> palautaTulostettavaEnumMap(EnumMap<BibtexField, String> map) {
         EnumMap<BibtexField, String> printMap = new EnumMap<BibtexField, String>(BibtexField.class);
         for (EnumMap.Entry<BibtexField, String> arvot : map.entrySet()) {

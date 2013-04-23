@@ -99,7 +99,7 @@ public enum BibtexField {
         }
         @Override
         public boolean validate(String input) {
-            return validateInteger(input);
+            return true;
         }
     },
     NOTE {
@@ -189,6 +189,10 @@ public enum BibtexField {
         return getName();
     }
     public boolean validateInteger(String input) {
+        if (input.equals(""))
+        {
+            return true;
+        }
         try {
             Integer.decode(input);
             return true;

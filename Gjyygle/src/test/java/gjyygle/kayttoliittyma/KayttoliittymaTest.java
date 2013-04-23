@@ -109,7 +109,7 @@ public class KayttoliittymaTest {
 
     @Test
     public void lisaaViiteArtikkeliKysyyLisatietoja() {
-        String[] input = {"1", "1", "Kalle", "Peruna", "Medicus", "1999", "756", "e", "3"};
+        String[] input = {"1", "1", "756", "Kalle", "Peruna", "Medicus", "1999", "e", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Haluatko lisätä valinnaisia tietoja? (k/e)\n"));
@@ -125,16 +125,32 @@ public class KayttoliittymaTest {
 
     @Test
     public void lisaaViiteArtikkeliVaaraArvoVaatiiKorjauksen() {
-        String[] input = {"1", "1", "Kalle123", "Peru321na", "Medicus", "sdfasdfa","vuosiluku","1999", "fdasfda", "e", "3"};
+        String[] input = {"1", "1", "fdasfda", "Kalle123", "Peru321na", "Medicus", "sdfasdfa","vuosiluku","1999", "e", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Arvo vuosiluku ei käy kentälle Year\n"));
         assertTrue(readerStub.loytyykoRivi("Viite lisätty\n"));
     }
+    
+        @Test
+    public void listaaViitteetTulostaaTiedot() {
+        String[] input = {"4", "3"};
+        asetaUusiReaderStubInput(input);
+        liittyma.kaynnista();
+        assertTrue(readerStub.loytyykoRivi("Type: Article\n"));
+        assertTrue(readerStub.loytyykoRivi("ID: aaa\n"));
+        assertTrue(readerStub.loytyykoRivi("Author: joku tyyppi\n"));
+        assertTrue(readerStub.loytyykoRivi("Title: hieno artikkeli\n"));
+        assertTrue(readerStub.loytyykoRivi("Journal: jostain kirjasta kai\n"));
+        assertTrue(readerStub.loytyykoRivi("Year: 2013\n"));
+        assertTrue(readerStub.loytyykoRivi("Volume: 1\n"));
+        assertTrue(readerStub.loytyykoRivi("Note: huom!\n"));
+
+    }
 
     @Test
     public void lisaaViiteArtikkeliValideillaArvoillaJaLisatiedoilla() {
-        String[] input = {"1", "1", "Kalle", "Peruna", "Medicus", "1999", "756", "k", "14", "15", "99", "100", "1", "moi", "avain", "3"};
+        String[] input = {"1", "1", "756", "Kalle", "Peruna", "Medicus", "1999", "k", "14", "15", "99", "100", "1", "moi", "avain", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Viite lisätty\n"));
@@ -144,7 +160,7 @@ public class KayttoliittymaTest {
     
     @Test
     public void lisaaViiteArtikkeliLisatiedotVaaraKomento() {
-        String[] input = {"1", "1", "Kalle123", "Peru321na", "Medicus", "1999", "fdasfda", "gepardi","e", "3"};
+        String[] input = {"1", "1", "fdasfda", "Kalle123", "Peru321na", "Medicus", "1999", "gepardi","e", "3"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Vastaa k tai e\n"));

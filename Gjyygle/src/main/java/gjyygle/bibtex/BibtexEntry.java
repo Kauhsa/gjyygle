@@ -24,6 +24,14 @@ public class BibtexEntry {
             throw new IllegalArgumentException();
         }
     }
+    public void poistaTyhjat() {
+        for (BibtexField i : arvot.keySet()) {
+            if (arvot.get(i) == null || arvot.get(i).equals(""))
+            {
+                arvot.remove(i);
+            }
+        }
+    }
     private void lisaaArvot(HashMap<String, String> values, BibtexField[] kentat) {
         for (BibtexField i : kentat) {
             arvot.put(i, values.get(i.getName()));
