@@ -22,28 +22,41 @@
 \end{titlepage}
 
 \section{Projektin aloitus}
+
 Ryhmämme muodostui spontaanisti yhden kurssin luennon lopussa -- suurin osa ryhmästä ei ollut aiemmin työskennellyt yhdessä.
 
-Pääsimme melko vaivatta yhteisymmärrykseen projektin toteutustavasta -- konsolisovelluksen teko oli luonteva valinta, koska Swing ei herättänyt suuria intohimon tunteita ryhmäläisissä eikä toisaalta web-sovelluksen kehittämiseen Javalla ollut tarpeeksi kokemusta ryhmän sisällä.
+Pääsimme melko vaivatta yhteisymmärrykseen projektin toteutustavasta -- konsolisovelluksen teko oli luonteva valinta, koska Swing ei herättänyt suuria intohimon tunteita ryhmäläisissä eikä toisaalta web-sovelluksen kehittämiseen Javalla ollut kenties tarpeeksi kokemusta ryhmän sisällä. Muita vaihtehtoja näiden lisäksi ei mietitty.
 
 \section{Projektin kulku}
 
-Ensimmäisessä sprintissä työskentelimme kahdessa neljän tunnin pätkässä, muissa sprinteissä aikatauluongelmien vuoksi jouduimme työskentelemään kahden tunnin erillisissä pätkissä. Molemmat työskentelytavat osoittautuivat kuitenkin hyvin toimivaksi, jälkimmäinen ehkä jopa paremmaksi -- oli helpompaa kunnolla keskittyä tekemiseen vain kahden tunnin ajan. Kaikki nämä pätkät työskentelimme laitoksella niin, että koko ryhmä oli samassa tilassa.
+Ensimmäisessä sprintissä työskentelimme koko viikon tunnit neljän tunnin yhtenäisessä pätkässä, mutta muissa sprinteissä aikatauluongelmien vuoksi jouduimme työskentelemään kahden tunnin erillisissä pätkissä. Molemmat työskentelytavat osoittautuivat kuitenkin hyvin toimivaksi, jälkimmäinen ehkä jopa paremmaksi -- oli helpompaa kunnolla keskittyä tekemiseen vain kahden tunnin ajan. Kaikki nämä pätkät työskentelimme laitoksella niin, että koko ryhmä oli samassa tilassa.
 
-Koska ryhmämme koko oli melko suuri, etenkin aluksi oli ongelmia keksiä kaikille viidelle jäsenelle jotain tuottavaa tekemistä. Käytössä olevan ajan vuoksi emme myöskään malttaneet alussa jäädä kunnolla miettimään mitä ja miten olemme tekemässä vaan aloitimme melko suoraan ohjelmiston eri osien toteuttamisen -- aineksia olisi ollut suurempaankin katastrofiin, mutta oikeastaan emme joutuneet mihinkään varsinaiseen integraatiohelvettiin. Vähän kattavampi suunnittelu etukäteen olisi kuitenkin saattanut näkyä ohjelmakoodin laadussa positiivisella tavalla.
+Koska ryhmämme koko oli melko suuri, aluksi oli ehkä ongelmia keksiä kaikille viidelle jäsenelle jotain tuottavaa tekemistä. Käytössä olevan ajan vuoksi emme myöskään malttaneet alussa jäädä kunnolla miettimään mitä ja miten olemme tekemässä vaan aloitimme melko suoraan ohjelmiston eri osien toteuttamisen -- aineksia olisi ollut suurempaankin katastrofiin, mutta oikeastaan emme joutuneet mihinkään varsinaiseen integraatiohelvettiin. Vähän kattavampi suunnittelu etukäteen olisi kuitenkin saattanut näkyä ohjelmakoodin laadussa positiivisella tavalla.
 
-Ensimmäisessä sprintissä aikataulu osoittautuikin aika tiukaksi -- siinä ja muissakin sprinteissä onnistuimme kyllä toteuttamaan kaikki vaaditut ominaisuudet, mutta emme paljonkaan ylimääräistä.
+Etenkin ensimmäisessä sprintissä aikataulu osoittautuikin aika tiukaksi -- siinä ja muissakin sprinteissä onnistuimme kyllä toteuttamaan kaikki vaaditut ominaisuudet, mutta emme paljonkaan ylimääräistä. Toisaalta tuhlasimme ehkä aikaa arkkitehtuurin rakentamiseen tulevia sprinttejä varten, mitä ei pitäisi ehkä tehdä.
 
 Prosessin noudattainen ei noussut keskeiseksi asiaksi projektin aikana, ja projekti tuntuikin ensisijaisesti ohjelmointiprojektilta prosessin harjoittelemisen sijaan. Yleensä yksi ryhmän jäsen hoiti prosessiin liittyvät asiat kuntoon kussakin sprintissä. Syntyneissä artifakteissa ei ollut ilmeisesti kuitenkaan puutteita.
 
 \section{Tekniset haasteet}
 
+Jenkinsin kanssa värkkääminen kulutti yllättävän paljon aikaa, enemmän kuin laskuharjoituksissa. Aikaa ei kuitenkaan mennyt varsinaisesti hukkaan mihinkään hölmöihin ongelmiin.
+
 Päätös käyttää XML:ää viitteiden tallentamiseen osoittautui huonoksi valinnaksi - käyttämämme, Javan standardikirjastoon kuuluva XML-kirjasto osoittautui epäintuitiiviseksi käyttää. Parempi vaihtoehto olisi kenties ollut käyttää jotain tietokantaa, esimerkiksi SQLiteä ja jotain yksinkertaista ORM-kirjastoa.
 
-BibTeX-formaatti osoittautui myös kovin kummalliseksi eikä dokumentaatio ollut hirveän selkeää etenkään erikoismerkkien tallentamisen osalta, joten oikea tapa tallentaa tiedot jouduttiin osittain selvittämään yritys ja erehdys -periaatteella. Tähän ei kuitenkaan mennyt kokonaisuudessaan hirveän paljon aikaa, koska LaTeX oli ennestään tuttu osalle ryhmästä.
+BibTeX-formaatti osoittautui myös vähän kummalliseksi eikä dokumentaatio ollut hirveän selkeää etenkään erikoismerkkien tallentamisen osalta, joten oikea tapa tallentaa tiedot jouduttiin osittain selvittämään yrityksen ja erehdyksen kautta. Tähän ei kuitenkaan mennyt kokonaisuudessaan hirveän paljon aikaa, koska LaTeX oli ennestään tuttu osalle ryhmästä.
 
 Muutamaan otteeseen myös Javan standardikirjaston puutteet häiritsivät -- toisaalta, koska käytimme Mavenia, olisimme voineet helposti lisätä esimerkiksi Apache Commons tai Google Guava -kirjastoja projektiimme, mutta jätimme sen kuitenkin tekemättä.
 
-Keskimäärin varmaan pääsimme keskimääräistä vähäisemmillä teknisillä murheilla, koska emme toteuttaneet esimerkiksi graafista käyttöliittymää, web-sovellusta tai datan synkronointia pilveen, joista kaikista olisi tullut epäilemättä esiin monenlaisia teknisiä murheita.
+Kurssin laskuharjoituksissa esitellyille tekniikoille (mm. Mockito) olisi ollut käyttöä projektin kuluessa, mutta ne esiteltiin miniprojektin kannalta ehkä turhan myöhään eikä niitä tuotu projektiin enää mukaan.
+
+Keskimäärin pääsimme varmaankin keskimääräistä vähäisemmillä teknisillä murheilla, koska emme toteuttaneet esimerkiksi graafista käyttöliittymää, web-sovellusta tai datan synkronointia pilveen, joista kaikista olisi tullut epäilemättä esiin monenlaisia ongelmia.
+
+\section{Yleisesti positiivista}
+
+Vaikka aiemmin todettiinkin että aina ei löytynyt ihan kaikille tuottavaa tekemistä, noin yleisesti aikaa ei kuitenkaan mennyt sormien pyörittelemiseen.
+
+Versionhallinnan käytöstä koko ryhmä sai arvokasta kokemusta -- osalle ryhmästä versionhallinnan käyttö muiden kanssa oli uutta.
+
+
 
 \end{document}
