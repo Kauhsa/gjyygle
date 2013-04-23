@@ -17,8 +17,7 @@ public enum BibtexEntryType {
                 BibtexField.AUTHOR,
                 BibtexField.TITLE,
                 BibtexField.JOURNAL,
-                BibtexField.YEAR,
-            };
+                BibtexField.YEAR,};
             return ret;
         }
 
@@ -30,6 +29,16 @@ public enum BibtexEntryType {
                 BibtexField.MONTH,
                 BibtexField.NOTE,
                 BibtexField.KEY
+            };
+            return ret;
+        }
+
+        @Override
+        public BibtexField[] getPrintFields() {
+            BibtexField[] ret = {BibtexField.ID,
+                BibtexField.AUTHOR,
+                BibtexField.TITLE,
+                BibtexField.YEAR
             };
             return ret;
         }
@@ -63,12 +72,23 @@ public enum BibtexEntryType {
                 BibtexField.KEY,};
             return ret;
         }
+
+        @Override
+        public BibtexField[] getPrintFields() {
+            BibtexField[] ret = {BibtexField.ID,
+                BibtexField.AUTHOR,
+                BibtexField.TITLE,
+                BibtexField.YEAR
+            };
+            return ret;
+        }
     },
     INPROCEEDINGS {
         @Override
         public String getName() {
             return "inproceedings";
         }
+
         @Override
         public BibtexField[] getRequiredFields() {
             BibtexField[] ret = {BibtexField.ID,
@@ -78,6 +98,7 @@ public enum BibtexEntryType {
                 BibtexField.YEAR};
             return ret;
         }
+
         @Override
         public BibtexField[] getOptionalFields() {
             BibtexField[] ret = {BibtexField.EDITOR,
@@ -93,20 +114,32 @@ public enum BibtexEntryType {
                 BibtexField.KEY,};
             return ret;
         }
+
+        @Override
+        public BibtexField[] getPrintFields() {
+            BibtexField[] ret = {BibtexField.ID,
+                BibtexField.AUTHOR,
+                BibtexField.TITLE,
+                BibtexField.YEAR
+            };
+            return ret;
+        }
     };
 
     public static BibtexEntryType getType(String type) {
         for (BibtexEntryType et : BibtexEntryType.values()) {
-            if (type.equals(et.getName()))
-            {
+            if (type.equals(et.getName())) {
                 return et;
             }
         }
         return null;
     }
+
     abstract public String getName();
 
     abstract public BibtexField[] getRequiredFields();
 
     abstract public BibtexField[] getOptionalFields();
+
+    abstract public BibtexField[] getPrintFields();
 }
