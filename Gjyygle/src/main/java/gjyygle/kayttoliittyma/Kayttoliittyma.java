@@ -58,6 +58,7 @@ public class Kayttoliittyma {
                 tiedostonGenerointi();
             } else if (komento.equals("3")) {
                 listaaViitteet();
+                lue();
             } else if (komento.equals("4")) {
                 io.print("Lisättävä filtteri: ");
                 tietokanta.lisaaFiltteri(lue());            
