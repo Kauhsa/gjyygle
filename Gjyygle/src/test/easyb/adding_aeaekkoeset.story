@@ -12,7 +12,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään ääkkösiä", 
         String fileContents = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root></root>";
         FileWrite.stringToFile(fileContents, tempXMLTietokanta);
 
-        String[] input = ["1", "1", "756", "Åke", "Äöäöää", "ÅÄÖåäö", "1999", "e", "3"]
+        String[] input = ["1", "1", "756", "Åke", "Äöäöää", "ÅÄÖåäö", "1999", "e", "x"]
         io = new TestIO(input)        
         XmlTietokanta tietokanta = new XmlTietokanta(tempXMLTietokanta)
         juttu = new Kayttoliittyma(io, tietokanta)
@@ -42,7 +42,7 @@ scenario "käyttäjä pystyy generoimaan bibtexin jossa on ääkkösiä", {
         tempBibTexFile = File.createTempFile("temp", ".bib")
         tempBibTexFile.deleteOnExit()
 
-        String[] input = ["2", tempBibTexFile.getAbsolutePath(), "3"]
+        String[] input = ["2", tempBibTexFile.getAbsolutePath(), "x"]
         io = new TestIO(input)        
         XmlTietokanta tietokanta = new XmlTietokanta(tempXMLTietokanta)
         juttu = new Kayttoliittyma(io, tietokanta)

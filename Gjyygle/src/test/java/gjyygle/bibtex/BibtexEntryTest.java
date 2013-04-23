@@ -193,4 +193,19 @@ public class BibtexEntryTest {
         artikkeli.poistaTyhjat();
         assertFalse(artikkeli.getAllValues().containsKey(BibtexField.MONTH));
     }
+    @Test
+    public void toStringWorks() {
+        BibtexEntry artikkeli = new BibtexEntry(artonPaperi, BibtexEntryType.ARTICLE);
+        assertEquals("ID: arto1, Arto Vihavainen, A Software Craftsman's Approach to Data Structures, 2012, Article.", artikkeli.toString());
+    }
+    @Test
+    public void kaikkiArvotStringinaToimii() {
+        BibtexEntry artikkeli = new BibtexEntry(artonPaperi, BibtexEntryType.ARTICLE);
+        assertTrue(artikkeli.kaikkiKentatStringina().contains("Type:Article\n"));
+        assertTrue(artikkeli.kaikkiKentatStringina().contains("ID:arto1\n"));
+        assertTrue(artikkeli.kaikkiKentatStringina().contains("Author:Arto Vihavainen\n"));
+        assertTrue(artikkeli.kaikkiKentatStringina().contains("Title:A Software Craftsman's Approach to Data Structures\n"));
+        assertTrue(artikkeli.kaikkiKentatStringina().contains("Year:2012\n"));
+        assertTrue(artikkeli.kaikkiKentatStringina().contains("Key:null\n"));
+    }
 }

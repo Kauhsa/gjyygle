@@ -12,7 +12,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään inproceedings-t
         String fileContents = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root></root>";
         FileWrite.stringToFile(fileContents, tempXMLTietokanta);
 
-        String[] input = ["1", "3", "inproceedings123", "tyyppi", "Hieno paperi", "kirja", "2005", "e", "3"]
+        String[] input = ["1", "3", "inproceedings123", "tyyppi", "Hieno paperi", "kirja", "2005", "e", "x"]
         io = new TestIO(input)        
         XmlTietokanta tietokanta = new XmlTietokanta(tempXMLTietokanta)
         juttu = new Kayttoliittyma(io, tietokanta)
@@ -37,7 +37,7 @@ scenario "käyttäjä pystyy syöttämään käyttöliittymään inproceedings-t
         fileContents = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><root></root>"
         FileWrite.stringToFile(fileContents, tempXMLTietokanta)
 
-        String[] input = ["1", "3", "inproceedings1234", "tyyppi", "Hieno paperi", "kirja", "2005", "k", "joku", "1", "2", "50", "4--11", "paikka", "5", "tktl", "publishing oy", "aika hieno artikkeli", "avain", "3"]
+        String[] input = ["1", "3", "inproceedings1234", "tyyppi", "Hieno paperi", "kirja", "2005", "k", "joku", "1", "2", "50", "4--11", "paikka", "5", "tktl", "publishing oy", "aika hieno artikkeli", "avain", "x"]
         io = new TestIO(input)        
         XmlTietokanta tietokanta = new XmlTietokanta(tempXMLTietokanta)
         juttu = new Kayttoliittyma(io, tietokanta)
