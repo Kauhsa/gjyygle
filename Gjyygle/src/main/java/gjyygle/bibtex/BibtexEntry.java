@@ -107,7 +107,7 @@ public class BibtexEntry {
         for (BibtexField f : type.getPrintFields()) {
             tulos += getValue(f) + ", ";
         }
-        tulos = tulos.substring(0, tulos.length()-2) + ".";
+        tulos += type.getName() + ".";
         return tulos;
     }
 }
