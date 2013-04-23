@@ -12,14 +12,12 @@ import gjyygle.bibtex.ValidationException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -27,10 +25,14 @@ import java.util.logging.Logger;
  */
 public class XmlTietokanta implements BibtexTietokanta {
 
-    File savefile;
-    ArrayList<BibtexEntry> viitteet = new ArrayList();
+    private File savefile;
+    private ArrayList<BibtexEntry> viitteet;
+    private ArrayList<String> filtterit;
+    private ArrayList<BibtexEntry> filtteroidytViitteet;
 
     public XmlTietokanta(File save) throws ValidationException {
+        viitteet = new ArrayList();
+        filtterit = new ArrayList();;
         savefile = save;
         loadEntries();
     }
@@ -49,7 +51,7 @@ public class XmlTietokanta implements BibtexTietokanta {
                 throw new ValidationException("Type is missing from entry!");
             }
             BibtexEntryType entryType = BibtexEntryType.getType(typename);
-            if(entryType == null) {
+            if (entryType == null) {
                 throw new ValidationException("Invalid type for entry!");
             }
             viitteet.add(new BibtexEntry(map, entryType));
@@ -70,7 +72,23 @@ public class XmlTietokanta implements BibtexTietokanta {
 
     @Override
     public List<BibtexEntry> listaaArtikkelit() {
-        return viitteet;
+        if (filtteroidytViitteet == null) {
+            filtteroidytViitteet = new ArrayList();
+            for (BibtexEntry tutkittavaViite : viitteet) {
+                String kentatStringina = tutkittavaViite.kaikkiKentatStringina();
+                boolean match = true;
+                for (String filtteri : filtterit) {
+                    if (!kentatStringina.contains(filtteri)) {
+                        match = false;
+                        break;
+                    }
+                }
+                if (match) {
+                    filtteroidytViitteet.add(tutkittavaViite);
+                }
+            }
+        }
+        return Collections.unmodifiableList(filtteroidytViitteet);
     }
 
     @Override
@@ -87,5 +105,22 @@ public class XmlTietokanta implements BibtexTietokanta {
             }
         }
         WriteXML.write(savefile, r);
+    }
+
+    @Override
+    public void lisaaFiltteri(String filtteri) {
+        filtteroidytViitteet = null;
+        filtterit.add(filtteri);
+    }
+
+    @Override
+    public List<String> getFiltterit() {
+        return Collections.unmodifiableList(filtterit);
+    }
+
+    @Override
+    public void nollaaFiltterit() {
+        filtteroidytViitteet = viitteet;
+        filtterit.clear();
     }
 }

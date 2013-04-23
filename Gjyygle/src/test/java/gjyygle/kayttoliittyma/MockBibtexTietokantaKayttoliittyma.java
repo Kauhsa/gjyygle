@@ -12,8 +12,6 @@ import gjyygle.bibtex.ValidationException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -50,6 +48,21 @@ public class MockBibtexTietokantaKayttoliittyma implements BibtexTietokanta {
     @Override
     public void tallenna() throws IOException {
         
+    }
+
+    @Override
+    public void lisaaFiltteri(String filtteri) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<String> getFiltterit() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void nollaaFiltterit() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     

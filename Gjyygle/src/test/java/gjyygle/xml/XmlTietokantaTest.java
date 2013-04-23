@@ -157,7 +157,7 @@ public class XmlTietokantaTest {
      * Test of listaaArtikkelit method, of class XmlTietokanta.
      */
     @Test
-    public void testListaaArtikkelit() {
+    public void testListaaArtikkelitIlmanFiltteria() {
         assertEquals(3,x.listaaArtikkelit().size());
     }
     @Test 
@@ -173,6 +173,68 @@ public class XmlTietokantaTest {
         x.lisaaArtikkeli(uusEntry);
         x.tallenna();
         x=new XmlTietokanta(temp);
+        assertEquals(4,x.listaaArtikkelit().size());
+    }
+    
+    @Test 
+    public void testListausFiltterilla() throws ValidationException {
+        BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
+        uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");
+        uusEntry.setValue(BibtexField.YEAR, "2013");
+        uusEntry.setValue(BibtexField.AUTHOR, "joku tyyppi");
+        uusEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
+        uusEntry.setValue(BibtexField.ID, "aaa");
+        uusEntry.setValue(BibtexField.NOTE, "huom!");
+        uusEntry.setValue(BibtexField.VOLUME, "1");
+        x.lisaaArtikkeli(uusEntry);
+        x.lisaaFiltteri("huom!");
+        assertEquals(1,x.listaaArtikkelit().size());
+    }
+    
+    
+    
+    @Test 
+    public void testListausKahdellaFiltterilla() throws ValidationException {
+        BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
+        uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");
+        uusEntry.setValue(BibtexField.YEAR, "2013");
+        uusEntry.setValue(BibtexField.AUTHOR, "joku tyyppi");
+        uusEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
+        uusEntry.setValue(BibtexField.ID, "aaa");
+        uusEntry.setValue(BibtexField.NOTE, "huom!");
+        uusEntry.setValue(BibtexField.VOLUME, "1");
+        x.lisaaArtikkeli(uusEntry);
+        
+        BibtexEntry uusEntry2 = new BibtexEntry(BibtexEntryType.ARTICLE);
+        uusEntry2.setValue(BibtexField.TITLE, "hieno artikkeli");
+        uusEntry2.setValue(BibtexField.YEAR, "2013");
+        uusEntry2.setValue(BibtexField.AUTHOR, "joku tyyppi");
+        uusEntry2.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
+        uusEntry2.setValue(BibtexField.ID, "aaa123");
+        uusEntry2.setValue(BibtexField.NOTE, "huom!");
+        uusEntry2.setValue(BibtexField.VOLUME, "1");
+        x.lisaaArtikkeli(uusEntry2);
+        
+        x.lisaaFiltteri("huom!");
+        assertEquals(2,x.listaaArtikkelit().size());
+        x.lisaaFiltteri("aaa123");
+        assertEquals(1,x.listaaArtikkelit().size());
+    }
+    
+        @Test 
+    public void filtteroinninNollausToimii() throws ValidationException {
+        BibtexEntry uusEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
+        uusEntry.setValue(BibtexField.TITLE, "hieno artikkeli");
+        uusEntry.setValue(BibtexField.YEAR, "2013");
+        uusEntry.setValue(BibtexField.AUTHOR, "joku tyyppi");
+        uusEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
+        uusEntry.setValue(BibtexField.ID, "aaa");
+        uusEntry.setValue(BibtexField.NOTE, "huom!");
+        uusEntry.setValue(BibtexField.VOLUME, "1");
+        x.lisaaArtikkeli(uusEntry);
+        x.lisaaFiltteri("huom!");
+        assertEquals(1,x.listaaArtikkelit().size());
+        x.nollaaFiltterit();
         assertEquals(4,x.listaaArtikkelit().size());
     }
 }
