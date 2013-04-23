@@ -132,11 +132,13 @@ public class KayttoliittymaTest {
         assertTrue(readerStub.loytyykoRivi("Viite lisätty\n"));
     }
     
-        @Test
+    @Test
     public void listaaViitteetTulostaaTiedot() {
         String[] input = {"3", "x"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
+        assertTrue(readerStub.loytyykoRivi("aaa, joku tyyppi, hieno artikkeli, 2013, Article.\n"));
+        /*
         assertTrue(readerStub.loytyykoRivi("Type: Article\n"));
         assertTrue(readerStub.loytyykoRivi("ID: aaa\n"));
         assertTrue(readerStub.loytyykoRivi("Author: joku tyyppi\n"));
@@ -144,7 +146,7 @@ public class KayttoliittymaTest {
         assertTrue(readerStub.loytyykoRivi("Journal: jostain kirjasta kai\n"));
         assertTrue(readerStub.loytyykoRivi("Year: 2013\n"));
         assertTrue(readerStub.loytyykoRivi("Volume: 1\n"));
-        assertTrue(readerStub.loytyykoRivi("Note: huom!\n"));
+        assertTrue(readerStub.loytyykoRivi("Note: huom!\n"));*/
 
     }
 

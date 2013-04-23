@@ -42,13 +42,7 @@ public class Kayttoliittyma {
     public void listaaViitteet() {
         List<BibtexEntry> viitteet = tietokanta.listaaArtikkelit();
         for (BibtexEntry entry : viitteet) {
-            entry.poistaTyhjat();
-            io.println("Type: " + entry.getType().getName());
-            Set<Entry<BibtexField, String>> vals = entry.getAllValues().entrySet();
-            for (Entry<BibtexField, String> data : vals) {
-                io.println(data.getKey().getName() + ": " + data.getValue());
-            }
-            io.println("");
+            io.println(entry.toString());
         }
     }
 
