@@ -145,6 +145,23 @@ public class BibtexGenTest {
     }
 
     @Test
+    public void realScandinavianLettersNotFound() {
+        String bar = foo.toString();
+        assertFalse(bar.contains("Ä"));
+        assertFalse(bar.contains("ö"));
+        assertFalse(bar.contains("Ö"));
+        assertFalse(bar.contains("ä"));
+        assertFalse(bar.contains("å"));
+        assertFalse(bar.contains("Å"));
+    }
+
+    @Test
+    public void dashWithBrackets() {
+        String bar = foo.toString();
+        assertTrue(bar.contains("{-}"));
+    }
+
+    @Test
     public void removesNullFields() {/*
          BibtexEntry tuhmaEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
          tuhmaEntry.setValue(BibtexField.TITLE, "hmm");
