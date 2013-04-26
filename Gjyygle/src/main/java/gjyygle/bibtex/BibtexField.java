@@ -181,6 +181,16 @@ public enum BibtexField {
         public boolean validate(String input) {
             return true;
         }
+    },
+    COMMENT {
+        @Override
+        public String getName() {
+            return "Comment";
+        }
+        @Override
+        public boolean validate(String input) {
+            return true;
+        }
     };
     abstract public String getName();
     abstract public boolean validate(String input);

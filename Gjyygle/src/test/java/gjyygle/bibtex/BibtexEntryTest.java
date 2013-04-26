@@ -201,11 +201,10 @@ public class BibtexEntryTest {
     @Test
     public void kaikkiArvotStringinaToimii() {
         BibtexEntry artikkeli = new BibtexEntry(artonPaperi, BibtexEntryType.ARTICLE);
-        assertTrue(artikkeli.kaikkiKentatStringina().contains("Type:Article\n"));
-        assertTrue(artikkeli.kaikkiKentatStringina().contains("ID:arto1\n"));
-        assertTrue(artikkeli.kaikkiKentatStringina().contains("Author:Arto Vihavainen\n"));
-        assertTrue(artikkeli.kaikkiKentatStringina().contains("Title:A Software Craftsman's Approach to Data Structures\n"));
-        assertTrue(artikkeli.kaikkiKentatStringina().contains("Year:2012\n"));
-        assertTrue(artikkeli.kaikkiKentatStringina().contains("Key:null\n"));
+        assertTrue(artikkeli.kaikkiKentatStringina().contains("Article\n"));
+        assertTrue(artikkeli.kaikkiKentatStringina().contains("arto1\n"));
+        assertTrue(artikkeli.kaikkiKentatStringina().contains("Arto Vihavainen\n"));
+        assertTrue(artikkeli.kaikkiKentatStringina().contains("A Software Craftsman's Approach to Data Structures\n"));
+        assertTrue(artikkeli.kaikkiKentatStringina().contains("2012\n"));
     }
 }

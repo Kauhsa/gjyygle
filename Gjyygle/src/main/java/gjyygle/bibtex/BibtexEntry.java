@@ -112,10 +112,10 @@ public class BibtexEntry {
     }
     
     public String kaikkiKentatStringina() {
-        String tulos = "Type:" + type.getName()+"\n";
+        String tulos = type.getName()+"\n";
         for (BibtexField f : BibtexField.values())
         {
-            tulos += f.getName() + ":" + getValue(f) + "\n";
+            tulos += getValue(f) + "\n";
         }
         return tulos;
     }
