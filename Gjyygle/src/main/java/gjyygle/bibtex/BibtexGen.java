@@ -56,6 +56,9 @@ public class BibtexGen {
             if (seuraavaArvo.getKey().equals(BibtexField.ID)) {
                 continue;
             }
+            if (seuraavaArvo.getKey().equals(BibtexField.COMMENT)) {
+                continue;
+            }
             String rivi = "    " + seuraavaArvo.getKey().toString().toLowerCase() + " = \"{" + seuraavaArvo.getValue() + "}\"";
             rivi = skandiMuunnin(rivi);
             if (entries.hasNext()) {

@@ -28,7 +28,8 @@ public enum BibtexEntryType {
                 BibtexField.PAGES,
                 BibtexField.MONTH,
                 BibtexField.NOTE,
-                BibtexField.KEY
+                BibtexField.KEY,
+                BibtexField.COMMENT
             };
             return ret;
         }
@@ -69,7 +70,9 @@ public enum BibtexEntryType {
                 BibtexField.EDITION,
                 BibtexField.MONTH,
                 BibtexField.NOTE,
-                BibtexField.KEY,};
+                BibtexField.KEY,
+                BibtexField.COMMENT
+            };
             return ret;
         }
 
@@ -111,7 +114,9 @@ public enum BibtexEntryType {
                 BibtexField.ORGANIZATION,
                 BibtexField.PUBLISHER,
                 BibtexField.NOTE,
-                BibtexField.KEY,};
+                BibtexField.KEY,
+                BibtexField.COMMENT
+            };
             return ret;
         }
 
