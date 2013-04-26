@@ -39,13 +39,13 @@ public class MockBibtexTietokantaKayttoliittyma implements BibtexTietokanta {
             lista.add(uusEntry);
             
             BibtexEntry tokaEntry = new BibtexEntry(BibtexEntryType.ARTICLE);
-            uusEntry.setValue(BibtexField.TITLE, "esa");
-            uusEntry.setValue(BibtexField.YEAR, "2000");
-            uusEntry.setValue(BibtexField.AUTHOR, "pertti");
-            uusEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
-            uusEntry.setValue(BibtexField.ID, "aaaa");
-            uusEntry.setValue(BibtexField.NOTE, "huom!");
-            uusEntry.setValue(BibtexField.VOLUME, "1");
+            tokaEntry.setValue(BibtexField.TITLE, "esa");
+            tokaEntry.setValue(BibtexField.YEAR, "2000");
+            tokaEntry.setValue(BibtexField.AUTHOR, "pertti");
+            tokaEntry.setValue(BibtexField.JOURNAL, "jostain kirjasta kai");
+            tokaEntry.setValue(BibtexField.ID, "aaaa");
+            tokaEntry.setValue(BibtexField.NOTE, "huom!");
+            tokaEntry.setValue(BibtexField.VOLUME, "1");
 
             lista.add(tokaEntry);
             
@@ -62,28 +62,17 @@ public class MockBibtexTietokantaKayttoliittyma implements BibtexTietokanta {
 
     @Override
     public void lisaaFiltteri(String filtteri) {
-<<<<<<< HEAD
-        
-=======
-//        throw new UnsupportedOperationException("Not supported yet.");
->>>>>>> 06e0bb01c49226cf8ecc4dac1c813555b7084299
+
     }
 
     @Override
     public List<String> getFiltterit() {
         return new ArrayList<String>();
-<<<<<<< HEAD
-=======
-//        throw new UnsupportedOperationException("Not supported yet.");
->>>>>>> 06e0bb01c49226cf8ecc4dac1c813555b7084299
+
     }
 
     @Override
     public void nollaaFiltterit() {
-<<<<<<< HEAD
-        
-=======
-//        throw new UnsupportedOperationException("Not supported yet.");
->>>>>>> 06e0bb01c49226cf8ecc4dac1c813555b7084299
+
     }
 }

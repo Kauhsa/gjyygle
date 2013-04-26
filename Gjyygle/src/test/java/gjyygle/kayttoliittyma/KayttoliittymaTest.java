@@ -84,11 +84,7 @@ public class KayttoliittymaTest {
 
     @Test
     public void alkuValikkoVirheellinenKomento() {
-<<<<<<< HEAD
         String[] input = {"67", "x"};
-=======
-        String[] input = {"15", "x"};
->>>>>>> 06e0bb01c49226cf8ecc4dac1c813555b7084299
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
         assertTrue(readerStub.loytyykoRivi("Virheellinen komento\n"));
@@ -141,7 +137,7 @@ public class KayttoliittymaTest {
         String[] input = {"3", "x"};
         asetaUusiReaderStubInput(input);
         liittyma.kaynnista();
-        assertTrue(readerStub.loytyykoRivi("ID: aaa, joku tyyppi, hieno artikkeli, 2013, Article.\n"));
+        assertTrue(readerStub.loytyykoRivi("ID: aa, teppo, matti, 2013, Article.\n"));
 
     }
 
